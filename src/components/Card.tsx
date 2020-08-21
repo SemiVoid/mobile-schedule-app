@@ -6,11 +6,12 @@ interface CardProps {
   title: string;
   desc: string;
   imgURL?: string;
+  cardLink?: string;
 }
 
-const Card: React.FC<CardProps> = ({ title, desc, imgURL }) => {
+const Card: React.FC<CardProps> = ({ title, desc, imgURL, cardLink }) => {
   return (
-    <IonCard>
+    <IonCard routerLink={cardLink}>
       <img className="card-image" src={imgURL} alt={title}/>
       <IonCardHeader>
         <IonCardTitle>{title}</IonCardTitle>
