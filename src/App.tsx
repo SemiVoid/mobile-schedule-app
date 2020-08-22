@@ -7,7 +7,7 @@ import {
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
-  IonTabs
+  IonTabs,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { home, calendar, fileTrayFull, menu } from 'ionicons/icons';
@@ -44,9 +44,13 @@ const App: React.FC = () => (
           <Route path="/schedule" component={Schedule} exact={true} />
           <Route path="/task" component={Task} exact={true} />
           <Route path="/option" component={Settings} />
-          <Route path="/" render={() => <Redirect to="/dashboard" />} exact={true} />
+          <Route
+            path="/"
+            render={() => <Redirect to="/dashboard" />}
+            exact={true}
+          />
         </IonRouterOutlet>
-        
+
         <IonTabBar slot="bottom">
           <IonTabButton tab="dashboard" href="/dashboard">
             <IonIcon icon={home} />

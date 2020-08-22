@@ -1,5 +1,10 @@
 import React from 'react';
-import { IonCard, IonCardHeader, IonCardContent, IonCardTitle } from '@ionic/react';
+import {
+  IonCard,
+  IonCardHeader,
+  IonCardContent,
+  IonCardTitle,
+} from '@ionic/react';
 import './Card.css';
 
 interface CardProps {
@@ -12,7 +17,7 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ title, desc, imgURL, cardLink }) => {
   return (
     <IonCard routerLink={cardLink}>
-      <img className="card-image" src={imgURL} alt={title}/>
+      <img className="card-image" src={imgURL} alt={title} />
       <IonCardHeader>
         <IonCardTitle>{title}</IonCardTitle>
       </IonCardHeader>
