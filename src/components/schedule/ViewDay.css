@@ -1,0 +1,32 @@
+.day-calendar {
+  background-color: var(--ion-toolbar-background);
+  color: var(--ion-text-color);
+  margin: 15px 0px;
+}
+
+.day-buttons {
+  text-align: center;
+  font-size: 10pt;
+  margin-bottom: 3px;
+}
+
+.day {
+  text-align: center;
+  font-size: 10pt;
+  z-index: 1;
+  margin-bottom: 3px;
+}
+
+.day-num {
+  font-size: 15pt;
+  font-weight: lighter;
+}
+
+.day-selection {
+  border: 2px solid var(--ion-color-primary-shade);
+  border-radius: 10px;
+  font-size: 15pt;
+  padding-top: 5px;
+  width: 100%;
+  text-align: center;
+}
