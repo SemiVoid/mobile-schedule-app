@@ -1,19 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IonGrid, IonRow, IonCol } from '@ionic/react';
 import './ViewDay.css';
-import { Week } from '../../hooks/useWeekday';
+import { useWeek } from '../../hooks/WeekContext';
+import { useScheduleUpdate } from '../../hooks/ScheduleContext';
 
-interface CardProps {
-  listNum: Week[];
-}
+const ViewDay: React.FC = () => {
+  const [currentDay, setCurrentDay] = useState<Date>();
+  const week = useWeek();
+  const scheduleUpdate = useScheduleUpdate();
 
-const ViewDay: React.FC<CardProps> = ({ listNum }) => {
+  function toggleCurrDay(date: Date) {
+    scheduleUpdate(date);
+    setCurrentDay(date);
+  }
+
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat'];
 
   const dayList = days.map((day) => <IonCol key={day}>{day}</IonCol>);
 
-  const dayListNum = listNum.map((data) =>
-    data.days.map((day) => <IonCol key={day.getDate()}>{day.getDate()}</IonCol>)
+  const dayListNum = week.map((data) =>
+    data.days.map((day) => (
+      <IonCol
+        onClick={() => {
+          toggleCurrDay(day);
+        }}
+        key={day.getDate()}
+      >
+        {day.getDate()}
+      </IonCol>
+    ))
   );
 
   return (
@@ -31,7 +46,7 @@ const ViewDay: React.FC<CardProps> = ({ listNum }) => {
       {/* Selected Day Display */}
       <IonRow>
         <IonCol className="day-selection">
-          <span>view-day selection</span>
+          <span>{currentDay?.toDateString()}</span>
         </IonCol>
       </IonRow>
     </IonGrid>

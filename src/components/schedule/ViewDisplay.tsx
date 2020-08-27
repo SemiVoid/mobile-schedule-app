@@ -1,13 +1,12 @@
 import React from 'react';
 import './ViewDisplay.css';
-import { Schedule } from '../../hooks/useSchedule';
+import { useSchedule } from '../../hooks/ScheduleContext';
 
-interface DisplayProps {
-  listSchedule: Schedule[];
-}
 
-const ViewDisplay: React.FC<DisplayProps> = ({ listSchedule }) => {
-  const list = listSchedule.map((data) => {
+const ViewDisplay: React.FC = () => {
+  const schedule = useSchedule();
+
+  const list = schedule.map((data) => {
     return (
       <div className="display-person" key={data.id}>
         <span className="display-name">{data.worker}</span>
@@ -21,7 +20,6 @@ const ViewDisplay: React.FC<DisplayProps> = ({ listSchedule }) => {
   return (
     <div className="display-background">
       <div className="display-foreground">
-        test
         {list}
       </div>
     </div>
