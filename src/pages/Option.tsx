@@ -7,7 +7,7 @@ import {
   IonToolbar,
 } from '@ionic/react';
 
-const Settings: React.FC = () => {
+const Option: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -26,4 +26,4 @@ const Settings: React.FC = () => {
   );
 };
 
-export default Settings;
+export default Option;
