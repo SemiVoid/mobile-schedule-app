@@ -14,7 +14,7 @@ import { home, calendar, fileTrayFull, menu } from 'ionicons/icons';
 import Dashboard from './pages/Dashboard';
 import Schedule from './pages/Schedule';
 import Task from './pages/Task';
-import Settings from './pages/Settings';
+import Option from './pages/Option';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -43,7 +43,7 @@ const App: React.FC = () => (
           <Route path="/dashboard" component={Dashboard} exact={true} />
           <Route path="/schedule" component={Schedule} exact={true} />
           <Route path="/task" component={Task} exact={true} />
-          <Route path="/option" component={Settings} />
+          <Route path="/option" component={Option} />
           <Route
             path="/"
             render={() => <Redirect to="/dashboard" />}

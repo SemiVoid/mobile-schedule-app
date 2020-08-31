@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { IonGrid, IonRow, IonCol } from '@ionic/react';
 import './ViewDay.css';
-import { useWeek } from '../../hooks/WeekContext';
-import { useScheduleUpdate } from '../../hooks/ScheduleContext';
+import { useWeekContext } from '../../hooks/WeekContext';
+import { useScheduleContext } from '../../hooks/ScheduleContext';
 
 const ViewDay: React.FC = () => {
-  const [currentDay, setCurrentDay] = useState<Date>();
-  const week = useWeek();
-  const scheduleUpdate = useScheduleUpdate();
+  const [currentDay, setCurrentDay] = useState<Date>(new Date());
+  const week = useWeekContext();
+  const schedule = useScheduleContext();
 
   function toggleCurrDay(date: Date) {
-    scheduleUpdate(date);
+    schedule.getScheduleForDate(date);
     setCurrentDay(date);
   }
 
@@ -18,7 +18,7 @@ const ViewDay: React.FC = () => {
 
   const dayList = days.map((day) => <IonCol key={day}>{day}</IonCol>);
 
-  const dayListNum = week.map((data) =>
+  const dayListNum = week.weekList.map((data) =>
     data.days.map((day) => (
       <IonCol
         onClick={() => {

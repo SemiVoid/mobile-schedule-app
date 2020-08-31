@@ -10,12 +10,22 @@ import {
 } from '@ionic/react';
 import { arrowBackOutline, arrowForwardOutline } from 'ionicons/icons';
 import './ScheduleFooter.css';
-import { useWeekPrev, useWeekCurr, useWeekNext } from '../../hooks/WeekContext';
+import { useWeekContext } from '../../hooks/WeekContext';
 
 const ScheduleFooter: React.FC = () => {
-  const prev = useWeekPrev();
-  const curr = useWeekCurr();
-  const next = useWeekNext();
+  const week = useWeekContext();
+
+  const prev = () => {
+    week.setWeekIndex(week.weekIndex - 1);
+  }
+
+  const curr = () => {
+    week.setWeekIndex(0);
+  }
+
+  const next = () => {
+    week.setWeekIndex(week.weekIndex + 1);
+  }
 
   return (
     <IonFooter>

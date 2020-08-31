@@ -1,23 +1,17 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useState, useEffect} from 'react';
 
 // Week Context Creation
-const WeekContext = React.createContext<Week[]>([]);
-const WeekPrevContext = React.createContext(() => {});
-const WeekCurContext = React.createContext(() => {});
-const WeekNextContext = React.createContext(() => {});
+interface ContextProps {
+  weekList: Week[];
+  weekIndex: number;
+  setWeekIndex: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const WeekContext = React.createContext({} as ContextProps);
 
 // Week Context Custom Hook Usage
-export function useWeek() {
+export function useWeekContext() {
   return useContext(WeekContext);
-}
-export function useWeekPrev() {
-  return useContext(WeekPrevContext);
-}
-export function useWeekCurr() {
-  return useContext(WeekCurContext);
-}
-export function useWeekNext() {
-  return useContext(WeekNextContext);
 }
 
 // Week Provider Function Component
@@ -32,27 +26,11 @@ const WeekProvider: React.FC = ({ children }) => {
     setWeekList(tempList);
   }, [weekIndex]);
 
-  function prevWeek() {
-    setWeekIndex( weekIndex - 1);
-  }
-
-  function currentWeek() {
-    setWeekIndex(0);
-  }
-
-  function nextWeek() {
-    setWeekIndex(weekIndex + 1);
-  }
+  const value = {weekList, weekIndex, setWeekIndex};
 
   return (
-    <WeekContext.Provider value={weekList}>
-      <WeekPrevContext.Provider value={prevWeek}>
-        <WeekCurContext.Provider value={currentWeek}>
-          <WeekNextContext.Provider value={nextWeek}>
-            {children}
-          </WeekNextContext.Provider>
-        </WeekCurContext.Provider>
-      </WeekPrevContext.Provider>
+    <WeekContext.Provider value={value}>
+      {children}
     </WeekContext.Provider>
   );
 };
