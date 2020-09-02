@@ -6,9 +6,12 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
+import AuthProvider from '../hooks/AuthContext';
+import Account from '../components/option/Account';
 
 const Option: React.FC = () => {
   return (
+    <AuthProvider>
     <IonPage>
       <IonHeader>
         <IonToolbar>
@@ -21,8 +24,10 @@ const Option: React.FC = () => {
             <IonTitle size="large">Settings</IonTitle>
           </IonToolbar>
         </IonHeader>
+        <Account />
       </IonContent>
     </IonPage>
+    </AuthProvider>
   );
 };
 
