@@ -7,7 +7,6 @@ import {
   IonToolbar,
 } from '@ionic/react';
 import Card from '../components/dashboard/Card';
-import AvatarCard from '../components/dashboard/AvatarCard';
 
 // Card List for Dashboard Cards
 const cards = [
@@ -51,7 +50,6 @@ const Dashboard: React.FC = () => {
             <IonTitle size="large">Dashboard</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <AvatarCard />
         {cardList}
       </IonContent>
     </IonPage>
