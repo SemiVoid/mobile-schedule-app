@@ -20,20 +20,17 @@ const Schedule: React.FC = () => {
   return (
     <ScheduleProvider>
       <IonPage>
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Schedule</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-
         <WeekProvider>
+          <IonHeader>
+            <IonToolbar>
+              <IonTitle>Schedule</IonTitle>
+            </IonToolbar>
+            <IonToolbar>
+              <ViewDay />
+            </IonToolbar>
+          </IonHeader>
+
           <IonContent fullscreen>
-            <IonHeader collapse="condense">
-              <IonToolbar>
-                <IonTitle size="large">Schedule</IonTitle>
-              </IonToolbar>
-            </IonHeader>
-            <ViewDay />
             <ViewDisplay />
           </IonContent>
           <ScheduleFooter />

@@ -28,7 +28,7 @@ const ScheduleFooter: React.FC = () => {
   }
 
   return (
-    <IonFooter>
+    <IonFooter className="ion-no-border">
       <IonGrid className="schedule-buttons">
         <IonRow>
           <IonCol>

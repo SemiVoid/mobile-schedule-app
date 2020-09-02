@@ -1,7 +1,6 @@
 .day-calendar {
   background-color: var(--ion-toolbar-background);
   color: var(--ion-text-color);
-  margin: 15px 0px;
 }
 
 .day-buttons {

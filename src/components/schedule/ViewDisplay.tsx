@@ -2,7 +2,6 @@ import React from 'react';
 import './ViewDisplay.css';
 import { useScheduleContext } from '../../hooks/ScheduleContext';
 
-
 const ViewDisplay: React.FC = () => {
   const schedule = useScheduleContext();
 
@@ -20,7 +19,8 @@ const ViewDisplay: React.FC = () => {
   return (
     <div className="display-background">
       <div className="display-foreground">
-        {list}
+        {list.length === 0 && <p>No Data</p>}
+        {list.length > 0 && list}
       </div>
     </div>
   );
