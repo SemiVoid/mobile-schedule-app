@@ -10,10 +10,12 @@ import {
 import { useAuthContext } from '../../hooks/AuthContext';
 import './Account.css';
 import Login from './Login';
+import Signup from './Signup';
 
 const Account = () => {
   const auth = useAuthContext();
   const [loginModal, setLoginModal] = useState<boolean>(false);
+  const [signupModal, setSignupModal] = useState<boolean>(false);
 
   useEffect(() => {
     setLoginModal(false);
@@ -27,7 +29,7 @@ const Account = () => {
             <IonCol>
               <IonAvatar>
                 <img
-                  src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.onlinewebfonts.com%2Fsvg%2Fimg_383214.png&f=1&nofb=1"
+                  src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.onlinewebfonts.com%2Fsvg%2Fimg_383214.png"
                   alt=""
                 />
               </IonAvatar>
@@ -42,7 +44,11 @@ const Account = () => {
             {!auth.account && (
               <IonButton onClick={(e) => setLoginModal(true)}>Login</IonButton>
             )}
-            {!auth.account && <IonButton>Signup</IonButton>}
+            {!auth.account && (
+              <IonButton onClick={(e) => setSignupModal(true)}>
+                Signup
+              </IonButton>
+            )}
             {auth.account && (
               <IonButton onClick={auth.handleLogout}>Logout</IonButton>
             )}
@@ -50,6 +56,7 @@ const Account = () => {
         </IonRow>
       </IonGrid>
       <Login loginModal={loginModal} setLoginModal={setLoginModal} />
+      <Signup signupModal={signupModal} setSignupModal={setSignupModal} />
     </>
   );
 };
