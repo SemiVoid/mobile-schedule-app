@@ -27,9 +27,7 @@ const Login: React.FC<AccountProps> = ({ loginModal, setLoginModal }) => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>Login With Email</IonTitle>
-          <IonButton slot="end" onClick={(e) => setLoginModal(false)}>
-            Close
-          </IonButton>
+          <IonButton slot="primary" size="small" onClick={(e) => setLoginModal(false)}>Close</IonButton>
         </IonToolbar>
       </IonHeader>
       <IonContent>

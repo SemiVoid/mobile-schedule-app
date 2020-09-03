@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   IonGrid,
   IonRow,
@@ -15,6 +15,10 @@ const Account = () => {
   const auth = useAuthContext();
   const [loginModal, setLoginModal] = useState<boolean>(false);
 
+  useEffect(() => {
+    setLoginModal(false);
+  }, [auth.account]);
+
   return (
     <>
       <IonGrid className="background">
@@ -23,7 +27,7 @@ const Account = () => {
             <IonCol>
               <IonAvatar>
                 <img
-                  src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
+                  src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.onlinewebfonts.com%2Fsvg%2Fimg_383214.png&f=1&nofb=1"
                   alt=""
                 />
               </IonAvatar>
