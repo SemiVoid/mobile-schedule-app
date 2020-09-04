@@ -19,6 +19,7 @@ const Account = () => {
 
   useEffect(() => {
     setLoginModal(false);
+    setSignupModal(false);
   }, [auth.account]);
 
   return (
