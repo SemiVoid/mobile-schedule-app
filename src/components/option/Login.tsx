@@ -27,7 +27,13 @@ const Login: React.FC<AccountProps> = ({ loginModal, setLoginModal }) => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>Login With Email</IonTitle>
-          <IonButton slot="primary" size="small" onClick={(e) => setLoginModal(false)}>Close</IonButton>
+          <IonButton
+            slot="primary"
+            size="small"
+            onClick={(e) => setLoginModal(false)}
+          >
+            Close
+          </IonButton>
         </IonToolbar>
       </IonHeader>
       <IonContent>
@@ -37,8 +43,14 @@ const Login: React.FC<AccountProps> = ({ loginModal, setLoginModal }) => {
             <IonInput
               type="email"
               required
-              value={auth.email}
-              onIonChange={(e) => auth.setEmail(e.detail.value as string)}
+              value={auth.authState.email}
+              onIonChange={(e) =>
+                auth.authDispatch({
+                  type: 'input',
+                  field: 'email',
+                  fieldValue: e.detail.value as string,
+                })
+              }
             ></IonInput>
           </IonItem>
           <IonItem>
@@ -46,8 +58,14 @@ const Login: React.FC<AccountProps> = ({ loginModal, setLoginModal }) => {
             <IonInput
               type="password"
               required
-              value={auth.password}
-              onIonChange={(e) => auth.setPassword(e.detail.value as string)}
+              value={auth.authState.password}
+              onIonChange={(e) =>
+                auth.authDispatch({
+                  type: 'input',
+                  field: 'password',
+                  fieldValue: e.detail.value as string,
+                })
+              }
             ></IonInput>
           </IonItem>
           <IonItem lines="none">
@@ -56,7 +74,9 @@ const Login: React.FC<AccountProps> = ({ loginModal, setLoginModal }) => {
             </IonButton>
           </IonItem>
         </IonList>
-        {auth.loginError && <div className="error">{auth.loginError}</div>}
+        {auth.authState.loginError && (
+          <div className="error">{auth.authState.loginError}</div>
+        )}
       </IonContent>
     </IonModal>
   );

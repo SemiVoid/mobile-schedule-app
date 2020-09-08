@@ -1,98 +1,136 @@
-import React, { useContext, useState, useEffect } from 'react';
-import fire from '../config/firebase';
+import React, { useContext, useReducer, useEffect } from 'react';
+import { auth } from '../config/firebase';
 
 // Auth Context Creation
-interface ContextProps {
-  account: firebase.User | string | null;
-  email: string;
-  password: string;
-  loginError: string;
-  signupError: string;
-  setEmail: React.Dispatch<React.SetStateAction<string>>;
-  setPassword: React.Dispatch<React.SetStateAction<string>>;
+interface AuthContextProps {
+  authState: any;
+  authDispatch: React.Dispatch<any>;
   handleSignup: () => void;
   handleLogin: () => void;
   handleLogout: () => void;
 }
 
-const AuthContext = React.createContext({} as ContextProps);
+const AuthContext = React.createContext({} as AuthContextProps);
 
-// Auth Context Custom Hook Usage
-export function useAuthContext() {
-  return useContext(AuthContext);
-}
+const authReducer = (state: any, action: any) => {
+  switch (action.type) {
+    case 'input': {
+      return {
+        ...state,
+        [action.field]: action.fieldValue,
+      };
+    }
+    case 'login': {
+      return {
+        ...state,
+        loginError: '',
+        isWaiting: true,
+      };
+    }
+    case 'signup': {
+      return {
+        ...state,
+        signupError: '',
+        isWaiting: true,
+      };
+    }
+    case 'success': {
+      return {
+        ...state,
+        isLoggedIn: true,
+        account: action.user,
+      };
+    }
+    case 'error': {
+      return {
+        ...state,
+        [action.error]: action.errorValue,
+      };
+    }
+    case 'logout': {
+      return {
+        ...state,
+        isLoggedIn: false,
+        username: '',
+        password: '',
+      };
+    }
+    default:
+      break;
+  }
+};
+
+const initialState = {
+  account: '',
+  email: '',
+  password: '',
+  loginError: '',
+  signupError: '',
+  isWaiting: false,
+  isLoggedIn: false,
+};
 
 // Auth Provider Function Component
 const AuthProvider: React.FC = ({ children }) => {
-  const [account, setAccount] = useState<firebase.User | string | null>('');
-  const [email, setEmail] = useState<any>();
-  const [password, setPassword] = useState<any>();
-  const [loginError, setLoginError] = useState<string>('');
-  const [signupError, setSignupError] = useState<string>('');
+  const [authState, authDispatch] = useReducer(authReducer, initialState);
 
   const handleLogin = () => {
-    clearError();
-    fire
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .catch((error) => {
-        setLoginError(error.message);
+    authDispatch({ type: 'login' });
+    auth
+      .signInWithEmailAndPassword(authState.email, authState.password)
+      .catch((e) => {
+        authDispatch({
+          type: 'error',
+          error: 'loginError',
+          errorValue: e.message,
+        });
       });
   };
 
-  const handleSignup = () => {
-    clearError();
-    fire
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .catch((error) => {
-        setSignupError(error.message);
+  const handleSignup = async () => {
+    authDispatch({ type: 'signup' });
+    await auth
+      .createUserWithEmailAndPassword(authState.email, authState.password)
+      .catch((e) => {
+        authDispatch({
+          type: 'error',
+          error: 'signupError',
+          errorValue: e.message,
+        });
       });
   };
 
-  const handleLogout = () => {
-    fire.auth().signOut();
+  const handleLogout = async () => {
+    authDispatch({ type: 'logout' });
+    await auth.signOut();
   };
 
-  const clearError = () => {
-    setLoginError('');
-    setSignupError('');
-  };
-
-  const clearInput = () => {
-    setEmail('');
-    setPassword('');
-  };
-
-  const authListener = () => {
-    fire.auth().onAuthStateChanged(user => {
-      if (user) {
-        clearInput();
-        setAccount(user.email);
-      } else {
-        setAccount('');
+  const authListener = async () => {
+    await auth.onAuthStateChanged((u) => {
+      if (u) {
+        authDispatch({ type: 'success', user: u });
       }
     });
   };
 
   useEffect(() => {
     authListener();
-  });
+  }, []);
 
   const value = {
-    account,
-    email,
-    password,
-    loginError,
-    signupError,
-    setEmail,
-    setPassword,
+    authState,
+    authDispatch,
     handleSignup,
     handleLogin,
-    handleLogout
+    handleLogout,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+
+// Auth Context Custom Hook Usage
+export function useAuthContext() {
+  return useContext(AuthContext);
+}
 
 export default AuthProvider;

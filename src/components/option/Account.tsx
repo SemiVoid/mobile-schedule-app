@@ -20,12 +20,12 @@ const Account = () => {
   useEffect(() => {
     setLoginModal(false);
     setSignupModal(false);
-  }, [auth.account]);
+  }, [auth.authState.account]);
 
   return (
     <>
       <IonGrid className="background">
-        {auth.account && (
+        {auth.authState.isLoggedIn && (
           <IonRow>
             <IonCol>
               <IonAvatar>
@@ -36,21 +36,21 @@ const Account = () => {
               </IonAvatar>
             </IonCol>
             <IonCol size="9">
-              <IonLabel>Hello, {auth.account}</IonLabel>
+              <IonLabel>Hello {auth.authState.account.email}</IonLabel>
             </IonCol>
           </IonRow>
         )}
         <IonRow>
           <IonCol>
-            {!auth.account && (
+            {!auth.authState.isLoggedIn && (
               <IonButton onClick={(e) => setLoginModal(true)}>Login</IonButton>
             )}
-            {!auth.account && (
+            {!auth.authState.isLoggedIn && (
               <IonButton onClick={(e) => setSignupModal(true)}>
                 Signup
               </IonButton>
             )}
-            {auth.account && (
+            {auth.authState.isLoggedIn && (
               <IonButton onClick={auth.handleLogout}>Logout</IonButton>
             )}
           </IonCol>

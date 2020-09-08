@@ -43,8 +43,14 @@ const Signup: React.FC<AccountProps> = ({ signupModal, setSignupModal }) => {
             <IonInput
               type="email"
               required
-              value={auth.email}
-              onIonChange={(e) => auth.setEmail(e.detail.value as string)}
+              value={auth.authState.email}
+              onIonChange={(e) =>
+                auth.authDispatch({
+                  type: 'input',
+                  field: 'email',
+                  fieldValue: e.detail.value as string,
+                })
+              }
             ></IonInput>
           </IonItem>
           <IonItem>
@@ -52,8 +58,14 @@ const Signup: React.FC<AccountProps> = ({ signupModal, setSignupModal }) => {
             <IonInput
               type="password"
               required
-              value={auth.password}
-              onIonChange={(e) => auth.setPassword(e.detail.value as string)}
+              value={auth.authState.password}
+              onIonChange={(e) =>
+                auth.authDispatch({
+                  type: 'input',
+                  field: 'password',
+                  fieldValue: e.detail.value as string,
+                })
+              }
             ></IonInput>
           </IonItem>
           <IonItem lines="none">
@@ -62,7 +74,9 @@ const Signup: React.FC<AccountProps> = ({ signupModal, setSignupModal }) => {
             </IonButton>
           </IonItem>
         </IonList>
-        {auth.signupError && <div className="error">{auth.signupError}</div>}
+        {auth.authState.signupError && (
+          <div className="error">{auth.authState.signupError}</div>
+        )}
       </IonContent>
     </IonModal>
   );
