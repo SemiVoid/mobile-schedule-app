@@ -1,4 +1,4 @@
-import { Schedule } from "./ScheduleContext";
+import { Schedule } from './ScheduleContext';
 
 export const tempScheduleList: Schedule[] = [
   {
