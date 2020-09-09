@@ -11,6 +11,7 @@ import {
 import { arrowBackOutline, arrowForwardOutline } from 'ionicons/icons';
 import './ScheduleFooter.css';
 import { useWeekContext } from '../../hooks/WeekContext';
+import ViewDay from './ViewDay';
 
 const ScheduleFooter: React.FC = () => {
   const week = useWeekContext();
@@ -29,21 +30,22 @@ const ScheduleFooter: React.FC = () => {
 
   return (
     <IonFooter className="ion-no-border">
+      <ViewDay />
       <IonGrid className="schedule-buttons">
         <IonRow>
           <IonCol>
-            <IonButton onClick={prev}>
+            <IonButton onClick={prev} expand="block">
               <IonIcon slot="start" icon={arrowBackOutline} />
               <IonLabel>Prev</IonLabel>
             </IonButton>
           </IonCol>
           <IonCol>
-            <IonButton onClick={curr}>
+            <IonButton onClick={curr} expand="block">
               <IonLabel>Current</IonLabel>
             </IonButton>
           </IonCol>
           <IonCol>
-            <IonButton onClick={next}>
+            <IonButton onClick={next} expand="block">
               <IonIcon slot="end" icon={arrowForwardOutline} />
               <IonLabel>Next</IonLabel>
             </IonButton>
