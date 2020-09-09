@@ -43,15 +43,19 @@ const Account = () => {
         <IonRow>
           <IonCol>
             {!auth.authState.isLoggedIn && (
-              <IonButton onClick={(e) => setLoginModal(true)}>Login</IonButton>
+              <IonButton onClick={(e) => setLoginModal(true)} expand="block">
+                Login
+              </IonButton>
             )}
             {!auth.authState.isLoggedIn && (
-              <IonButton onClick={(e) => setSignupModal(true)}>
+              <IonButton onClick={(e) => setSignupModal(true)} expand="block">
                 Signup
               </IonButton>
             )}
             {auth.authState.isLoggedIn && (
-              <IonButton onClick={auth.handleLogout}>Logout</IonButton>
+              <IonButton onClick={auth.handleLogout} expand="block">
+                Logout
+              </IonButton>
             )}
           </IonCol>
         </IonRow>
