@@ -11,10 +11,10 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { home, calendar, fileTrayFull, menu } from 'ionicons/icons';
-import Dashboard from './pages/Dashboard';
-import Schedule from './pages/Schedule';
-import Task from './pages/Task';
-import Option from './pages/Option';
+import DashboardPage from './pages/DashboardPage';
+import OptionPage from './pages/OptionPage';
+import SchedulePage from './pages/SchedulePage';
+import TaskPage from './pages/TaskPage';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -40,10 +40,10 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route path="/dashboard" component={Dashboard} exact={true} />
-          <Route path="/schedule" component={Schedule} exact={true} />
-          <Route path="/task" component={Task} exact={true} />
-          <Route path="/option" component={Option} />
+          <Route path="/dashboard" component={DashboardPage} exact={true} />
+          <Route path="/schedule" component={SchedulePage} exact={true} />
+          <Route path="/task" component={TaskPage} exact={true} />
+          <Route path="/option" component={OptionPage} exact={true}/>
           <Route
             path="/"
             render={() => <Redirect to="/dashboard" />}

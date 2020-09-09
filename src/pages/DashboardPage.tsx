@@ -1,12 +1,7 @@
 import React from 'react';
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-} from '@ionic/react';
+import { IonContent, IonPage } from '@ionic/react';
 import Card from '../components/dashboard/Card';
+import PageHeader from '../components/shared/PageHeader';
 
 // Card List for Dashboard Cards
 const cards = [
@@ -26,34 +21,26 @@ const cards = [
   },
 ];
 
-const cardList = cards.map((card) => (
-  <Card
-    key={card.title}
-    title={card.title}
-    desc={card.desc}
-    imgURL={card.imageURL}
-    cardLink={card.cardLink}
-  />
-));
+const DashboardPage: React.FC = () => {
+  const cardList = cards.map((card) => (
+    <Card
+      key={card.title}
+      title={card.title}
+      desc={card.desc}
+      imgURL={card.imageURL}
+      cardLink={card.cardLink}
+    />
+  ));
 
-const Dashboard: React.FC = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Dashboard</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <PageHeader title="Dashboard" />
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Dashboard</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+        <PageHeader title="Dashboard" condense />
         {cardList}
       </IonContent>
     </IonPage>
   );
 };
 
-export default Dashboard;
+export default DashboardPage;
