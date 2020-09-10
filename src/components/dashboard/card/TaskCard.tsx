@@ -4,7 +4,6 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonCardContent,
-  IonItem,
   IonButton,
 } from '@ionic/react';
 import './Card.css';
@@ -23,12 +22,10 @@ const TaskCard: React.FC = () => {
       <IonCardContent>
         The dashboard display of the Tasks. Giving company related tasks data
         letting people know what they need to work on.
-      </IonCardContent>
-      <IonItem>
-        <IonButton slot="end" routerLink="/task">
+        <IonButton expand="block" size="small" routerLink="/task">
           Go to Task
         </IonButton>
-      </IonItem>
+      </IonCardContent>
     </IonCard>
   );
 };

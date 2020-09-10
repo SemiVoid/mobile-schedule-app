@@ -5,7 +5,6 @@ import {
   IonCardSubtitle,
   IonCardTitle,
   IonCardContent,
-  IonItem,
   IonButton,
 } from '@ionic/react';
 import './Card.css';
@@ -25,12 +24,10 @@ const ScheduleCard: React.FC = () => {
       <IonCardContent>
         The dashboard display of the schedule. Giving company related Schedule
         data letting people know when they work.
-      </IonCardContent>
-      <IonItem>
-        <IonButton slot="end" routerLink="/schedule">
+        <IonButton expand="block" size="small" routerLink="/schedule">
           Go to Schedule
         </IonButton>
-      </IonItem>
+      </IonCardContent>
     </IonCard>
   );
 };
