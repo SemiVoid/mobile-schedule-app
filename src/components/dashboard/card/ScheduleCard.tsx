@@ -6,25 +6,26 @@ import {
   IonCardTitle,
   IonCardContent,
   IonButton,
+  IonImg,
 } from '@ionic/react';
 import './Card.css';
 
 const ScheduleCard: React.FC = () => {
   return (
     <IonCard>
-      <img
+      <IonImg
         className="card-image"
         src="../../assets/dashboard/Schedule-Test-Image.jpg"
         alt=""
       />
       <IonCardHeader>
-        <IonCardSubtitle>{new Date().toLocaleDateString()}</IonCardSubtitle>
+        <IonCardSubtitle color="secondary">{new Date().toLocaleDateString()}</IonCardSubtitle>
         <IonCardTitle>Scheduling</IonCardTitle>
       </IonCardHeader>
       <IonCardContent>
         The dashboard display of the schedule. Giving company related Schedule
         data letting people know when they work.
-        <IonButton expand="block" size="small" routerLink="/schedule">
+        <IonButton fill="outline" expand="block" size="small" routerLink="/schedule">
           Go to Schedule
         </IonButton>
       </IonCardContent>
