@@ -1,42 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
+  IonButton,
+  IonContent,
+  IonInput,
   IonItem,
   IonLabel,
-  IonInput,
-  IonButton,
   IonList,
-  IonHeader,
-  IonTitle,
-  IonModal,
-  IonContent,
-  IonToolbar,
+  IonPage,
+  IonToast,
 } from '@ionic/react';
+import PageHeader from '../../components/shared/PageHeader';
 import { useAuthContext } from '../../hooks/AuthContext';
-import './Login.css';
+import { useHistory } from 'react-router';
 
-interface AccountProps {
-  loginModal: boolean;
-  setLoginModal: (data: boolean) => void;
-}
-
-const Login: React.FC<AccountProps> = ({ loginModal, setLoginModal }) => {
+const RegisterPage: React.FC = () => {
+  const [errorToast, setErrorToast] = useState(false);
   const auth = useAuthContext();
+  const history = useHistory();
+
+  const handleSignup = () => {
+    auth
+      .handleSignup()
+      .then(() => {
+        history.push('/option');
+      })
+      .catch(() => {
+        setErrorToast(true);
+      });
+  };
 
   return (
-    <IonModal isOpen={loginModal}>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Login With Email</IonTitle>
-          <IonButton
-            slot="primary"
-            size="small"
-            onClick={(e) => setLoginModal(false)}
-          >
-            Close
-          </IonButton>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent>
+    <IonPage>
+      <PageHeader title="Register" />
+      <IonContent fullscreen>
+        <PageHeader title="Register" condense />
+        <IonToast
+          isOpen={errorToast}
+          onDidDismiss={() => setErrorToast(false)}
+          message={auth.authState.signupError}
+          duration={3000}
+          position="top"
+        />
         <IonList className="ion-margin-vertical">
           <IonItem>
             <IonLabel>Email</IonLabel>
@@ -69,17 +73,14 @@ const Login: React.FC<AccountProps> = ({ loginModal, setLoginModal }) => {
             ></IonInput>
           </IonItem>
           <IonItem lines="none">
-            <IonButton onClick={auth.handleLogin} slot="end">
-              Log In
+            <IonButton onClick={handleSignup} slot="end">
+              Signup
             </IonButton>
           </IonItem>
         </IonList>
-        {auth.authState.loginError && (
-          <div className="error">{auth.authState.loginError}</div>
-        )}
       </IonContent>
-    </IonModal>
+    </IonPage>
   );
 };
 
-export default Login;
+export default RegisterPage;

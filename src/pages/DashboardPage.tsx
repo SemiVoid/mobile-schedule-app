@@ -8,7 +8,7 @@ const DashboardPage: React.FC = () => {
   return (
     <IonPage>
       <PageHeader title="Dashboard" />
-      <IonContent fullscreen>
+      <IonContent>
         <PageHeader title="Dashboard" condense />
         <ScheduleCard />
         <TaskCard />

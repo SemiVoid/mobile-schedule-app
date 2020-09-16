@@ -6,7 +6,7 @@ interface PageHeaderProps {
   condense?: boolean;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ title, condense}) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ title, condense }) => {
   return (
     <>
       {!condense ? (

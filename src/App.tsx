@@ -10,11 +10,14 @@ import {
   IonTabs,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { home, calendar, fileTrayFull, menu } from 'ionicons/icons';
+import { home, calendar, menu, people, journal } from 'ionicons/icons';
 import DashboardPage from './pages/DashboardPage';
-import OptionPage from './pages/OptionPage';
+import OptionPage from './pages/option/OptionPage';
+import EmployeePage from './pages/employee/EmployeePage';
 import SchedulePage from './pages/SchedulePage';
 import TaskPage from './pages/TaskPage';
+import LoginPage from './pages/option/LoginPage';
+import RegisterPage from './pages/option/RegisterPage';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -34,44 +37,50 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import AuthProvider from './hooks/AuthContext';
 
 const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route path="/dashboard" component={DashboardPage} exact={true} />
-          <Route path="/schedule" component={SchedulePage} exact={true} />
-          <Route path="/task" component={TaskPage} exact={true} />
-          <Route path="/option" component={OptionPage} exact={true}/>
-          <Route
-            path="/"
-            render={() => <Redirect to="/dashboard" />}
-            exact={true}
-          />
-        </IonRouterOutlet>
+  <AuthProvider>
+    <IonApp>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route path="/dashboard" component={DashboardPage} exact />
+            <Route path="/employee" component={EmployeePage} exact />
+            <Route path="/schedule" component={SchedulePage} exact />
+            <Route path="/task" component={TaskPage} exact />
+            <Route path="/option" component={OptionPage} exact />
+            <Route path="/login" component={LoginPage} exact />
+            <Route path="/register" component={RegisterPage} exact />
+            <Route path="/" render={() => <Redirect to="/dashboard" />} exact />
+          </IonRouterOutlet>
 
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="dashboard" href="/dashboard">
-            <IonIcon icon={home} />
-            <IonLabel>Dashboard</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="schedule" href="/schedule">
-            <IonIcon icon={calendar} />
-            <IonLabel>Schedule</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="task" href="/task">
-            <IonIcon icon={fileTrayFull} />
-            <IonLabel>Task</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="option" href="/option">
-            <IonIcon icon={menu} />
-            <IonLabel>Options</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="dashboard" href="/dashboard">
+              <IonIcon icon={home} />
+              <IonLabel>Dashboard</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="employee" href="/employee">
+              <IonIcon icon={people} />
+              <IonLabel>Employee</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="schedule" href="/schedule">
+              <IonIcon icon={calendar} />
+              <IonLabel>Schedule</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="task" href="/task">
+              <IonIcon icon={journal} />
+              <IonLabel>Task</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="option" href="/option">
+              <IonIcon icon={menu} />
+              <IonLabel>More</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+  </AuthProvider>
 );
 
 export default App;

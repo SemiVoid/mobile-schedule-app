@@ -5,9 +5,9 @@ import { auth } from '../config/firebase';
 interface AuthContextProps {
   authState: any;
   authDispatch: React.Dispatch<any>;
-  handleSignup: () => void;
-  handleLogin: () => void;
-  handleLogout: () => void;
+  handleSignup: () => Promise<void>;
+  handleLogin: () => Promise<void>;
+  handleLogout: () => Promise<void>;
 }
 
 const AuthContext = React.createContext({} as AuthContextProps);
@@ -23,14 +23,13 @@ const authReducer = (state: any, action: any) => {
     case 'login': {
       return {
         ...state,
-        loginError: '',
         isWaiting: true,
+        password: '',
       };
     }
     case 'signup': {
       return {
         ...state,
-        signupError: '',
         isWaiting: true,
       };
     }
@@ -38,7 +37,8 @@ const authReducer = (state: any, action: any) => {
       return {
         ...state,
         isLoggedIn: true,
-        account: action.user,
+        signupError: '',
+        loginError: '',
       };
     }
     case 'error': {
@@ -51,8 +51,14 @@ const authReducer = (state: any, action: any) => {
       return {
         ...state,
         isLoggedIn: false,
-        username: '',
+        email: '',
         password: '',
+      };
+    }
+    case 'account': {
+      return {
+        ...state,
+        account: action.user,
       };
     }
     default:
@@ -74,16 +80,21 @@ const initialState = {
 const AuthProvider: React.FC = ({ children }) => {
   const [authState, authDispatch] = useReducer(authReducer, initialState);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     authDispatch({ type: 'login' });
-    auth
+    await auth
       .signInWithEmailAndPassword(authState.email, authState.password)
+      .then(() => {
+        authDispatch({ type: 'success' });
+        return Promise.resolve();
+      })
       .catch((e) => {
         authDispatch({
           type: 'error',
           error: 'loginError',
           errorValue: e.message,
         });
+        return Promise.reject();
       });
   };
 
@@ -91,12 +102,17 @@ const AuthProvider: React.FC = ({ children }) => {
     authDispatch({ type: 'signup' });
     await auth
       .createUserWithEmailAndPassword(authState.email, authState.password)
+      .then(() => {
+        authDispatch({ type: 'success' });
+        return Promise.resolve();
+      })
       .catch((e) => {
         authDispatch({
           type: 'error',
           error: 'signupError',
           errorValue: e.message,
         });
+        return Promise.reject();
       });
   };
 
@@ -105,10 +121,10 @@ const AuthProvider: React.FC = ({ children }) => {
     await auth.signOut();
   };
 
-  const authListener = async () => {
-    await auth.onAuthStateChanged((u) => {
+  const authListener = () => {
+    auth.onAuthStateChanged((u) => {
       if (u) {
-        authDispatch({ type: 'success', user: u });
+        authDispatch({ type: 'account', user: u });
       }
     });
   };
