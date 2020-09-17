@@ -38,48 +38,55 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import AuthProvider from './hooks/AuthContext';
+import ModalControlProvider from './hooks/ModalControlContext';
 
 const App: React.FC = () => (
   <AuthProvider>
-    <IonApp>
-      <IonReactRouter>
-        <IonTabs>
-          <IonRouterOutlet>
-            <Route path="/dashboard" component={DashboardPage} exact />
-            <Route path="/employee" component={EmployeePage} exact />
-            <Route path="/schedule" component={SchedulePage} exact />
-            <Route path="/task" component={TaskPage} exact />
-            <Route path="/option" component={OptionPage} exact />
-            <Route path="/login" component={LoginPage} exact />
-            <Route path="/register" component={RegisterPage} exact />
-            <Route path="/" render={() => <Redirect to="/dashboard" />} exact />
-          </IonRouterOutlet>
+    <ModalControlProvider>
+      <IonApp>
+        <IonReactRouter>
+          <IonTabs>
+            <IonRouterOutlet>
+              <Route path="/dashboard" component={DashboardPage} exact />
+              <Route path="/employee" component={EmployeePage} exact />
+              <Route path="/schedule" component={SchedulePage} exact />
+              <Route path="/task" component={TaskPage} exact />
+              <Route path="/option" component={OptionPage} exact />
+              <Route path="/login" component={LoginPage} exact />
+              <Route path="/register" component={RegisterPage} exact />
+              <Route
+                path="/"
+                render={() => <Redirect to="/dashboard" />}
+                exact
+              />
+            </IonRouterOutlet>
 
-          <IonTabBar slot="bottom">
-            <IonTabButton tab="dashboard" href="/dashboard">
-              <IonIcon icon={home} />
-              <IonLabel>Dashboard</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="employee" href="/employee">
-              <IonIcon icon={people} />
-              <IonLabel>Employee</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="schedule" href="/schedule">
-              <IonIcon icon={calendar} />
-              <IonLabel>Schedule</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="task" href="/task">
-              <IonIcon icon={journal} />
-              <IonLabel>Task</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="option" href="/option">
-              <IonIcon icon={menu} />
-              <IonLabel>More</IonLabel>
-            </IonTabButton>
-          </IonTabBar>
-        </IonTabs>
-      </IonReactRouter>
-    </IonApp>
+            <IonTabBar slot="bottom">
+              <IonTabButton tab="dashboard" href="/dashboard">
+                <IonIcon icon={home} />
+                <IonLabel>Dashboard</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="employee" href="/employee">
+                <IonIcon icon={people} />
+                <IonLabel>Employee</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="schedule" href="/schedule">
+                <IonIcon icon={calendar} />
+                <IonLabel>Schedule</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="task" href="/task">
+                <IonIcon icon={journal} />
+                <IonLabel>Task</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="option" href="/option">
+                <IonIcon icon={menu} />
+                <IonLabel>More</IonLabel>
+              </IonTabButton>
+            </IonTabBar>
+          </IonTabs>
+        </IonReactRouter>
+      </IonApp>
+    </ModalControlProvider>
   </AuthProvider>
 );
 
