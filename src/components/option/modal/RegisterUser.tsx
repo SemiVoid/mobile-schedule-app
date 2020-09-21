@@ -6,23 +6,31 @@ import {
   IonItem,
   IonLabel,
   IonList,
-  IonPage,
+  IonModal,
   IonToast,
 } from '@ionic/react';
-import { useAuthContext } from '../../hooks/AuthContext';
-import { useHistory } from 'react-router';
-import PageHeader from '../../components/shared/PageHeader';
+import PageHeader from '../../shared/PageHeader';
+import { useModalContext } from '../../../hooks/ModalContext';
+import { useAuthContext } from '../../../hooks/AuthContext';
 
-const LoginPage: React.FC = () => {
+interface RegisterUserProps {
+  registerUserModal: boolean;
+}
+
+const RegisterUser: React.FC<RegisterUserProps> = ({ registerUserModal }) => {
   const [errorToast, setErrorToast] = useState(false);
+  const modalControl = useModalContext();
   const auth = useAuthContext();
-  const history = useHistory();
 
-  const handleLogin = () => {
+  const closeModal = () => {
+    modalControl.modalDispatch({ type: 'closeRegisterUser' });
+  };
+
+  const handleSignup = () => {
     auth
-      .handleLogin()
+      .handleSignup()
       .then(() => {
-        history.push('/option');
+        closeModal();
       })
       .catch(() => {
         setErrorToast(true);
@@ -30,14 +38,14 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <IonPage>
-      <PageHeader title="Login" />
+    <IonModal isOpen={registerUserModal}>
+      <PageHeader title="Register" />
       <IonContent fullscreen>
-        <PageHeader title="Login" condense />
+        <PageHeader title="Register" condense />
         <IonToast
           isOpen={errorToast}
           onDidDismiss={() => setErrorToast(false)}
-          message={auth.authState.loginError}
+          message={auth.authState.signupError}
           duration={3000}
           position="top"
         />
@@ -73,14 +81,17 @@ const LoginPage: React.FC = () => {
             ></IonInput>
           </IonItem>
           <IonItem lines="none">
-            <IonButton onClick={handleLogin} slot="end">
-              Log In
+            <IonButton onClick={closeModal} slot="end">
+              Close Modal
+            </IonButton>
+            <IonButton onClick={handleSignup} slot="end">
+              Signup
             </IonButton>
           </IonItem>
         </IonList>
       </IonContent>
-    </IonPage>
+    </IonModal>
   );
 };
 
-export default LoginPage;
+export default RegisterUser;

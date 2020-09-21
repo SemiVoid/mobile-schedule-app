@@ -1,7 +1,7 @@
 import React from 'react';
 import { IonContent, IonPage } from '@ionic/react';
-import AccountSection from '../../components/option/AccountSection';
-import PageHeader from '../../components/shared/PageHeader';
+import AccountSection from '../components/option/AccountSection';
+import PageHeader from '../components/shared/PageHeader';
 
 const OptionPage: React.FC = () => {
   return (

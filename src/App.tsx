@@ -12,12 +12,10 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import { home, calendar, menu, people, journal } from 'ionicons/icons';
 import DashboardPage from './pages/DashboardPage';
-import OptionPage from './pages/option/OptionPage';
-import EmployeePage from './pages/employee/EmployeePage';
+import OptionPage from './pages/OptionPage';
+import EmployeePage from './pages/EmployeePage';
 import SchedulePage from './pages/SchedulePage';
 import TaskPage from './pages/TaskPage';
-import LoginPage from './pages/option/LoginPage';
-import RegisterPage from './pages/option/RegisterPage';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -38,12 +36,12 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import AuthProvider from './hooks/AuthContext';
-import ModalControlProvider from './hooks/ModalControlContext';
+import ModalProvider from './hooks/ModalContext';
 
 const App: React.FC = () => (
-  <AuthProvider>
-    <ModalControlProvider>
-      <IonApp>
+  <IonApp>
+    <AuthProvider>
+      <ModalProvider>
         <IonReactRouter>
           <IonTabs>
             <IonRouterOutlet>
@@ -52,8 +50,6 @@ const App: React.FC = () => (
               <Route path="/schedule" component={SchedulePage} exact />
               <Route path="/task" component={TaskPage} exact />
               <Route path="/option" component={OptionPage} exact />
-              <Route path="/login" component={LoginPage} exact />
-              <Route path="/register" component={RegisterPage} exact />
               <Route
                 path="/"
                 render={() => <Redirect to="/dashboard" />}
@@ -85,9 +81,9 @@ const App: React.FC = () => (
             </IonTabBar>
           </IonTabs>
         </IonReactRouter>
-      </IonApp>
-    </ModalControlProvider>
-  </AuthProvider>
+      </ModalProvider>
+    </AuthProvider>
+  </IonApp>
 );
 
 export default App;

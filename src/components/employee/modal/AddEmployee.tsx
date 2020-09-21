@@ -8,9 +8,9 @@ import {
   IonList,
   IonModal,
 } from '@ionic/react';
-import PageHeader from '../../components/shared/PageHeader';
-import { useModalControlContext } from '../../hooks/ModalControlContext';
-import { db } from '../../config/firebase';
+import PageHeader from '../../shared/PageHeader';
+import { useModalContext } from '../../../hooks/ModalContext';
+import { db } from '../../../config/firebase';
 
 interface AddEmployeeProps {
   addEmployeeModal: boolean;
@@ -19,7 +19,7 @@ interface AddEmployeeProps {
 const AddEmployee: React.FC<AddEmployeeProps> = ({ addEmployeeModal }) => {
   const [name, setName] = useState('');
   const [department, setDepartment] = useState('');
-  const modalControl = useModalControlContext();
+  const modalControl = useModalContext();
 
   const handleAddEmployee = () => {
     db

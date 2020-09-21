@@ -1,9 +1,9 @@
 import React from 'react';
 import { IonButton, IonFooter, IonLabel } from '@ionic/react';
-import { useModalControlContext } from '../../hooks/ModalControlContext';
+import { useModalContext } from '../../hooks/ModalContext';
 
 const EmployeeFooter: React.FC = () => {
-  const modal = useModalControlContext();
+  const modal = useModalContext();
 
   return (
     <IonFooter className="ion-no-border">

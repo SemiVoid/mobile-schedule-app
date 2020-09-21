@@ -10,6 +10,7 @@ import {
 } from '@ionic/react';
 import { useAuthContext } from '../../hooks/AuthContext';
 import './AccountSection.css';
+import { useModalContext } from '../../hooks/ModalContext';
 
 const AccountSection: React.FC = () => {
   const auth = useAuthContext();
@@ -27,6 +28,7 @@ const AccountSection: React.FC = () => {
 
 const Avatar: React.FC = () => {
   const auth = useAuthContext();
+
   return (
     <IonRow>
       <IonCol>
@@ -38,22 +40,32 @@ const Avatar: React.FC = () => {
         </IonAvatar>
       </IonCol>
       <IonCol size="9">
-        <IonLabel>Hello {auth.authState.account.email}</IonLabel>
+        <IonLabel>Hello {auth.authState.account?.email}</IonLabel>
       </IonCol>
     </IonRow>
   );
 };
 
 const NoUserButtons: React.FC = () => {
+  const modal = useModalContext();
+
+  const handleLogin = () => {
+    modal.modalDispatch({ type: 'openLoginUser' });
+  };
+
+  const handleRegister = () => {
+    modal.modalDispatch({ type: 'openRegisterUser' });
+  };
+
   return (
     <>
       <IonCol>
-        <IonButton routerLink="/register" expand="block">
+        <IonButton onClick={handleRegister} expand="block">
           Signup
         </IonButton>
       </IonCol>
       <IonCol>
-        <IonButton routerLink="/login" expand="block">
+        <IonButton onClick={handleLogin} expand="block">
           Login
         </IonButton>
       </IonCol>
@@ -63,9 +75,14 @@ const NoUserButtons: React.FC = () => {
 
 const UserButtons: React.FC = () => {
   const auth = useAuthContext();
+
+  const handleLogout = () => {
+    auth.handleLogout();
+  };
+
   return (
     <IonCol>
-      <IonButton onClick={auth.handleLogout} expand="block">
+      <IonButton onClick={handleLogout} expand="block">
         Logout
       </IonButton>
     </IonCol>
