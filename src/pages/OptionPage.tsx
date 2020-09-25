@@ -1,17 +1,24 @@
 import React from 'react';
 import { IonContent, IonPage } from '@ionic/react';
-import AccountSection from '../components/option/AccountSection';
+
+// Import Providers
+import AuthProvider from '../hooks/AuthContext';
+
+// Import Components
 import PageHeader from '../components/shared/PageHeader';
+import AccountSection from '../components/option/AccountSection';
 
 const OptionPage: React.FC = () => {
   return (
-    <IonPage>
-      <PageHeader title="Settings" />
-      <IonContent fullscreen>
-        <PageHeader title="Settings" condense />
-        <AccountSection />
-      </IonContent>
-    </IonPage>
+    <AuthProvider>
+      <IonPage>
+        <PageHeader title="Settings" />
+        <IonContent fullscreen>
+          <PageHeader title="Settings" condense />
+          <AccountSection />
+        </IonContent>
+      </IonPage>
+    </AuthProvider>
   );
 };
 

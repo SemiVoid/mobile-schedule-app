@@ -1,10 +1,14 @@
 import React from 'react';
 import { IonContent, IonPage } from '@ionic/react';
-import ViewDisplay from '../components/schedule/ViewDisplay';
-import ScheduleFooter from '../components/schedule/ScheduleFooter';
+
+// Import Providers
 import ScheduleProvider from '../hooks/ScheduleContext';
 import WeekProvider from '../hooks/WeekContext';
+
+// Import Components
 import PageHeader from '../components/shared/PageHeader';
+import ViewDisplay from '../components/schedule/ViewDisplay';
+import ScheduleFooter from '../components/schedule/ScheduleFooter';
 
 const SchedulePage: React.FC = () => {
   return (
