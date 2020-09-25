@@ -1,6 +1,7 @@
 import React from 'react';
 import './ViewDisplay.css';
 import { useScheduleContext } from '../../hooks/ScheduleContext';
+import EmptyPage from '../shared/EmptyPage';
 
 const ViewDisplay: React.FC = () => {
   const schedule = useScheduleContext();
@@ -17,12 +18,14 @@ const ViewDisplay: React.FC = () => {
   });
 
   return (
-    <div className="display-background">
-      <div className="display-foreground">
-        {list.length === 0 && <p>No Data</p>}
-        {list.length > 0 && list}
-      </div>
-    </div>
+    <>
+      {list.length === 0 && <EmptyPage page="Schedule" />}
+      {list.length > 0 && (
+        <div className="display-background ion-margin-vertical">
+          <div className="display-foreground">{list}</div>
+        </div>
+      )}
+    </>
   );
 };
 
