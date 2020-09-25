@@ -1,7 +1,14 @@
 import React, { useContext, useReducer } from 'react';
+
+// Import Modals
 import AddEmployee from '../components/employee/modal/AddEmployee';
 import LoginUser from '../components/option/modal/LoginUser';
 import RegisterUser from '../components/option/modal/RegisterUser';
+
+// Import Providers
+import AuthProvider from './AuthContext';
+
+// Import Modal Reducer
 import {
   ModalActionType,
   ModalInitState,
@@ -9,20 +16,15 @@ import {
   ModalStateType,
 } from './ModalReducer';
 
-// Auth Context Creation
 interface ModalContextProps {
   modalState: ModalStateType;
   modalDispatch: React.Dispatch<ModalActionType>;
 }
 
+// Modal Context
 const ModalContext = React.createContext({} as ModalContextProps);
 
-// Modal Control Context Custom Hook Usage
-export function useModalContext() {
-  return useContext(ModalContext);
-}
-
-// Modal Control Provider Function Component
+// Modal Provider
 const ModalProvider: React.FC = ({ children }) => {
   const [modalState, modalDispatch] = useReducer(ModalReducer, ModalInitState);
 
@@ -31,11 +33,18 @@ const ModalProvider: React.FC = ({ children }) => {
   return (
     <ModalContext.Provider value={value}>
       {children}
-      <AddEmployee addEmployeeModal={modalState.addEmployee} />
-      <LoginUser loginUserModal={modalState.loginUser} />
-      <RegisterUser registerUserModal={modalState.registerUser} />
+      <AuthProvider>
+        <AddEmployee addEmployeeModal={modalState.addEmployee} />
+        <LoginUser loginUserModal={modalState.loginUser} />
+        <RegisterUser registerUserModal={modalState.registerUser} />
+      </AuthProvider>
     </ModalContext.Provider>
   );
 };
+
+// Modal Context Use Custom Hook
+export function useModalContext() {
+  return useContext(ModalContext);
+}
 
 export default ModalProvider;

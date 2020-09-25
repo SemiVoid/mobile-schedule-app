@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   IonButton,
   IonContent,
@@ -7,7 +7,6 @@ import {
   IonLabel,
   IonList,
   IonModal,
-  IonToast,
 } from '@ionic/react';
 import PageHeader from '../../shared/PageHeader';
 import { useModalContext } from '../../../hooks/ModalContext';
@@ -18,7 +17,6 @@ interface LoginUserProps {
 }
 
 const LoginUser: React.FC<LoginUserProps> = ({ loginUserModal }) => {
-  const [errorToast, setErrorToast] = useState(false);
   const modalControl = useModalContext();
   const auth = useAuthContext();
 
@@ -28,30 +26,19 @@ const LoginUser: React.FC<LoginUserProps> = ({ loginUserModal }) => {
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    auth
-      .handleLogin()
-      .then(() => {
-        closeModal();
-      })
-      .catch(() => {
-        setErrorToast(true);
-      });
+    auth.handleLogin();
   };
 
   return (
-    <IonModal isOpen={loginUserModal}>
+    <IonModal
+      isOpen={loginUserModal}
+      onDidDismiss={closeModal}
+    >
       <PageHeader title="Login" />
       <IonContent fullscreen>
         <PageHeader title="Login" condense />
-        <IonToast
-          isOpen={errorToast}
-          onDidDismiss={() => setErrorToast(false)}
-          message={auth.authState.loginError}
-          duration={3000}
-          position="top"
-        />
         <IonList className="ion-margin-vertical">
-          <form onSubmit={(e) =>{handleLogin(e)}}>
+          <form onSubmit={(e) => handleLogin(e)}>
             <IonItem>
               <IonLabel>Email</IonLabel>
               <IonInput

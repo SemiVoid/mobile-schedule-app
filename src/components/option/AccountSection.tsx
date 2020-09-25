@@ -17,10 +17,10 @@ const AccountSection: React.FC = () => {
 
   return (
     <IonGrid className="background">
-      {auth.authState.isLoggedIn && <Avatar />}
+      {auth.user && <Avatar />}
       <IonRow className="buttons">
-        {!auth.authState.isLoggedIn && <NoUserButtons />}
-        {auth.authState.isLoggedIn && <UserButtons />}
+        {!auth.user && <NoUserButtons />}
+        {auth.user && <UserButtons />}
       </IonRow>
     </IonGrid>
   );
@@ -40,7 +40,7 @@ const Avatar: React.FC = () => {
         </IonAvatar>
       </IonCol>
       <IonCol size="9">
-        <IonLabel>Hello {auth.authState.account?.email}</IonLabel>
+        <IonLabel>Hello {auth.user?.email}</IonLabel>
       </IonCol>
     </IonRow>
   );

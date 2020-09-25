@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
+import { IonReactRouter } from '@ionic/react-router';
 import {
   IonApp,
   IonIcon,
@@ -9,13 +10,7 @@ import {
   IonTabButton,
   IonTabs,
 } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
 import { home, calendar, menu, people, journal } from 'ionicons/icons';
-import DashboardPage from './pages/DashboardPage';
-import OptionPage from './pages/OptionPage';
-import EmployeePage from './pages/EmployeePage';
-import SchedulePage from './pages/SchedulePage';
-import TaskPage from './pages/TaskPage';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -35,12 +30,21 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import AuthProvider from './hooks/AuthContext';
+
+// Import Global Providers
+import NotificationProvider from './hooks/NotificationContext';
 import ModalProvider from './hooks/ModalContext';
+
+// Import Pages
+import DashboardPage from './pages/DashboardPage';
+import EmployeePage from './pages/EmployeePage';
+import SchedulePage from './pages/SchedulePage';
+import TaskPage from './pages/TaskPage';
+import OptionPage from './pages/OptionPage';
 
 const App: React.FC = () => (
   <IonApp>
-    <AuthProvider>
+    <NotificationProvider>
       <ModalProvider>
         <IonReactRouter>
           <IonTabs>
@@ -82,7 +86,7 @@ const App: React.FC = () => (
           </IonTabs>
         </IonReactRouter>
       </ModalProvider>
-    </AuthProvider>
+    </NotificationProvider>
   </IonApp>
 );
 

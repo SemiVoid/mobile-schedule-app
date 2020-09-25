@@ -1,5 +1,10 @@
-import React, { useContext, useReducer, useEffect } from 'react';
+import React, { useContext, useReducer } from 'react';
+
+// Import Firebase Auth
 import { auth } from '../config/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+
+// Import Auth Reducer
 import {
   AuthActionType,
   AuthInitState,
@@ -7,74 +12,64 @@ import {
   AuthStateType,
 } from './AuthReducer';
 
-// Auth Context Creation
+import { useModalContext } from './ModalContext';
+import { useNotificationContext } from './NotificationContext';
+
 interface AuthContextProps {
+  user: firebase.User | undefined;
+  loading: boolean;
   authState: AuthStateType;
   authDispatch: React.Dispatch<AuthActionType>;
-  handleSignup: () => Promise<void>;
-  handleLogin: () => Promise<void>;
-  handleLogout: () => Promise<void>;
+  handleSignup: () => void;
+  handleLogin: () => void;
+  handleLogout: () => void;
 }
 
+// Auth Context
 const AuthContext = React.createContext({} as AuthContextProps);
 
-// Auth Provider Function Component
+// Auth Provider
 const AuthProvider: React.FC = ({ children }) => {
+  const [user, loading] = useAuthState(auth);
   const [authState, authDispatch] = useReducer(AuthReducer, AuthInitState);
+  const modalControl = useModalContext();
+  const notif = useNotificationContext();
 
-  const handleLogin = async () => {
-    authDispatch({ type: 'login' });
-    await auth
+  const handleLogin = () => {
+    auth
       .signInWithEmailAndPassword(authState.email, authState.password)
       .then(() => {
-        return Promise.resolve();
+        modalControl.modalDispatch({ type: 'closeLoginUser' });
+        authDispatch({ type: 'resetEmail' });
+        authDispatch({ type: 'resetPass' });
       })
       .catch((e) => {
-        authDispatch({
-          type: 'error',
-          error: 'loginError',
-          errorValue: e.message,
-        });
-        return Promise.reject();
+        notif.setNotif(e.message);
+        authDispatch({ type: 'resetPass' });
       });
   };
 
-  const handleSignup = async () => {
-    authDispatch({ type: 'signup' });
-    await auth
+  const handleSignup = () => {
+    auth
       .createUserWithEmailAndPassword(authState.email, authState.password)
       .then(() => {
-        return Promise.resolve();
+        modalControl.modalDispatch({ type: 'closeRegisterUser' });
+        authDispatch({ type: 'resetEmail' });
+        authDispatch({ type: 'resetPass' });
       })
       .catch((e) => {
-        authDispatch({
-          type: 'error',
-          error: 'signupError',
-          errorValue: e.message,
-        });
-        return Promise.reject();
+        notif.setNotif(e.message);
+        authDispatch({ type: 'resetPass' });
       });
   };
 
-  const handleLogout = async () => {
-    authDispatch({ type: 'logout' });
-    await auth.signOut();
+  const handleLogout = () => {
+    auth.signOut();
   };
-
-  const authListener = () => {
-    auth.onAuthStateChanged((u) => {
-      if (u) {
-        authDispatch({ type: 'account', user: u });
-        authDispatch({ type: 'success' });
-      }
-    });
-  };
-
-  useEffect(() => {
-    authListener();
-  }, []);
 
   const value = {
+    user,
+    loading,
     authState,
     authDispatch,
     handleSignup,
@@ -85,7 +80,7 @@ const AuthProvider: React.FC = ({ children }) => {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-// Auth Context Custom Hook Usage
+// Auth Context Use Custom Hook
 export function useAuthContext() {
   return useContext(AuthContext);
 }

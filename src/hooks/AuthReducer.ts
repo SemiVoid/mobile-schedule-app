@@ -1,30 +1,19 @@
 export interface AuthStateType {
-  account: firebase.User | undefined;
   email: string;
   password: string;
-  loginError: string;
-  signupError: string;
-  isWaiting: boolean;
-  isLoggedIn: boolean;
+  error: string;
 }
 
 export type AuthActionType =
   | { type: 'input'; field: string; fieldValue: string }
-  | { type: 'error'; error: string; errorValue: string }
-  | { type: 'account'; user: firebase.User }
-  | { type: 'login' }
-  | { type: 'signup' }
-  | { type: 'success' }
-  | { type: 'logout' };
+  | { type: 'error'; errorVal: string }
+  | { type: 'resetEmail' }
+  | { type: 'resetPass' };
 
 export const AuthInitState: AuthStateType = {
-  account: undefined,
   email: '',
   password: '',
-  loginError: '',
-  signupError: '',
-  isWaiting: false,
-  isLoggedIn: false,
+  error: '',
 };
 
 export const AuthReducer = (
@@ -38,46 +27,22 @@ export const AuthReducer = (
         [action.field]: action.fieldValue,
       };
     }
-    case 'login': {
-      return {
-        ...state,
-        isWaiting: true,
-        password: '',
-      };
-    }
-    case 'signup': {
-      return {
-        ...state,
-        isWaiting: true,
-      };
-    }
-    case 'success': {
-      return {
-        ...state,
-        isLoggedIn: true,
-        signupError: '',
-        loginError: '',
-      };
-    }
     case 'error': {
       return {
         ...state,
-        [action.error]: action.errorValue,
+        error: action.errorVal,
       };
     }
-    case 'logout': {
+    case 'resetEmail': {
       return {
         ...state,
-        isLoggedIn: false,
-        account: undefined,
         email: '',
-        password: '',
       };
     }
-    case 'account': {
+    case 'resetPass': {
       return {
         ...state,
-        account: action.user,
+        password: '',
       };
     }
     default:
