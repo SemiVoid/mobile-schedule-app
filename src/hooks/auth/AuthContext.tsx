@@ -1,7 +1,7 @@
 import React, { useContext, useReducer } from 'react';
 
 // Import Firebase Auth
-import { auth } from '../config/firebase';
+import { auth } from '../../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 // Import Auth Reducer
@@ -12,8 +12,8 @@ import {
   AuthStateType,
 } from './AuthReducer';
 
-import { useModalContext } from './ModalContext';
-import { useNotificationContext } from './NotificationContext';
+import { useModalContext } from '../modal/ModalContext';
+import { useNotificationContext } from '../notification/NotificationContext';
 
 interface AuthContextProps {
   user: firebase.User | undefined;

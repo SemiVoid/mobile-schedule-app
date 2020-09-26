@@ -9,7 +9,7 @@ import {
   IonModal,
 } from '@ionic/react';
 import PageHeader from '../../shared/PageHeader';
-import { useModalContext } from '../../../hooks/ModalContext';
+import { useModalContext } from '../../../hooks/modal/ModalContext';
 import { db } from '../../../config/firebase';
 
 interface AddEmployeeProps {

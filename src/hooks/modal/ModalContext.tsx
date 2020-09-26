@@ -1,12 +1,12 @@
 import React, { useContext, useReducer } from 'react';
 
 // Import Modals
-import AddEmployee from '../components/employee/modal/AddEmployee';
-import LoginUser from '../components/option/modal/LoginUser';
-import RegisterUser from '../components/option/modal/RegisterUser';
+import AddEmployee from '../../components/employee/modal/AddEmployee';
+import LoginUser from '../../components/option/modal/LoginUser';
+import RegisterUser from '../../components/option/modal/RegisterUser';
 
 // Import Providers
-import AuthProvider from './AuthContext';
+import AuthProvider from '../auth/AuthContext';
 
 // Import Modal Reducer
 import {

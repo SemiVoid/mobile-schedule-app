@@ -2,7 +2,7 @@ import React from 'react';
 import { IonContent, IonPage } from '@ionic/react';
 
 // Import Providers
-import AuthProvider from '../hooks/AuthContext';
+import AuthProvider from '../hooks/auth/AuthContext';
 
 // Import Components
 import PageHeader from '../components/shared/PageHeader';

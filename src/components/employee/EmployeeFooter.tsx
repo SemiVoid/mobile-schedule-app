@@ -1,6 +1,6 @@
 import React from 'react';
 import { IonButton, IonFooter, IonLabel } from '@ionic/react';
-import { useModalContext } from '../../hooks/ModalContext';
+import { useModalContext } from '../../hooks/modal/ModalContext';
 
 const EmployeeFooter: React.FC = () => {
   const modal = useModalContext();

@@ -32,8 +32,8 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 // Import Global Providers
-import NotificationProvider from './hooks/NotificationContext';
-import ModalProvider from './hooks/ModalContext';
+import NotificationProvider from './hooks/notification/NotificationContext';
+import ModalProvider from './hooks/modal/ModalContext';
 
 // Import Pages
 import DashboardPage from './pages/DashboardPage';

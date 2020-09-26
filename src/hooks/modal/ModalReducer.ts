@@ -1,9 +1,11 @@
+// Modal State Type
 export interface ModalStateType {
   addEmployee: boolean;
   loginUser: boolean;
   registerUser: boolean;
 }
 
+// Modal Action Type
 export interface ModalActionType {
   type:
     | 'openAddEmployee'
@@ -14,12 +16,14 @@ export interface ModalActionType {
     | 'closeRegisterUser';
 }
 
+// Modal Initial State
 export const ModalInitState: ModalStateType = {
   addEmployee: false,
   loginUser: false,
   registerUser: false,
 };
 
+// Modal Reducer
 export const ModalReducer = (
   state: ModalStateType,
   action: ModalActionType

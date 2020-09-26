@@ -9,8 +9,8 @@ import {
   IonModal,
 } from '@ionic/react';
 import PageHeader from '../../shared/PageHeader';
-import { useModalContext } from '../../../hooks/ModalContext';
-import { useAuthContext } from '../../../hooks/AuthContext';
+import { useModalContext } from '../../../hooks/modal/ModalContext';
+import { useAuthContext } from '../../../hooks/auth/AuthContext';
 
 interface RegisterUserProps {
   registerUserModal: boolean;

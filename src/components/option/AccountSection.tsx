@@ -8,9 +8,9 @@ import {
   IonLabel,
   IonRow,
 } from '@ionic/react';
-import { useAuthContext } from '../../hooks/AuthContext';
+import { useAuthContext } from '../../hooks/auth/AuthContext';
 import './AccountSection.css';
-import { useModalContext } from '../../hooks/ModalContext';
+import { useModalContext } from '../../hooks/modal/ModalContext';
 
 const AccountSection: React.FC = () => {
   const auth = useAuthContext();

@@ -1,21 +1,25 @@
+// Auth State Type
 export interface AuthStateType {
   email: string;
   password: string;
   error: string;
 }
 
+// Auth Action Type
 export type AuthActionType =
   | { type: 'input'; field: string; fieldValue: string }
   | { type: 'error'; errorVal: string }
   | { type: 'resetEmail' }
   | { type: 'resetPass' };
 
+// Auth Initial State
 export const AuthInitState: AuthStateType = {
   email: '',
   password: '',
   error: '',
 };
 
+// Auth Reducer
 export const AuthReducer = (
   state: AuthStateType,
   action: AuthActionType
