@@ -10,7 +10,7 @@ import {
 } from '@ionic/react';
 import PageHeader from '../../shared/PageHeader';
 import { useModalContext } from '../../../hooks/modal/ModalContext';
-import { db } from '../../../config/firebase';
+import { useEmployeeContext } from '../../../hooks/employee/EmployeeContext';
 
 interface AddEmployeeProps {
   addEmployeeModal: boolean;
@@ -20,14 +20,10 @@ const AddEmployee: React.FC<AddEmployeeProps> = ({ addEmployeeModal }) => {
   const [name, setName] = useState('');
   const [department, setDepartment] = useState('');
   const modalControl = useModalContext();
+  const employee = useEmployeeContext();
 
   const handleAddEmployee = () => {
-    db
-      .collection('workers')
-      .add({ workerName: name, workerDep: department })
-      .then((data) => {
-        console.log(data);
-      });
+    employee.handleAddEmployee(name, department);
   };
 
   const closeModal = () => {
