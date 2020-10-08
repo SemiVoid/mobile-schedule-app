@@ -50,7 +50,8 @@ const AuthProvider: React.FC = ({ children }) => {
   };
 
   const handleSignup = () => {
-    auth
+    if (authState.password === authState.verifyPassword) {
+      auth
       .createUserWithEmailAndPassword(authState.email, authState.password)
       .then(() => {
         modalControl.modalDispatch({ type: 'closeRegisterUser' });
@@ -61,6 +62,11 @@ const AuthProvider: React.FC = ({ children }) => {
         notif.setNotif(e.message);
         authDispatch({ type: 'resetPass' });
       });
+    } else {
+      authDispatch({ type: 'resetPass' });
+      authDispatch({ type: 'resetVerifyPass' });
+      notif.setNotif("Password and Verify Password didn't match");
+    }
   };
 
   const handleLogout = () => {
