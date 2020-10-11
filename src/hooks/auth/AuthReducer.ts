@@ -2,6 +2,7 @@
 export interface AuthStateType {
   email: string;
   password: string;
+  verifyPassword: string;
   error: string;
 }
 
@@ -10,12 +11,14 @@ export type AuthActionType =
   | { type: 'input'; field: string; fieldValue: string }
   | { type: 'error'; errorVal: string }
   | { type: 'resetEmail' }
-  | { type: 'resetPass' };
+  | { type: 'resetPass' }
+  | { type: 'resetVerifyPass' };
 
 // Auth Initial State
 export const AuthInitState: AuthStateType = {
   email: '',
   password: '',
+  verifyPassword: '',
   error: '',
 };
 
@@ -47,6 +50,12 @@ export const AuthReducer = (
       return {
         ...state,
         password: '',
+      };
+    }
+    case 'resetVerifyPass': {
+      return {
+        ...state,
+        verifyPassword: '',
       };
     }
     default:

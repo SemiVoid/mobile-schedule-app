@@ -69,6 +69,21 @@ const RegisterUser: React.FC<RegisterUserProps> = ({ registerUserModal }) => {
                 }
               ></IonInput>
             </IonItem>
+            <IonItem>
+              <IonLabel>Verify Password</IonLabel>
+              <IonInput
+                type="password"
+                required
+                value={auth.authState.verifyPassword}
+                onIonChange={(e) =>
+                  auth.authDispatch({
+                    type: 'input',
+                    field: 'verifyPassword',
+                    fieldValue: e.detail.value as string,
+                  })
+                }
+              ></IonInput>
+            </IonItem>
             <IonItem lines="none">
               <IonButton onClick={closeModal} slot="end">
                 Close Modal

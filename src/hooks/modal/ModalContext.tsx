@@ -33,8 +33,8 @@ const ModalProvider: React.FC = ({ children }) => {
   return (
     <ModalContext.Provider value={value}>
       {children}
+      <AddEmployee addEmployeeModal={modalState.addEmployee} />
       <AuthProvider>
-        <AddEmployee addEmployeeModal={modalState.addEmployee} />
         <LoginUser loginUserModal={modalState.loginUser} />
         <RegisterUser registerUserModal={modalState.registerUser} />
       </AuthProvider>

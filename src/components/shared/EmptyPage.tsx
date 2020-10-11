@@ -11,8 +11,9 @@ const EmptyPage: React.FC<EmptyPageProps> = ({ page }) => {
     <div className="empty-container">
       {page === 'Employee' && (
         <IonText color="secondary">
-          There is currently no employees tied to this account. If you wish to
-          start adding employees then click the add Employee button below.
+          There is currently no employees. If you wish to start adding employees
+          then click the add Employee button below. Then refresh the page to see
+          the changes.
         </IonText>
       )}
       {page === 'Schedule' && (
