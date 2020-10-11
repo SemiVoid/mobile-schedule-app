@@ -2,12 +2,11 @@
 
 A mobile scheduling application that can help manage employee scheduling, assign tasks, and auto fill work hours.
 
-## Clone Project
+## Clone This Project
 
-1. Clone this repo
-2. Create a firebase project
-3. Setup environment varibles based on the ".env.example"
-4. Run the following commands
+1. Create a firebase project
+2. Setup environment varibles based on the ".env.example"
+3. Run the following commands
 
 ```powershell
 npm i
