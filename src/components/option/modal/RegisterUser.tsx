@@ -9,31 +9,38 @@ import {
   IonModal,
 } from '@ionic/react';
 import PageHeader from '../../shared/PageHeader';
-import { useModalContext } from '../../../hooks/modal/ModalContext';
-import { useAuthContext } from '../../../hooks/auth/AuthContext';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  RootState,
+  userRegister,
+  userInput,
+  toggleRegister,
+} from '../../../redux';
 
 interface RegisterUserProps {
   registerUserModal: boolean;
 }
 
 const RegisterUser: React.FC<RegisterUserProps> = ({ registerUserModal }) => {
-  const modalControl = useModalContext();
-  const auth = useAuthContext();
+  const { email, password, verifyPassword } = useSelector(
+    (state: RootState) => state.auth
+  );
+  const { modalRegister } = useSelector((state: RootState) => state.modal);
+  const dispatch = useDispatch();
 
   const closeModal = () => {
-    modalControl.modalDispatch({ type: 'closeRegisterUser' });
+    if (modalRegister) {
+      dispatch(toggleRegister());
+    }
   };
 
   const handleSignup = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    auth.handleSignup();
+    dispatch(userRegister());
   };
 
   return (
-    <IonModal
-      isOpen={registerUserModal}
-      onDidDismiss={closeModal}
-    >
+    <IonModal isOpen={registerUserModal} onDidDismiss={closeModal}>
       <PageHeader title="Register" />
       <IonContent fullscreen>
         <PageHeader title="Register" condense />
@@ -44,13 +51,14 @@ const RegisterUser: React.FC<RegisterUserProps> = ({ registerUserModal }) => {
               <IonInput
                 type="email"
                 required
-                value={auth.authState.email}
+                value={email}
                 onIonChange={(e) =>
-                  auth.authDispatch({
-                    type: 'input',
-                    field: 'email',
-                    fieldValue: e.detail.value as string,
-                  })
+                  dispatch(
+                    userInput({
+                      field: 'email',
+                      value: e.detail.value as string,
+                    })
+                  )
                 }
               ></IonInput>
             </IonItem>
@@ -59,13 +67,14 @@ const RegisterUser: React.FC<RegisterUserProps> = ({ registerUserModal }) => {
               <IonInput
                 type="password"
                 required
-                value={auth.authState.password}
+                value={password}
                 onIonChange={(e) =>
-                  auth.authDispatch({
-                    type: 'input',
-                    field: 'password',
-                    fieldValue: e.detail.value as string,
-                  })
+                  dispatch(
+                    userInput({
+                      field: 'password',
+                      value: e.detail.value as string,
+                    })
+                  )
                 }
               ></IonInput>
             </IonItem>
@@ -74,13 +83,14 @@ const RegisterUser: React.FC<RegisterUserProps> = ({ registerUserModal }) => {
               <IonInput
                 type="password"
                 required
-                value={auth.authState.verifyPassword}
+                value={verifyPassword}
                 onIonChange={(e) =>
-                  auth.authDispatch({
-                    type: 'input',
-                    field: 'verifyPassword',
-                    fieldValue: e.detail.value as string,
-                  })
+                  dispatch(
+                    userInput({
+                      field: 'verifyPassword',
+                      value: e.detail.value as string,
+                    })
+                  )
                 }
               ></IonInput>
             </IonItem>

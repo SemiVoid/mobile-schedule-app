@@ -9,31 +9,31 @@ import {
   IonModal,
 } from '@ionic/react';
 import PageHeader from '../../shared/PageHeader';
-import { useModalContext } from '../../../hooks/modal/ModalContext';
-import { useAuthContext } from '../../../hooks/auth/AuthContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, userLogin, userInput, toggleLogin } from '../../../redux';
 
 interface LoginUserProps {
   loginUserModal: boolean;
 }
 
 const LoginUser: React.FC<LoginUserProps> = ({ loginUserModal }) => {
-  const modalControl = useModalContext();
-  const auth = useAuthContext();
+  const { email, password } = useSelector((state: RootState) => state.auth);
+  const { modalLogin } = useSelector((state: RootState) => state.modal);
+  const dispatch = useDispatch();
 
   const closeModal = () => {
-    modalControl.modalDispatch({ type: 'closeLoginUser' });
+    if (modalLogin) {
+      dispatch(toggleLogin());
+    }
   };
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    auth.handleLogin();
+    dispatch(userLogin());
   };
 
   return (
-    <IonModal
-      isOpen={loginUserModal}
-      onDidDismiss={closeModal}
-    >
+    <IonModal isOpen={loginUserModal} onDidDismiss={closeModal}>
       <PageHeader title="Login" />
       <IonContent fullscreen>
         <PageHeader title="Login" condense />
@@ -44,13 +44,14 @@ const LoginUser: React.FC<LoginUserProps> = ({ loginUserModal }) => {
               <IonInput
                 type="email"
                 required
-                value={auth.authState.email}
+                value={email}
                 onIonChange={(e) =>
-                  auth.authDispatch({
-                    type: 'input',
-                    field: 'email',
-                    fieldValue: e.detail.value as string,
-                  })
+                  dispatch(
+                    userInput({
+                      field: 'email',
+                      value: e.detail.value as string,
+                    })
+                  )
                 }
               ></IonInput>
             </IonItem>
@@ -59,13 +60,14 @@ const LoginUser: React.FC<LoginUserProps> = ({ loginUserModal }) => {
               <IonInput
                 type="password"
                 required
-                value={auth.authState.password}
+                value={password}
                 onIonChange={(e) =>
-                  auth.authDispatch({
-                    type: 'input',
-                    field: 'password',
-                    fieldValue: e.detail.value as string,
-                  })
+                  dispatch(
+                    userInput({
+                      field: 'password',
+                      value: e.detail.value as string,
+                    })
+                  )
                 }
               ></IonInput>
             </IonItem>
