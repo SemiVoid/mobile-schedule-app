@@ -11,7 +11,7 @@ import {
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
 } from './authTypes';
-import { toggleLogin, toggleRegister } from '../modal/modalActions';
+import { toggleLogin, toggleRegister, sendToast, isLoading, notifLoadingDismiss} from '../../redux';
 
 export const userAccount = (account: AccountPayload): AuthActionTypes => {
   return {
@@ -53,6 +53,7 @@ export const userRegisterFail = (): AuthActionTypes => {
 
 export const userLogin = (): AppThunk => {
   return (dispatch, getState) => {
+    dispatch(isLoading());
     auth
       .signInWithEmailAndPassword(
         getState().auth.email,
@@ -61,15 +62,19 @@ export const userLogin = (): AppThunk => {
       .then(() => {
         dispatch(userLoginSuccess());
         dispatch(toggleLogin());
+        dispatch(notifLoadingDismiss());
       })
       .catch((error) => {
         dispatch(userLoginFail());
+        dispatch(notifLoadingDismiss());
+        dispatch(sendToast({header: 'Login Error', message: error.message}))
       });
   };
 };
 
 export const userRegister = (): AppThunk => {
   return (dispatch, getState) => {
+    dispatch(isLoading());
     if (getState().auth.password === getState().auth.verifyPassword) {
       auth
         .createUserWithEmailAndPassword(
@@ -79,12 +84,16 @@ export const userRegister = (): AppThunk => {
         .then(() => {
           dispatch(userRegisterSuccess());
           dispatch(toggleRegister());
+          dispatch(notifLoadingDismiss());
         })
         .catch((error) => {
           dispatch(userRegisterFail());
+          dispatch(notifLoadingDismiss());
+          dispatch(sendToast({header: 'Registration Error', message: error.message}))
         });
     } else {
       dispatch(userRegisterFail());
+      dispatch(sendToast({header: 'Registration Error', message: 'Password do not match'}))
     }
   };
 };
