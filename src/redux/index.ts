@@ -17,3 +17,11 @@ export {
   toggleRegister,
   toggleAddEmployee,
 } from './modal/modalActions';
+
+export {
+  isLoading,
+  sendToast,
+  sendAlert,
+  notifDismiss,
+  notifLoadingDismiss,
+} from './notification/notifActions';
