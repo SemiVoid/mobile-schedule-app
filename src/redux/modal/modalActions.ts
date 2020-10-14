@@ -1,24 +1,20 @@
 import {
   ModalActionTypes,
-  TOGGLE_LOGIN_MODAL,
-  TOGGLE_REGISTER_MODAL,
-  TOGGLE_ADD_EMPLOYEE_MODAL,
+  ModalPayload,
+  MODAL_OPEN,
+  MODAL_CLOSE
 } from './modalTypes';
 
-export const toggleLogin = (): ModalActionTypes => {
+export const modalOpen = (payload: ModalPayload): ModalActionTypes => {
   return {
-    type: TOGGLE_LOGIN_MODAL,
+    type: MODAL_OPEN,
+    payload: payload,
   };
 };
 
-export const toggleRegister = (): ModalActionTypes => {
+export const modalClose = (payload: ModalPayload): ModalActionTypes => {
   return {
-    type: TOGGLE_REGISTER_MODAL,
-  };
-};
-
-export const toggleAddEmployee = (): ModalActionTypes => {
-  return {
-    type: TOGGLE_ADD_EMPLOYEE_MODAL,
+    type: MODAL_CLOSE,
+    payload: payload,
   };
 };

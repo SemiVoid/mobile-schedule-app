@@ -1,26 +1,26 @@
-export const TOGGLE_LOGIN_MODAL = 'TOGGLE_LOGIN_MODAL';
-export const TOGGLE_REGISTER_MODAL = 'TOGGLE_REGISTER_MODAL';
-export const TOGGLE_ADD_EMPLOYEE_MODAL = 'TOGGLE_ADD_EMPLOYEE_MODAL';
+export const MODAL_OPEN = 'MODAL_OPEN';
+export const MODAL_CLOSE = 'MODAL_CLOSE';
 
 export interface ModalState {
-  modalLogin: boolean;
-  modalRegister: boolean;
-  modalAddEmployee: boolean;
+  login: boolean;
+  register: boolean;
+  addEmployee: boolean;
 }
 
-interface ToggleLoginModalAction {
-  type: typeof TOGGLE_LOGIN_MODAL;
+export type Modals = 'login' | 'register' | 'addEmployee';
+
+export interface ModalPayload {
+  modalName: Modals;
 }
 
-interface ToggleRegisterModalAction {
-  type: typeof TOGGLE_REGISTER_MODAL;
+interface ModalOpenAction {
+  type: typeof MODAL_OPEN;
+  payload: ModalPayload;
 }
 
-interface ToggleAddEmployeeModalAction {
-  type: typeof TOGGLE_ADD_EMPLOYEE_MODAL;
+interface ModalCloseAction {
+  type: typeof MODAL_CLOSE;
+  payload: ModalPayload;
 }
 
-export type ModalActionTypes =
-  | ToggleLoginModalAction
-  | ToggleRegisterModalAction
-  | ToggleAddEmployeeModalAction;
+export type ModalActionTypes = ModalOpenAction | ModalCloseAction;

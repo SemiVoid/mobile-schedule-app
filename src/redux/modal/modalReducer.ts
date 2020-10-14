@@ -1,15 +1,14 @@
 import {
   ModalState,
   ModalActionTypes,
-  TOGGLE_LOGIN_MODAL,
-  TOGGLE_REGISTER_MODAL,
-  TOGGLE_ADD_EMPLOYEE_MODAL,
+  MODAL_OPEN,
+  MODAL_CLOSE
 } from './modalTypes';
 
 const modalInitState: ModalState = {
-  modalLogin: false,
-  modalRegister: false,
-  modalAddEmployee: false,
+  login: false,
+  register: false,
+  addEmployee: false,
 };
 
 const modalReducer = (
@@ -17,22 +16,16 @@ const modalReducer = (
   action: ModalActionTypes
 ): ModalState => {
   switch (action.type) {
-    case TOGGLE_LOGIN_MODAL: {
+    case MODAL_OPEN: {
       return {
         ...state,
-        modalLogin: !state.modalLogin,
+        [action.payload.modalName]: true,
       };
     }
-    case TOGGLE_REGISTER_MODAL: {
+    case MODAL_CLOSE: {
       return {
         ...state,
-        modalRegister: !state.modalRegister,
-      };
-    }
-    case TOGGLE_ADD_EMPLOYEE_MODAL: {
-      return {
-        ...state,
-        modalAddEmployee: !state.modalAddEmployee,
+        [action.payload.modalName]: false,
       };
     }
     default: {
