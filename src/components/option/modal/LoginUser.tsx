@@ -10,20 +10,16 @@ import {
 } from '@ionic/react';
 import PageHeader from '../../shared/PageHeader';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, userLogin, userInput, toggleLogin } from '../../../redux';
+import { RootState, userLogin, userInput, modalClose } from '../../../redux';
 
-interface LoginUserProps {
-  loginUserModal: boolean;
-}
-
-const LoginUser: React.FC<LoginUserProps> = ({ loginUserModal }) => {
+const LoginUser: React.FC = () => {
   const { email, password } = useSelector((state: RootState) => state.auth);
-  const { modalLogin } = useSelector((state: RootState) => state.modal);
+  const { login } = useSelector((state: RootState) => state.modal);
   const dispatch = useDispatch();
 
   const closeModal = () => {
-    if (modalLogin) {
-      dispatch(toggleLogin());
+    if (login) {
+      dispatch(modalClose({ modalName: 'login' }));
     }
   };
 
@@ -33,12 +29,12 @@ const LoginUser: React.FC<LoginUserProps> = ({ loginUserModal }) => {
   };
 
   return (
-    <IonModal isOpen={loginUserModal} onDidDismiss={closeModal}>
-      <PageHeader title="Login" />
+    <IonModal isOpen={login} onDidDismiss={closeModal}>
+      <PageHeader title="Login" modal="login" />
       <IonContent fullscreen>
         <PageHeader title="Login" condense />
-        <IonList className="ion-margin-vertical">
-          <form onSubmit={(e) => handleLogin(e)}>
+        <form onSubmit={(e) => handleLogin(e)}>
+          <IonList className="ion-margin-vertical">
             <IonItem>
               <IonLabel>Email</IonLabel>
               <IonInput
@@ -71,16 +67,11 @@ const LoginUser: React.FC<LoginUserProps> = ({ loginUserModal }) => {
                 }
               ></IonInput>
             </IonItem>
-            <IonItem lines="none">
-              <IonButton onClick={closeModal} slot="end">
-                Close Modal
-              </IonButton>
-              <IonButton type="submit" slot="end">
-                Log In
-              </IonButton>
-            </IonItem>
-          </form>
-        </IonList>
+          </IonList>
+          <IonButton expand="block" type="submit">
+            Log In
+          </IonButton>
+        </form>
       </IonContent>
     </IonModal>
   );
