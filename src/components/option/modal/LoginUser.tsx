@@ -9,45 +9,48 @@ import {
   IonModal,
 } from '@ionic/react';
 import PageHeader from '../../shared/PageHeader';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, userLogin, userInput, modalClose } from '../../../redux';
+import { useModalContext } from '../../../hooks/modal/ModalContext';
+import { useAuthContext } from '../../../hooks/auth/AuthContext';
 
-const LoginUser: React.FC = () => {
-  const { email, password } = useSelector((state: RootState) => state.auth);
-  const { login } = useSelector((state: RootState) => state.modal);
-  const dispatch = useDispatch();
+interface LoginUserProps {
+  loginUserModal: boolean;
+}
+
+const LoginUser: React.FC<LoginUserProps> = ({ loginUserModal }) => {
+  const modalControl = useModalContext();
+  const auth = useAuthContext();
 
   const closeModal = () => {
-    if (login) {
-      dispatch(modalClose({ modalName: 'login' }));
-    }
+    modalControl.modalDispatch({ type: 'closeLoginUser' });
   };
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(userLogin());
+    auth.handleLogin();
   };
 
   return (
-    <IonModal isOpen={login} onDidDismiss={closeModal}>
-      <PageHeader title="Login" modal="login" />
+    <IonModal
+      isOpen={loginUserModal}
+      onDidDismiss={closeModal}
+    >
+      <PageHeader title="Login" />
       <IonContent fullscreen>
         <PageHeader title="Login" condense />
-        <form onSubmit={(e) => handleLogin(e)}>
-          <IonList className="ion-margin-vertical">
+        <IonList className="ion-margin-vertical">
+          <form onSubmit={(e) => handleLogin(e)}>
             <IonItem>
               <IonLabel>Email</IonLabel>
               <IonInput
                 type="email"
                 required
-                value={email}
+                value={auth.authState.email}
                 onIonChange={(e) =>
-                  dispatch(
-                    userInput({
-                      field: 'email',
-                      value: e.detail.value as string,
-                    })
-                  )
+                  auth.authDispatch({
+                    type: 'input',
+                    field: 'email',
+                    fieldValue: e.detail.value as string,
+                  })
                 }
               ></IonInput>
             </IonItem>
@@ -56,22 +59,26 @@ const LoginUser: React.FC = () => {
               <IonInput
                 type="password"
                 required
-                value={password}
+                value={auth.authState.password}
                 onIonChange={(e) =>
-                  dispatch(
-                    userInput({
-                      field: 'password',
-                      value: e.detail.value as string,
-                    })
-                  )
+                  auth.authDispatch({
+                    type: 'input',
+                    field: 'password',
+                    fieldValue: e.detail.value as string,
+                  })
                 }
               ></IonInput>
             </IonItem>
-          </IonList>
-          <IonButton expand="block" type="submit">
-            Log In
-          </IonButton>
-        </form>
+            <IonItem lines="none">
+              <IonButton onClick={closeModal} slot="end">
+                Close Modal
+              </IonButton>
+              <IonButton type="submit" slot="end">
+                Log In
+              </IonButton>
+            </IonItem>
+          </form>
+        </IonList>
       </IonContent>
     </IonModal>
   );

@@ -1,19 +1,13 @@
 import React from 'react';
 import { IonButton, IonFooter, IonLabel } from '@ionic/react';
-import { useDispatch } from 'react-redux';
-import { modalOpen } from '../../redux';
+import { useModalContext } from '../../hooks/modal/ModalContext';
 
 const EmployeeFooter: React.FC = () => {
-  const dispatch = useDispatch();
+  const modal = useModalContext();
 
   return (
     <IonFooter className="ion-no-border">
-      <IonButton
-        onClick={() => {
-          dispatch(modalOpen({modalName: 'addEmployee'}));
-        }}
-        expand="block"
-      >
+      <IonButton onClick={()=>{modal.modalDispatch({type: 'openAddEmployee'})}} expand="block">
         <IonLabel>Add Employee</IonLabel>
       </IonButton>
     </IonFooter>
