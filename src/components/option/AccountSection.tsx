@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   IonAvatar,
   IonButton,
@@ -8,39 +8,26 @@ import {
   IonLabel,
   IonRow,
 } from '@ionic/react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, userLogout, userAccount, modalOpen } from '../../redux';
-
+import { useAuthContext } from '../../hooks/auth/AuthContext';
 import './AccountSection.css';
-import { auth } from '../../config/firebase';
+import { useModalContext } from '../../hooks/modal/ModalContext';
 
 const AccountSection: React.FC = () => {
-  const account = useSelector((state: RootState) => state.auth.account);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const unsub = auth.onAuthStateChanged(user =>{
-      if (user){
-        dispatch(userAccount({account: user}));
-      }
-    })
-
-    return unsub;
-  }, [dispatch])
+  const auth = useAuthContext();
 
   return (
     <IonGrid className="background">
-      {account && <Avatar />}
+      {auth.user && <Avatar />}
       <IonRow className="buttons">
-        {!account && <NoUserButtons />}
-        {account && <UserButtons />}
+        {!auth.user && <NoUserButtons />}
+        {auth.user && <UserButtons />}
       </IonRow>
     </IonGrid>
   );
 };
 
 const Avatar: React.FC = () => {
-  const account = useSelector((state: RootState) => state.auth.account);
+  const auth = useAuthContext();
 
   return (
     <IonRow>
@@ -53,21 +40,21 @@ const Avatar: React.FC = () => {
         </IonAvatar>
       </IonCol>
       <IonCol size="9">
-        <IonLabel>Hello {account?.email}</IonLabel>
+        <IonLabel>Hello {auth.user?.email}</IonLabel>
       </IonCol>
     </IonRow>
   );
 };
 
 const NoUserButtons: React.FC = () => {
-  const dispatch = useDispatch();
+  const modal = useModalContext();
 
   const handleLogin = () => {
-    dispatch(modalOpen({modalName: 'login'}));
+    modal.modalDispatch({ type: 'openLoginUser' });
   };
 
   const handleRegister = () => {
-    dispatch(modalOpen({modalName: 'register'}));
+    modal.modalDispatch({ type: 'openRegisterUser' });
   };
 
   return (
@@ -87,10 +74,10 @@ const NoUserButtons: React.FC = () => {
 };
 
 const UserButtons: React.FC = () => {
-  const dispatch = useDispatch();
+  const auth = useAuthContext();
 
   const handleLogout = () => {
-    dispatch(userLogout());
+    auth.handleLogout();
   };
 
   return (

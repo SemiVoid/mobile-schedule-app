@@ -9,30 +9,30 @@ import {
   IonModal,
 } from '@ionic/react';
 import PageHeader from '../../shared/PageHeader';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, modalClose } from '../../../redux';
+import { useModalContext } from '../../../hooks/modal/ModalContext';
 import { useEmployeeContext } from '../../../hooks/employee/EmployeeContext';
 
-const AddEmployee: React.FC = () => {
+interface AddEmployeeProps {
+  addEmployeeModal: boolean;
+}
+
+const AddEmployee: React.FC<AddEmployeeProps> = ({ addEmployeeModal }) => {
   const [name, setName] = useState('');
   const [department, setDepartment] = useState('');
-  const dispatch = useDispatch();
-  const { addEmployee } = useSelector((state: RootState) => state.modal);
+  const modalControl = useModalContext();
   const employee = useEmployeeContext();
-
-  const closeModal = () => {
-    if (addEmployee) {
-      dispatch(modalClose({ modalName: 'addEmployee' }));
-    }
-  };
 
   const handleAddEmployee = () => {
     employee.handleAddEmployee(name, department);
   };
 
+  const closeModal = () => {
+    modalControl.modalDispatch({ type: 'closeAddEmployee' });
+  };
+
   return (
-    <IonModal isOpen={addEmployee} onDidDismiss={closeModal}>
-      <PageHeader title="Add New Employees" modal="addEmployee" />
+    <IonModal isOpen={addEmployeeModal}>
+      <PageHeader title="Add New Employees" />
       <IonContent fullscreen>
         <PageHeader title="Add New Employees" condense />
         <IonList className="ion-margin-vertical">
