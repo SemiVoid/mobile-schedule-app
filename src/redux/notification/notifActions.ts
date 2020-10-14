@@ -1,42 +1,21 @@
 import {
   NotifActionTypes,
-  ToastPayload,
-  AlertPayload,
-  NOTIF_IS_LOADING,
-  NOTIF_SEND_TOAST,
-  NOTIF_SEND_ALERT,
-  NOTIF_DISMISS,
-  NOTIF_LOADING_DISMISS
+  SendPayload,
+  DismissPayload,
+  NOTIF_SEND,
+  NOTIF_DISMISS
 } from './notifTypes';
 
-export const isLoading = (): NotifActionTypes => {
+export const notifSend = (notifPayload: SendPayload): NotifActionTypes => {
   return {
-    type: NOTIF_IS_LOADING,
+    type: NOTIF_SEND,
+    payload: notifPayload,
   };
 };
 
-export const sendToast = (toast: ToastPayload): NotifActionTypes => {
-  return {
-    type: NOTIF_SEND_TOAST,
-    payload: toast,
-  };
-};
-
-export const sendAlert = (alert: AlertPayload): NotifActionTypes => {
-  return {
-    type: NOTIF_SEND_ALERT,
-    payload: alert,
-  };
-};
-
-export const notifDismiss = (): NotifActionTypes => {
+export const notifDismiss = (notifPayload: DismissPayload): NotifActionTypes => {
   return {
     type: NOTIF_DISMISS,
-  };
-};
-
-export const notifLoadingDismiss = (): NotifActionTypes => {
-  return {
-    type: NOTIF_LOADING_DISMISS,
+    payload: notifPayload,
   };
 };
