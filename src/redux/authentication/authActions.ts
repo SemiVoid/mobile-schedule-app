@@ -11,7 +11,7 @@ import {
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
 } from './authTypes';
-import { toggleLogin, toggleRegister, sendToast, isLoading, notifLoadingDismiss} from '../../redux';
+import { modalClose, notifSend, notifDismiss } from '../../redux';
 
 export const userAccount = (account: AccountPayload): AuthActionTypes => {
   return {
@@ -53,7 +53,7 @@ export const userRegisterFail = (): AuthActionTypes => {
 
 export const userLogin = (): AppThunk => {
   return (dispatch, getState) => {
-    dispatch(isLoading());
+    dispatch(notifSend({ notifType: 'notifLoading' }));
     auth
       .signInWithEmailAndPassword(
         getState().auth.email,
@@ -61,21 +61,28 @@ export const userLogin = (): AppThunk => {
       )
       .then(() => {
         dispatch(userLoginSuccess());
-        dispatch(toggleLogin());
-        dispatch(notifLoadingDismiss());
+        dispatch(modalClose({ modalName: 'login' }));
       })
       .catch((error) => {
         dispatch(userLoginFail());
-        dispatch(notifLoadingDismiss());
-        dispatch(sendToast({header: 'Login Error', message: error.message}))
+        dispatch(
+          notifSend({
+            notifType: 'notifToast',
+            header: 'Login Error',
+            message: error.message,
+          })
+        );
+      })
+      .finally(() => {
+        dispatch(notifDismiss({ notifType: 'notifLoading' }));
       });
   };
 };
 
 export const userRegister = (): AppThunk => {
   return (dispatch, getState) => {
-    dispatch(isLoading());
     if (getState().auth.password === getState().auth.verifyPassword) {
+      dispatch(notifSend({ notifType: 'notifLoading' }));
       auth
         .createUserWithEmailAndPassword(
           getState().auth.email,
@@ -83,17 +90,30 @@ export const userRegister = (): AppThunk => {
         )
         .then(() => {
           dispatch(userRegisterSuccess());
-          dispatch(toggleRegister());
-          dispatch(notifLoadingDismiss());
+          dispatch(modalClose({ modalName: 'register' }));
         })
         .catch((error) => {
           dispatch(userRegisterFail());
-          dispatch(notifLoadingDismiss());
-          dispatch(sendToast({header: 'Registration Error', message: error.message}))
+          dispatch(
+            notifSend({
+              notifType: 'notifToast',
+              header: 'Registration Error',
+              message: error.message,
+            })
+          );
+        })
+        .finally(() => {
+          dispatch(notifDismiss({ notifType: 'notifLoading' }));
         });
     } else {
+      dispatch(
+        notifSend({
+          notifType: 'notifToast',
+          header: 'Registration Error',
+          message: 'Passwords do not match',
+        })
+      );
       dispatch(userRegisterFail());
-      dispatch(sendToast({header: 'Registration Error', message: 'Password do not match'}))
     }
   };
 };

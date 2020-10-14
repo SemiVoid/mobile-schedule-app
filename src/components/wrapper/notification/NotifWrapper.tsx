@@ -1,7 +1,7 @@
 import React from 'react';
 import { IonAlert, IonLoading, IonToast } from '@ionic/react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState, notifDismiss } from '../../../redux';
+import { RootState, NotifType, notifDismiss } from '../../../redux';
 
 // Notification Wrapper
 const NotifWrapper: React.FC = ({ children }) => {
@@ -12,41 +12,38 @@ const NotifWrapper: React.FC = ({ children }) => {
     cssClass,
     header,
     message,
-    duration,
   } = useSelector((state: RootState) => state.notif);
   const dispatch = useDispatch();
 
-  const handleDismiss = () => {
-    dispatch(notifDismiss());
+  const handleDismiss = (notifType: NotifType) => {
+    dispatch(notifDismiss({ notifType: notifType }));
   };
 
   return (
-    <>
+    <div>
       {children}
       <IonLoading
         isOpen={notifLoading}
-        onDidDismiss={handleDismiss}
+        onDidDismiss={() => handleDismiss('notifLoading')}
         cssClass={cssClass}
-        message={message}
-        duration={duration}
       />
       <IonToast
         isOpen={notifToast}
-        onDidDismiss={handleDismiss}
+        onDidDismiss={() => handleDismiss('notifToast')}
         header={header}
         message={message}
-        duration={duration}
+        duration={4000}
         position="top"
       />
       <IonAlert
         isOpen={notifAlert}
-        onDidDismiss={handleDismiss}
+        onDidDismiss={() => handleDismiss('notifAlert')}
         cssClass={cssClass}
         header={header}
         message={message}
         buttons={['OK']}
       />
-    </>
+    </div>
   );
 };
 

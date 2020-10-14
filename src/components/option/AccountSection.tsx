@@ -9,7 +9,7 @@ import {
   IonRow,
 } from '@ionic/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, userLogout, userAccount, toggleLogin, toggleRegister } from '../../redux';
+import { RootState, userLogout, userAccount, modalOpen } from '../../redux';
 
 import './AccountSection.css';
 import { auth } from '../../config/firebase';
@@ -63,11 +63,11 @@ const NoUserButtons: React.FC = () => {
   const dispatch = useDispatch();
 
   const handleLogin = () => {
-    dispatch(toggleLogin());
+    dispatch(modalOpen({modalName: 'login'}));
   };
 
   const handleRegister = () => {
-    dispatch(toggleRegister());
+    dispatch(modalOpen({modalName: 'register'}));
   };
 
   return (

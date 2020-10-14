@@ -1,7 +1,7 @@
 import React from 'react';
 import { IonButton, IonFooter, IonLabel } from '@ionic/react';
 import { useDispatch } from 'react-redux';
-import { toggleAddEmployee } from '../../redux';
+import { modalOpen } from '../../redux';
 
 const EmployeeFooter: React.FC = () => {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ const EmployeeFooter: React.FC = () => {
     <IonFooter className="ion-no-border">
       <IonButton
         onClick={() => {
-          dispatch(toggleAddEmployee());
+          dispatch(modalOpen({modalName: 'addEmployee'}));
         }}
         expand="block"
       >
