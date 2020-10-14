@@ -9,48 +9,47 @@ import {
   IonModal,
 } from '@ionic/react';
 import PageHeader from '../../shared/PageHeader';
-import { useModalContext } from '../../../hooks/modal/ModalContext';
-import { useAuthContext } from '../../../hooks/auth/AuthContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, userRegister, userInput, modalClose } from '../../../redux';
 
-interface RegisterUserProps {
-  registerUserModal: boolean;
-}
-
-const RegisterUser: React.FC<RegisterUserProps> = ({ registerUserModal }) => {
-  const modalControl = useModalContext();
-  const auth = useAuthContext();
+const RegisterUser: React.FC = () => {
+  const { email, password, verifyPassword } = useSelector(
+    (state: RootState) => state.auth
+  );
+  const { register } = useSelector((state: RootState) => state.modal);
+  const dispatch = useDispatch();
 
   const closeModal = () => {
-    modalControl.modalDispatch({ type: 'closeRegisterUser' });
+    if (register) {
+      dispatch(modalClose({ modalName: 'register' }));
+    }
   };
 
   const handleSignup = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    auth.handleSignup();
+    dispatch(userRegister());
   };
 
   return (
-    <IonModal
-      isOpen={registerUserModal}
-      onDidDismiss={closeModal}
-    >
-      <PageHeader title="Register" />
+    <IonModal isOpen={register} onDidDismiss={closeModal}>
+      <PageHeader title="Register" modal="register" />
       <IonContent fullscreen>
         <PageHeader title="Register" condense />
-        <IonList className="ion-margin-vertical">
-          <form onSubmit={(e) => handleSignup(e)}>
+        <form onSubmit={(e) => handleSignup(e)}>
+          <IonList className="ion-margin-vertical">
             <IonItem>
               <IonLabel>Email</IonLabel>
               <IonInput
                 type="email"
                 required
-                value={auth.authState.email}
+                value={email}
                 onIonChange={(e) =>
-                  auth.authDispatch({
-                    type: 'input',
-                    field: 'email',
-                    fieldValue: e.detail.value as string,
-                  })
+                  dispatch(
+                    userInput({
+                      field: 'email',
+                      value: e.detail.value as string,
+                    })
+                  )
                 }
               ></IonInput>
             </IonItem>
@@ -59,13 +58,14 @@ const RegisterUser: React.FC<RegisterUserProps> = ({ registerUserModal }) => {
               <IonInput
                 type="password"
                 required
-                value={auth.authState.password}
+                value={password}
                 onIonChange={(e) =>
-                  auth.authDispatch({
-                    type: 'input',
-                    field: 'password',
-                    fieldValue: e.detail.value as string,
-                  })
+                  dispatch(
+                    userInput({
+                      field: 'password',
+                      value: e.detail.value as string,
+                    })
+                  )
                 }
               ></IonInput>
             </IonItem>
@@ -74,26 +74,22 @@ const RegisterUser: React.FC<RegisterUserProps> = ({ registerUserModal }) => {
               <IonInput
                 type="password"
                 required
-                value={auth.authState.verifyPassword}
+                value={verifyPassword}
                 onIonChange={(e) =>
-                  auth.authDispatch({
-                    type: 'input',
-                    field: 'verifyPassword',
-                    fieldValue: e.detail.value as string,
-                  })
+                  dispatch(
+                    userInput({
+                      field: 'verifyPassword',
+                      value: e.detail.value as string,
+                    })
+                  )
                 }
               ></IonInput>
             </IonItem>
-            <IonItem lines="none">
-              <IonButton onClick={closeModal} slot="end">
-                Close Modal
-              </IonButton>
-              <IonButton type="submit" slot="end">
-                Signup
-              </IonButton>
-            </IonItem>
-          </form>
-        </IonList>
+          </IonList>
+          <IonButton expand="block" type="submit">
+            Signup
+          </IonButton>
+        </form>
       </IonContent>
     </IonModal>
   );
