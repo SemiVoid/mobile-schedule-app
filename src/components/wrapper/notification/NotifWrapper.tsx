@@ -24,7 +24,6 @@ const NotifWrapper: React.FC = ({ children }) => {
       {children}
       <IonLoading
         isOpen={notifLoading}
-        onDidDismiss={() => handleDismiss('notifLoading')}
         cssClass={cssClass}
       />
       <IonToast
