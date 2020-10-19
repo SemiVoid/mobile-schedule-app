@@ -1,21 +1,16 @@
 import React from 'react';
-import { IonContent, IonPage } from '@ionic/react';
 
 // Import Components
-import PageHeader from '../components/shared/PageHeader';
+import PageContainer from '../components/shared/Page/PageContainer';
 import ScheduleCard from '../components/pages/dashboard/card/ScheduleCard';
 import TaskCard from '../components/pages/dashboard/card/TaskCard';
 
 const DashboardPage: React.FC = () => {
   return (
-    <IonPage>
-      <PageHeader title="Dashboard" />
-      <IonContent>
-        <PageHeader title="Dashboard" condense />
-        <ScheduleCard />
-        <TaskCard />
-      </IonContent>
-    </IonPage>
+    <PageContainer pageTitle="Dashboard" fullscreen>
+      <ScheduleCard />
+      <TaskCard />
+    </PageContainer>
   );
 };
 

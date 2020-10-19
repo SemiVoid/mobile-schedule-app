@@ -1,18 +1,17 @@
 import React from 'react';
 import {
   IonButton,
-  IonContent,
   IonInput,
   IonItem,
   IonLabel,
   IonList,
   IonModal,
 } from '@ionic/react';
-import PageHeader from '../../shared/PageHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, userLogin, userInput, modalClose } from '../../../redux';
+import PageContainer from '../../shared/Page/PageContainer';
 
-const LoginUser: React.FC = () => {
+export const LoginUser: React.FC = () => {
   const { email, password } = useSelector((state: RootState) => state.auth);
   const { login } = useSelector((state: RootState) => state.modal);
   const dispatch = useDispatch();
@@ -30,9 +29,7 @@ const LoginUser: React.FC = () => {
 
   return (
     <IonModal isOpen={login} onDidDismiss={closeModal}>
-      <PageHeader title="Login" modal="login" />
-      <IonContent fullscreen>
-        <PageHeader title="Login" condense />
+      <PageContainer pageTitle="Login" modal="login" fullscreen>
         <form onSubmit={(e) => handleLogin(e)}>
           <IonList className="ion-margin-vertical">
             <IonItem>
@@ -72,9 +69,7 @@ const LoginUser: React.FC = () => {
             Log In
           </IonButton>
         </form>
-      </IonContent>
+      </PageContainer>
     </IonModal>
   );
 };
-
-export default LoginUser;

@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import {
   IonButton,
-  IonContent,
   IonInput,
   IonItem,
   IonLabel,
   IonList,
   IonModal,
 } from '@ionic/react';
-import PageHeader from '../../shared/PageHeader';
+import PageContainer from '../../shared/Page/PageContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, modalClose } from '../../../redux';
 import { useEmployeeContext } from '../../../hooks/employee/EmployeeContext';
 
-const AddEmployee: React.FC = () => {
+export const AddEmployee: React.FC = () => {
   const [name, setName] = useState('');
   const [department, setDepartment] = useState('');
   const dispatch = useDispatch();
@@ -32,9 +31,7 @@ const AddEmployee: React.FC = () => {
 
   return (
     <IonModal isOpen={addEmployee} onDidDismiss={closeModal}>
-      <PageHeader title="Add New Employees" modal="addEmployee" />
-      <IonContent fullscreen>
-        <PageHeader title="Add New Employees" condense />
+      <PageContainer pageTitle="Add Employees" modal="addEmployee" fullscreen>
         <IonList className="ion-margin-vertical">
           <IonItem>
             <IonLabel>Name</IonLabel>
@@ -67,9 +64,7 @@ const AddEmployee: React.FC = () => {
             </IonButton>
           </IonItem>
         </IonList>
-      </IonContent>
+      </PageContainer>
     </IonModal>
   );
 };
-
-export default AddEmployee;

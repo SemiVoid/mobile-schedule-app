@@ -1,8 +1,8 @@
 import React from 'react';
-import { IonContent, IonList, IonPage } from '@ionic/react';
+import { IonList } from '@ionic/react';
 
 // Import Components
-import PageHeader from '../components/shared/PageHeader';
+import PageContainer from '../components/shared/Page/PageContainer';
 import EmptyPage from '../components/shared/EmptyPage';
 import EmployeeFooter from '../components/pages/employee/EmployeeFooter';
 import EmployeeItem from '../components/pages/employee/EmployeeItem';
@@ -27,18 +27,13 @@ const EmployeePage: React.FC = () => {
     ));
 
   return (
-    <IonPage>
-      <PageHeader title="Employees" />
-      <IonContent fullscreen>
-        <PageHeader title="Employees" condense />
-        {employee.value ? (
-          <IonList className="ion-margin-vertical">{list}</IonList>
-        ) : (
-          <EmptyPage page="Employee" />
-        )}
-      </IonContent>
-      <EmployeeFooter />
-    </IonPage>
+    <PageContainer pageTitle="Employees" footer={<EmployeeFooter />} fullscreen>
+      {employee.value ? (
+        <IonList className="ion-margin-vertical">{list}</IonList>
+      ) : (
+        <EmptyPage page="Employee" />
+      )}
+    </PageContainer>
   );
 };
 
