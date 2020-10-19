@@ -3,7 +3,7 @@ import { IonContent, IonPage } from '@ionic/react';
 
 // Import Components
 import PageHeader from '../components/shared/PageHeader';
-import AccountSection from '../components/option/AccountSection';
+import AccountSection from '../components/pages/option/AccountSection';
 
 const OptionPage: React.FC = () => {
   return (

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { IonGrid, IonRow, IonCol } from '@ionic/react';
 import './ViewDay.css';
-import { useWeekContext } from '../../hooks/WeekContext';
-import { useScheduleContext } from '../../hooks/ScheduleContext';
+import { useWeekContext } from '../../../hooks/WeekContext';
+import { useScheduleContext } from '../../../hooks/ScheduleContext';
 
 const ViewDay: React.FC = () => {
   const [currentDay, setCurrentDay] = useState<Date>(new Date());

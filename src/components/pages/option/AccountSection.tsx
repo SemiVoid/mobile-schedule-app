@@ -9,10 +9,10 @@ import {
   IonRow,
 } from '@ionic/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, userLogout, userAccount, modalOpen } from '../../redux';
+import { RootState, userLogout, userAccount, modalOpen } from '../../../redux';
 
 import './AccountSection.css';
-import { auth } from '../../config/firebase';
+import { auth } from '../../../config/firebase';
 
 const AccountSection: React.FC = () => {
   const account = useSelector((state: RootState) => state.auth.account);

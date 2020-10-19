@@ -1,7 +1,7 @@
 import React from 'react';
 import { IonButton, IonFooter, IonLabel } from '@ionic/react';
 import { useDispatch } from 'react-redux';
-import { modalOpen } from '../../redux';
+import { modalOpen } from '../../../redux';
 
 const EmployeeFooter: React.FC = () => {
   const dispatch = useDispatch();

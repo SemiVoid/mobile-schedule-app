@@ -4,8 +4,8 @@ import { IonContent, IonList, IonPage } from '@ionic/react';
 // Import Components
 import PageHeader from '../components/shared/PageHeader';
 import EmptyPage from '../components/shared/EmptyPage';
-import EmployeeFooter from '../components/employee/EmployeeFooter';
-import EmployeeItem from '../components/employee/EmployeeItem';
+import EmployeeFooter from '../components/pages/employee/EmployeeFooter';
+import EmployeeItem from '../components/pages/employee/EmployeeItem';
 import { useEmployeeContext } from '../hooks/employee/EmployeeContext';
 
 interface empData {

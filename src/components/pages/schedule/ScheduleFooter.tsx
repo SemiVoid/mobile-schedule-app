@@ -10,7 +10,7 @@ import {
 } from '@ionic/react';
 import { arrowBackOutline, arrowForwardOutline } from 'ionicons/icons';
 import './ScheduleFooter.css';
-import { useWeekContext } from '../../hooks/WeekContext';
+import { useWeekContext } from '../../../hooks/WeekContext';
 import ViewDay from './ViewDay';
 
 const ScheduleFooter: React.FC = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import './ViewDisplay.css';
-import { useScheduleContext } from '../../hooks/ScheduleContext';
-import EmptyPage from '../shared/EmptyPage';
+import { useScheduleContext } from '../../../hooks/ScheduleContext';
+import EmptyPage from '../../shared/EmptyPage';
 
 const ViewDisplay: React.FC = () => {
   const schedule = useScheduleContext();

@@ -7,8 +7,8 @@ import WeekProvider from '../hooks/WeekContext';
 
 // Import Components
 import PageHeader from '../components/shared/PageHeader';
-import ViewDisplay from '../components/schedule/ViewDisplay';
-import ScheduleFooter from '../components/schedule/ScheduleFooter';
+import ViewDisplay from '../components/pages/schedule/ViewDisplay';
+import ScheduleFooter from '../components/pages/schedule/ScheduleFooter';
 
 const SchedulePage: React.FC = () => {
   return (

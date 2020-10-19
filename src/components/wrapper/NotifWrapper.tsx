@@ -1,7 +1,7 @@
 import React from 'react';
 import { IonAlert, IonLoading, IonToast } from '@ionic/react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState, NotifType, notifDismiss } from '../../../redux';
+import { RootState, NotifType, notifDismiss } from '../../redux';
 
 // Notification Wrapper
 const NotifWrapper: React.FC = ({ children }) => {
