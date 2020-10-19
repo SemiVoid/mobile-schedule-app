@@ -20,7 +20,7 @@ const NotifWrapper: React.FC = ({ children }) => {
   };
 
   return (
-    <div>
+    <>
       {children}
       <IonLoading
         isOpen={notifLoading}
@@ -42,7 +42,7 @@ const NotifWrapper: React.FC = ({ children }) => {
         message={message}
         buttons={['OK']}
       />
-    </div>
+    </>
   );
 };
 
