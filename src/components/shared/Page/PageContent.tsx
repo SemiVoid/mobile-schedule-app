@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonContent } from '@ionic/react';
+import { IonContent, IonFooter } from '@ionic/react';
 import { PageContentProps } from './pageTypes';
 
 // Import Components
@@ -19,7 +19,7 @@ const PageContent: React.FC<PageContentProps> = ({
         <PageHeader pageTitle={pageTitle} condense />
         {children}
       </IonContent>
-      {footer && footer}
+      {footer && <IonFooter className="ion-no-border">{footer}</IonFooter>}
     </>
   );
 };
