@@ -1,7 +1,7 @@
 import React from 'react';
 import { IonButton, IonFooter, IonLabel } from '@ionic/react';
 import { useDispatch } from 'react-redux';
-import { modalOpen } from '../../../redux';
+import { modalOpen, emplFetch } from '../../../redux';
 
 const EmployeeFooter: React.FC = () => {
   const dispatch = useDispatch();
@@ -15,6 +15,14 @@ const EmployeeFooter: React.FC = () => {
         expand="block"
       >
         <IonLabel>Add Employee</IonLabel>
+      </IonButton>
+      <IonButton
+        onClick={() => {
+          dispatch(emplFetch());
+        }}
+        expand="block"
+      >
+        <IonLabel>refresh</IonLabel>
       </IonButton>
     </IonFooter>
   );
