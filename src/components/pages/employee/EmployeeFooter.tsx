@@ -26,7 +26,7 @@ const EmployeeFooter: React.FC = () => {
             }}
             expand="block"
           >
-            <IonLabel>refresh</IonLabel>
+            <IonLabel>Refresh</IonLabel>
           </IonButton>
         </IonCol>
       </IonRow>
