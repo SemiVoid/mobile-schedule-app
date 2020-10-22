@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import store from '../../redux/store';
 
 // Import Wrappers
+import AuthWrapper from './AuthWrapper';
 import ModalWrapper from './ModalWrapper';
 import NotifWrapper from './NotifWrapper';
 
@@ -10,9 +11,11 @@ import NotifWrapper from './NotifWrapper';
 const GlobalWrapper: React.FC = ({ children }) => {
   return (
     <Provider store={store}>
-      <ModalWrapper>
-        <NotifWrapper>{children}</NotifWrapper>
-      </ModalWrapper>
+      <AuthWrapper>
+        <ModalWrapper>
+          <NotifWrapper>{children}</NotifWrapper>
+        </ModalWrapper>
+      </AuthWrapper>
     </Provider>
   );
 };
