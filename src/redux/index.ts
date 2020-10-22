@@ -16,4 +16,4 @@ export { notifSend, notifDismiss } from './notification/notifActions';
 
 export type { NotifType } from './notification/notifTypes';
 
-export { emplSet, emplFetch } from './employee/employeeAction';
+export { emplSet, emplFetch, emplAdd } from './employee/employeeAction';
