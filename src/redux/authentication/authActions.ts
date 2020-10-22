@@ -1,4 +1,4 @@
-import { auth } from '../../config/firebase';
+import { auth, db } from '../../config/firebase';
 import { AppThunk } from '../rootReducer';
 import {
   AuthActionTypes,
@@ -88,7 +88,8 @@ export const userRegister = (): AppThunk => {
           getState().auth.email,
           getState().auth.password
         )
-        .then(() => {
+        .then((data) => {
+          db.doc(`/users/${data.user?.uid}`).set({createdAt: new Date()});
           dispatch(userRegisterSuccess());
           dispatch(modalClose({ modalName: 'register' }));
         })
