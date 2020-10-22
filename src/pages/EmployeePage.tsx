@@ -1,35 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IonList } from '@ionic/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { emplFetch, RootState } from '../redux';
 
 // Import Components
 import PageContainer from '../components/shared/Page/PageContainer';
 import EmptyPage from '../components/shared/EmptyPage';
 import EmployeeFooter from '../components/pages/employee/EmployeeFooter';
 import EmployeeItem from '../components/pages/employee/EmployeeItem';
-import { useEmployeeContext } from '../hooks/employee/EmployeeContext';
-
-interface empData {
-  name: string;
-  department: string;
-}
 
 const EmployeePage: React.FC = () => {
-  const employee = useEmployeeContext();
+  const dispatch = useDispatch();
+  const { employeeList } = useSelector((state: RootState) => state.empl);
 
-  const list = employee.value
-    ?.get('workers')
-    .map((data: empData) => (
-      <EmployeeItem
-        key={data.name}
-        name={data.name}
-        department={data.department}
-      />
-    ));
+  const fetchEmployee = () => {
+    dispatch(emplFetch());
+    console.log('Employee Dispatch');
+  };
+
+  useEffect(fetchEmployee, []);
 
   return (
     <PageContainer pageTitle="Employees" footer={<EmployeeFooter />} fullscreen>
-      {employee.value ? (
-        <IonList className="ion-margin-vertical">{list}</IonList>
+      {employeeList.length > 0 ? (
+        <IonList className="ion-margin-vertical">
+          {employeeList.map((data) => (
+            <EmployeeItem
+              key={data.name}
+              name={data.name}
+              department={data.department}
+            />
+          ))}
+        </IonList>
       ) : (
         <EmptyPage page="Employee" />
       )}

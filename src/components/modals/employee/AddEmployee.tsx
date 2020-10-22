@@ -10,14 +10,12 @@ import {
 import PageContainer from '../../shared/Page/PageContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, modalClose } from '../../../redux';
-import { useEmployeeContext } from '../../../hooks/employee/EmployeeContext';
 
 export const AddEmployee: React.FC = () => {
   const [name, setName] = useState('');
   const [department, setDepartment] = useState('');
   const dispatch = useDispatch();
   const { addEmployee } = useSelector((state: RootState) => state.modal);
-  const employee = useEmployeeContext();
 
   const closeModal = () => {
     if (addEmployee) {
@@ -26,7 +24,7 @@ export const AddEmployee: React.FC = () => {
   };
 
   const handleAddEmployee = () => {
-    employee.handleAddEmployee(name, department);
+    
   };
 
   return (
