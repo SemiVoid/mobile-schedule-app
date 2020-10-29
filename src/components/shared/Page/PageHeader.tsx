@@ -12,6 +12,7 @@ import { PageHeaderProps } from './pageTypes';
 
 const PageHeader: React.FC<PageHeaderProps> = ({
   pageTitle,
+  color,
   condense,
   modal,
 }) => {
@@ -29,7 +30,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
       translucent={!condense}
     >
       <IonToolbar>
-        <IonTitle size={condense ? 'large' : undefined}>{pageTitle}</IonTitle>
+        <IonTitle color={color} size={condense ? 'large' : undefined}>{pageTitle}</IonTitle>
         {modal && !condense && (
           <IonButtons slot="secondary">
             <IonButton color="danger" onClick={handleClose}>

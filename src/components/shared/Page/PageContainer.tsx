@@ -7,13 +7,14 @@ import PageContent from './PageContent';
 
 const PageContainer: React.FC<PageContainerProps> = ({
   pageTitle,
+  color,
   fullscreen,
   modal,
   footer,
   children,
 }) => {
   const content = (
-    <PageContent pageTitle={pageTitle} fullscreen={fullscreen} modal={modal} footer={footer}>
+    <PageContent pageTitle={pageTitle} color={color} fullscreen={fullscreen} modal={modal} footer={footer}>
       {children}
     </PageContent>
   );

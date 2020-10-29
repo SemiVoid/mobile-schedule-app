@@ -7,6 +7,7 @@ import PageHeader from './PageHeader';
 
 const PageContent: React.FC<PageContentProps> = ({
   pageTitle,
+  color,
   fullscreen,
   modal,
   footer,
@@ -14,9 +15,9 @@ const PageContent: React.FC<PageContentProps> = ({
 }) => {
   return (
     <>
-      <PageHeader pageTitle={pageTitle} modal={modal} />
+      <PageHeader pageTitle={pageTitle} color={color} modal={modal} />
       <IonContent fullscreen={fullscreen}>
-        <PageHeader pageTitle={pageTitle} condense />
+        <PageHeader pageTitle={pageTitle} color={color} condense />
         <IonGrid className="ion-no-padding" fixed>
           {children}
         </IonGrid>
