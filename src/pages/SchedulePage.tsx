@@ -13,7 +13,7 @@ const SchedulePage: React.FC = () => {
   return (
     <ScheduleProvider>
       <WeekProvider>
-        <PageContainer pageTitle="Schedule" footer={<ScheduleFooter />} fullscreen>
+        <PageContainer pageTitle="Schedule" color="schedule" footer={<ScheduleFooter />} fullscreen>
           <ViewDisplay />
         </PageContainer>
       </WeekProvider>

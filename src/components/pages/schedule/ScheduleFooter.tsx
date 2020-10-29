@@ -33,18 +33,18 @@ const ScheduleFooter: React.FC = () => {
       </IonRow>
       <IonRow>
         <IonCol>
-          <IonButton onClick={prev} expand="block">
+          <IonButton color="schedule" onClick={prev} expand="block">
             <IonIcon slot="start" icon={arrowBackOutline} />
             <IonLabel>Prev</IonLabel>
           </IonButton>
         </IonCol>
         <IonCol>
-          <IonButton onClick={curr} expand="block">
+          <IonButton color="schedule" onClick={curr} expand="block">
             <IonLabel>Current</IonLabel>
           </IonButton>
         </IonCol>
         <IonCol>
-          <IonButton onClick={next} expand="block">
+          <IonButton color="schedule" onClick={next} expand="block">
             <IonIcon slot="end" icon={arrowForwardOutline} />
             <IonLabel>Next</IonLabel>
           </IonButton>

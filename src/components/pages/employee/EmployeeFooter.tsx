@@ -11,6 +11,7 @@ const EmployeeFooter: React.FC = () => {
       <IonRow>
         <IonCol>
           <IonButton
+            color="employee"
             onClick={() => {
               dispatch(modalOpen({ modalName: 'addEmployee' }));
             }}
@@ -21,6 +22,7 @@ const EmployeeFooter: React.FC = () => {
         </IonCol>
         <IonCol>
           <IonButton
+            color="employee"
             onClick={() => {
               dispatch(emplFetch());
             }}
