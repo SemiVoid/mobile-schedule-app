@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonContent, IonFooter } from '@ionic/react';
+import { IonContent, IonFooter, IonGrid } from '@ionic/react';
 import { PageContentProps } from './pageTypes';
 
 // Import Components
@@ -17,7 +17,9 @@ const PageContent: React.FC<PageContentProps> = ({
       <PageHeader pageTitle={pageTitle} modal={modal} />
       <IonContent fullscreen={fullscreen}>
         <PageHeader pageTitle={pageTitle} condense />
-        {children}
+        <IonGrid className="ion-no-padding" fixed>
+          {children}
+        </IonGrid>
       </IonContent>
       {footer && <IonFooter className="ion-no-border">{footer}</IonFooter>}
     </>
