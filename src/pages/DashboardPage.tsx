@@ -1,21 +1,20 @@
 import React from 'react';
+import { IonCol, IonRow } from '@ionic/react';
 
 // Import Components
 import PageContainer from '../components/shared/Page/PageContainer';
-import ScheduleCard from '../components/pages/dashboard/card/ScheduleCard';
-import TaskCard from '../components/pages/dashboard/card/TaskCard';
-import { IonCol, IonRow } from '@ionic/react';
+import Card from '../components/pages/dashboard/card/Card';
+
+// Import Data
+import { cardList } from '../components/pages/dashboard/data/cards';
 
 const DashboardPage: React.FC = () => {
+  const cards = cardList.map((data) => (<IonCol key ={data.cardTitle} sizeXs="12" sizeXl="6"><Card cardTitle={data.cardTitle} cardDesc={data.cardDesc} /></IonCol>));
+
   return (
-    <PageContainer pageTitle="Dashboard" fullscreen>
+    <PageContainer pageTitle="Dashboard">
       <IonRow>
-        <IonCol sizeXs="12" sizeXl="6">
-          <ScheduleCard />
-        </IonCol>
-        <IonCol sizeXs="12" sizeXl="6">
-          <TaskCard />
-        </IonCol>
+        {cards}
       </IonRow>
     </PageContainer>
   );
