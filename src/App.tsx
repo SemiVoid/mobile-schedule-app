@@ -30,6 +30,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import './theme/custom.css';
 
 // Import Global Wrapper
 import GlobalWrapper from './components/wrapper/GlobalWrapper';
@@ -60,13 +61,13 @@ const App: React.FC = () => (
               <IonIcon icon={home} />
               <IonLabel>Dashboard</IonLabel>
             </IonTabButton>
-            <IonTabButton tab="employee" href="/employee">
-              <IonIcon icon={people} />
-              <IonLabel>Employee</IonLabel>
-            </IonTabButton>
             <IonTabButton tab="schedule" href="/schedule">
               <IonIcon icon={calendar} />
               <IonLabel>Schedule</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="employee" href="/employee">
+              <IonIcon icon={people} />
+              <IonLabel>Employee</IonLabel>
             </IonTabButton>
             <IonTabButton tab="task" href="/task">
               <IonIcon icon={journal} />
