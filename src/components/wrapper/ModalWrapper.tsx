@@ -1,19 +1,17 @@
 import React from 'react';
 
 // Import Modals
-import LoginUser from '../../option/modal/LoginUser';
-import RegisterUser from '../../option/modal/RegisterUser';
-import AddEmployee from '../../employee/modal/AddEmployee';
+import { AddEmployee, LoginUser, RegisterUser } from '../modals';
 
 // Modal Wrapper
 const ModalWrapper: React.FC = ({ children }) => {
   return (
-    <div>
+    <>
       {children}
       <LoginUser />
       <RegisterUser />
       <AddEmployee />
-    </div>
+    </>
   );
 };
 

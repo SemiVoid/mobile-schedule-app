@@ -1,44 +1,44 @@
-import React from 'react';
-import { IonContent, IonList, IonPage } from '@ionic/react';
+import React, { useEffect } from 'react';
+import { IonList } from '@ionic/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { emplFetch, RootState } from '../redux';
 
 // Import Components
-import PageHeader from '../components/shared/PageHeader';
+import PageContainer from '../components/shared/Page/PageContainer';
 import EmptyPage from '../components/shared/EmptyPage';
-import EmployeeFooter from '../components/employee/EmployeeFooter';
-import EmployeeItem from '../components/employee/EmployeeItem';
-import { useEmployeeContext } from '../hooks/employee/EmployeeContext';
-
-interface empData {
-  name: string;
-  department: string;
-}
+import EmployeeFooter from '../components/pages/employee/EmployeeFooter';
+import EmployeeItem from '../components/pages/employee/EmployeeItem';
 
 const EmployeePage: React.FC = () => {
-  const employee = useEmployeeContext();
+  const dispatch = useDispatch();
+  const { employeeList } = useSelector((state: RootState) => state.empl);
+  const { account } = useSelector((state: RootState) => state.auth);
 
-  const list = employee.value
-    ?.get('workers')
-    .map((data: empData) => (
-      <EmployeeItem
-        key={data.name}
-        name={data.name}
-        department={data.department}
-      />
-    ));
+  const fetchEmployee = () => {
+    if (account) {
+    dispatch(emplFetch());
+    console.log('Employee Dispatch');
+    }
+  };
+
+  useEffect(fetchEmployee, []);
 
   return (
-    <IonPage>
-      <PageHeader title="Employees" />
-      <IonContent fullscreen>
-        <PageHeader title="Employees" condense />
-        {employee.value ? (
-          <IonList className="ion-margin-vertical">{list}</IonList>
-        ) : (
-          <EmptyPage page="Employee" />
-        )}
-      </IonContent>
-      <EmployeeFooter />
-    </IonPage>
+    <PageContainer pageTitle="Employee" color="employee" footer={<EmployeeFooter />} fullscreen>
+      {employeeList.length > 0 ? (
+        <IonList className="ion-margin-vertical">
+          {employeeList.map((data) => (
+            <EmployeeItem
+              key={data.name}
+              name={data.name}
+              department={data.department}
+            />
+          ))}
+        </IonList>
+      ) : (
+        <EmptyPage page="Employee" />
+      )}
+    </PageContainer>
   );
 };
 

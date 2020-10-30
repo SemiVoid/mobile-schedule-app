@@ -1,4 +1,4 @@
-import { auth } from '../../config/firebase';
+import { auth, db } from '../../config/firebase';
 import { AppThunk } from '../rootReducer';
 import {
   AuthActionTypes,
@@ -11,7 +11,7 @@ import {
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
 } from './authTypes';
-import { modalClose, notifSend, notifDismiss } from '../../redux';
+import { modalClose, notifSend, notifDismiss, emplSet } from '../../redux';
 
 export const userAccount = (account: AccountPayload): AuthActionTypes => {
   return {
@@ -88,7 +88,9 @@ export const userRegister = (): AppThunk => {
           getState().auth.email,
           getState().auth.password
         )
-        .then(() => {
+        .then((data) => {
+          db.doc(`/users/${data.user?.uid}`).set({createdAt: new Date()});
+          db.doc(`/users/${data.user?.uid}/employees/test`).set({workers: []});
           dispatch(userRegisterSuccess());
           dispatch(modalClose({ modalName: 'register' }));
         })
@@ -122,6 +124,7 @@ export const userLogout = (): AppThunk => {
   return (dispatch) => {
     auth.signOut().then(() => {
       dispatch(userAccount({ account: undefined }));
+      dispatch(emplSet({list: []}));
     });
   };
 };

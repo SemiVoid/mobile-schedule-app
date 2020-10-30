@@ -30,12 +30,10 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import './theme/custom.css';
 
-// Import Global Wrappers
+// Import Global Wrapper
 import GlobalWrapper from './components/wrapper/GlobalWrapper';
-
-// Import Global Providers
-import EmployeeProvider from './hooks/employee/EmployeeContext';
 
 // Import Pages
 import DashboardPage from './pages/DashboardPage';
@@ -47,47 +45,41 @@ import OptionPage from './pages/OptionPage';
 const App: React.FC = () => (
   <GlobalWrapper>
     <IonApp>
-      <EmployeeProvider>
-        <IonReactRouter>
-          <IonTabs>
-            <IonRouterOutlet>
-              <Route path="/dashboard" component={DashboardPage} exact />
-              <Route path="/employee" component={EmployeePage} exact />
-              <Route path="/schedule" component={SchedulePage} exact />
-              <Route path="/task" component={TaskPage} exact />
-              <Route path="/option" component={OptionPage} exact />
-              <Route
-                path="/"
-                render={() => <Redirect to="/dashboard" />}
-                exact
-              />
-            </IonRouterOutlet>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route path="/dashboard" component={DashboardPage} exact />
+            <Route path="/employee" component={EmployeePage} exact />
+            <Route path="/schedule" component={SchedulePage} exact />
+            <Route path="/task" component={TaskPage} exact />
+            <Route path="/option" component={OptionPage} exact />
+            <Route path="/" render={() => <Redirect to="/dashboard" />} exact />
+          </IonRouterOutlet>
 
-            <IonTabBar slot="bottom">
-              <IonTabButton tab="dashboard" href="/dashboard">
-                <IonIcon icon={home} />
-                <IonLabel>Dashboard</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="employee" href="/employee">
-                <IonIcon icon={people} />
-                <IonLabel>Employee</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="schedule" href="/schedule">
-                <IonIcon icon={calendar} />
-                <IonLabel>Schedule</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="task" href="/task">
-                <IonIcon icon={journal} />
-                <IonLabel>Task</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="option" href="/option">
-                <IonIcon icon={menu} />
-                <IonLabel>More</IonLabel>
-              </IonTabButton>
-            </IonTabBar>
-          </IonTabs>
-        </IonReactRouter>
-      </EmployeeProvider>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="dashboard" href="/dashboard">
+              <IonIcon icon={home} />
+              <IonLabel>Dashboard</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="schedule" href="/schedule">
+              <IonIcon icon={calendar} />
+              <IonLabel>Schedule</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="employee" href="/employee">
+              <IonIcon icon={people} />
+              <IonLabel>Employee</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="task" href="/task">
+              <IonIcon icon={journal} />
+              <IonLabel>Task</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="option" href="/option">
+              <IonIcon icon={menu} />
+              <IonLabel>More</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
     </IonApp>
   </GlobalWrapper>
 );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { IonAlert, IonLoading, IonToast } from '@ionic/react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState, NotifType, notifDismiss } from '../../../redux';
+import { RootState, NotifType, notifDismiss } from '../../redux';
 
 // Notification Wrapper
 const NotifWrapper: React.FC = ({ children }) => {
@@ -20,7 +20,7 @@ const NotifWrapper: React.FC = ({ children }) => {
   };
 
   return (
-    <div>
+    <>
       {children}
       <IonLoading
         isOpen={notifLoading}
@@ -42,7 +42,7 @@ const NotifWrapper: React.FC = ({ children }) => {
         message={message}
         buttons={['OK']}
       />
-    </div>
+    </>
   );
 };
 

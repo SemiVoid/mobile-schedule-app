@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   IonAvatar,
   IonButton,
@@ -9,24 +9,12 @@ import {
   IonRow,
 } from '@ionic/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, userLogout, userAccount, modalOpen } from '../../redux';
+import { RootState, userLogout, modalOpen } from '../../../redux';
 
 import './AccountSection.css';
-import { auth } from '../../config/firebase';
 
 const AccountSection: React.FC = () => {
   const account = useSelector((state: RootState) => state.auth.account);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const unsub = auth.onAuthStateChanged(user =>{
-      if (user){
-        dispatch(userAccount({account: user}));
-      }
-    })
-
-    return unsub;
-  }, [dispatch])
 
   return (
     <IonGrid className="background">
@@ -63,11 +51,11 @@ const NoUserButtons: React.FC = () => {
   const dispatch = useDispatch();
 
   const handleLogin = () => {
-    dispatch(modalOpen({modalName: 'login'}));
+    dispatch(modalOpen({ modalName: 'login' }));
   };
 
   const handleRegister = () => {
-    dispatch(modalOpen({modalName: 'register'}));
+    dispatch(modalOpen({ modalName: 'register' }));
   };
 
   return (

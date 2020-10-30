@@ -1,27 +1,21 @@
 import React from 'react';
-import { IonContent, IonPage } from '@ionic/react';
 
 // Import Providers
 import ScheduleProvider from '../hooks/ScheduleContext';
 import WeekProvider from '../hooks/WeekContext';
 
 // Import Components
-import PageHeader from '../components/shared/PageHeader';
-import ViewDisplay from '../components/schedule/ViewDisplay';
-import ScheduleFooter from '../components/schedule/ScheduleFooter';
+import PageContainer from '../components/shared/Page/PageContainer';
+import ViewDisplay from '../components/pages/schedule/ViewDisplay';
+import ScheduleFooter from '../components/pages/schedule/ScheduleFooter';
 
 const SchedulePage: React.FC = () => {
   return (
     <ScheduleProvider>
       <WeekProvider>
-        <IonPage>
-          <PageHeader title="Schedule" />
-          <IonContent>
-            <PageHeader title="Schedule" condense />
-            <ViewDisplay />
-          </IonContent>
-          <ScheduleFooter />
-        </IonPage>
+        <PageContainer pageTitle="Schedule" color="schedule" footer={<ScheduleFooter />} fullscreen>
+          <ViewDisplay />
+        </PageContainer>
       </WeekProvider>
     </ScheduleProvider>
   );

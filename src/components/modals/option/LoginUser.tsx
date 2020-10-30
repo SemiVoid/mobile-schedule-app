@@ -1,41 +1,36 @@
 import React from 'react';
 import {
   IonButton,
-  IonContent,
   IonInput,
   IonItem,
   IonLabel,
   IonList,
   IonModal,
 } from '@ionic/react';
-import PageHeader from '../../shared/PageHeader';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, userRegister, userInput, modalClose } from '../../../redux';
+import { RootState, userLogin, userInput, modalClose } from '../../../redux';
+import PageContainer from '../../shared/Page/PageContainer';
 
-const RegisterUser: React.FC = () => {
-  const { email, password, verifyPassword } = useSelector(
-    (state: RootState) => state.auth
-  );
-  const { register } = useSelector((state: RootState) => state.modal);
+export const LoginUser: React.FC = () => {
+  const { email, password } = useSelector((state: RootState) => state.auth);
+  const { login } = useSelector((state: RootState) => state.modal);
   const dispatch = useDispatch();
 
   const closeModal = () => {
-    if (register) {
-      dispatch(modalClose({ modalName: 'register' }));
+    if (login) {
+      dispatch(modalClose({ modalName: 'login' }));
     }
   };
 
-  const handleSignup = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(userRegister());
+    dispatch(userLogin());
   };
 
   return (
-    <IonModal isOpen={register} onDidDismiss={closeModal}>
-      <PageHeader title="Register" modal="register" />
-      <IonContent fullscreen>
-        <PageHeader title="Register" condense />
-        <form onSubmit={(e) => handleSignup(e)}>
+    <IonModal isOpen={login} onDidDismiss={closeModal}>
+      <PageContainer pageTitle="Login" modal="login" fullscreen>
+        <form onSubmit={(e) => handleLogin(e)}>
           <IonList className="ion-margin-vertical">
             <IonItem>
               <IonLabel>Email</IonLabel>
@@ -69,30 +64,12 @@ const RegisterUser: React.FC = () => {
                 }
               ></IonInput>
             </IonItem>
-            <IonItem>
-              <IonLabel>Verify Password</IonLabel>
-              <IonInput
-                type="password"
-                required
-                value={verifyPassword}
-                onIonChange={(e) =>
-                  dispatch(
-                    userInput({
-                      field: 'verifyPassword',
-                      value: e.detail.value as string,
-                    })
-                  )
-                }
-              ></IonInput>
-            </IonItem>
           </IonList>
           <IonButton expand="block" type="submit">
-            Signup
+            Log In
           </IonButton>
         </form>
-      </IonContent>
+      </PageContainer>
     </IonModal>
   );
 };
-
-export default RegisterUser;
