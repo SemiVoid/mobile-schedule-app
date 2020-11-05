@@ -48,12 +48,12 @@ const App: React.FC = () => (
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
-            <Route path="/dashboard" component={DashboardPage} exact />
-            <Route path="/employee" component={EmployeePage} exact />
-            <Route path="/schedule" component={SchedulePage} exact />
-            <Route path="/task" component={TaskPage} exact />
-            <Route path="/option" component={OptionPage} exact />
-            <Route path="/" render={() => <Redirect to="/dashboard" />} exact />
+            <Route exact path="/dashboard" component={DashboardPage} />
+            <Route exact path="/employee" component={EmployeePage} />
+            <Route exact path="/schedule" component={SchedulePage} />
+            <Route exact path="/task" component={TaskPage} />
+            <Route exact path="/option" component={OptionPage} />
+            <Redirect exact from="/" to="/dashboard" />
           </IonRouterOutlet>
 
           <IonTabBar slot="bottom">
