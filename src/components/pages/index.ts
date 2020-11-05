@@ -1,14 +1,13 @@
-// Reexport Dashboard Components
-export { DashboardCard } from './dashboard/card/DashboardCard';
-
-// Reexport Employee Components
-export { EmployeeFooter } from './employee/EmployeeFooter';
-export { EmployeeItem } from './employee/EmployeeItem';
-
-// Reexport Option Components
-export { AccountSection } from './option/auth/AccountSection';
-export { AccountButtons } from './option/auth/AccountButtons';
+// Reexport Dashboard Content
+export { DashboardContent } from './dashboard/DashboardContent';
 
 // Reexport Schedule Components
-export { ViewDisplay } from './schedule/ViewDisplay';
+export { ScheduleContent } from './schedule/ScheduleContent';
 export { ScheduleFooter } from './schedule/ScheduleFooter';
+
+// Reexport Employee Components
+export { EmployeeContent } from './employee/EmployeeContent';
+export { EmployeeFooter } from './employee/EmployeeFooter';
+
+// Reexport Option Components
+export { OptionContent } from './option/OptionContent';

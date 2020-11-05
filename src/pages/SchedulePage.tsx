@@ -5,7 +5,7 @@ import ScheduleProvider from '../hooks/ScheduleContext';
 import WeekProvider from '../hooks/WeekContext';
 
 // Import Components
-import { ScheduleFooter, ViewDisplay } from '../components/pages';
+import { ScheduleContent, ScheduleFooter } from '../components/pages';
 import { PageContainer } from '../components/shared';
 
 const SchedulePage: React.FC = () => {
@@ -18,7 +18,7 @@ const SchedulePage: React.FC = () => {
           footer={<ScheduleFooter />}
           fullscreen
         >
-          <ViewDisplay />
+          <ScheduleContent />
         </PageContainer>
       </WeekProvider>
     </ScheduleProvider>
