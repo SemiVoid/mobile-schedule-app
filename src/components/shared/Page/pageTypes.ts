@@ -1,10 +1,9 @@
 import { Modals } from '../../../redux';
 
-export interface PageContainerProps {
-  pageTitle: string;
-  color?: string;
+export interface PageContainerProps extends PageContentProps {}
+
+export interface PageContentProps extends PageHeaderProps {
   fullscreen?: boolean;
-  modal?: Modals;
   footer?: React.ReactNode;
 }
 
@@ -13,12 +12,4 @@ export interface PageHeaderProps {
   color?: string;
   condense?: boolean;
   modal?: Modals;
-}
-
-export interface PageContentProps {
-  pageTitle: string;
-  color?: string;
-  fullscreen?: boolean;
-  modal?: Modals;
-  footer?: React.ReactNode;
 }

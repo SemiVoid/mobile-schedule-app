@@ -1,7 +1,7 @@
 import React from 'react';
 import { IonAlert, IonLoading, IonToast } from '@ionic/react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState, NotifType, notifDismiss } from '../../redux';
+import { RootState, NotifType, notifDismiss } from '../../../../redux';
 
 // Notification Wrapper
 const NotifWrapper: React.FC = ({ children }) => {
@@ -22,10 +22,7 @@ const NotifWrapper: React.FC = ({ children }) => {
   return (
     <>
       {children}
-      <IonLoading
-        isOpen={notifLoading}
-        cssClass={cssClass}
-      />
+      <IonLoading isOpen={notifLoading} cssClass={cssClass} />
       <IonToast
         isOpen={notifToast}
         onDidDismiss={() => handleDismiss('notifToast')}

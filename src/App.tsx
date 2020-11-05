@@ -33,7 +33,7 @@ import './theme/variables.css';
 import './theme/custom.css';
 
 // Import Global Wrapper
-import GlobalWrapper from './components/wrapper/GlobalWrapper';
+import { GlobalWrapper } from './components/global';
 
 // Import Pages
 import DashboardPage from './pages/DashboardPage';
@@ -43,8 +43,8 @@ import TaskPage from './pages/TaskPage';
 import OptionPage from './pages/OptionPage';
 
 const App: React.FC = () => (
-  <GlobalWrapper>
-    <IonApp>
+  <IonApp>
+    <GlobalWrapper>
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
@@ -80,8 +80,8 @@ const App: React.FC = () => (
           </IonTabBar>
         </IonTabs>
       </IonReactRouter>
-    </IonApp>
-  </GlobalWrapper>
+    </GlobalWrapper>
+  </IonApp>
 );
 
 export default App;

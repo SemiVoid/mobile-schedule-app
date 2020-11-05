@@ -4,10 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { emplFetch, RootState } from '../redux';
 
 // Import Components
-import PageContainer from '../components/shared/Page/PageContainer';
-import EmptyPage from '../components/shared/EmptyPage';
-import EmployeeFooter from '../components/pages/employee/EmployeeFooter';
-import EmployeeItem from '../components/pages/employee/EmployeeItem';
+import { EmployeeFooter, EmployeeItem } from '../components/pages';
+import { EmptyPage, PageContainer } from '../components/shared';
 
 const EmployeePage: React.FC = () => {
   const dispatch = useDispatch();

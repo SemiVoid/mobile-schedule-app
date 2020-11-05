@@ -13,7 +13,7 @@ export interface CardProps {
   cardDesc: string;
 }
 
-const Card: React.FC<CardProps> = ({ cardTitle, cardDesc }) => {
+export const DashboardCard: React.FC<CardProps> = ({ cardTitle, cardDesc }) => {
   return (
     <IonCard>
       <IonItem
@@ -22,7 +22,7 @@ const Card: React.FC<CardProps> = ({ cardTitle, cardDesc }) => {
         detail={false}
       >
         <IonCardTitle>{cardTitle}</IonCardTitle>
-        <IonIcon icon={arrowForward} slot="end"/>
+        <IonIcon icon={arrowForward} slot="end" />
       </IonItem>
       <IonCardContent>
         <p className="ion-padding-vertical">{cardDesc}</p>
@@ -30,5 +30,3 @@ const Card: React.FC<CardProps> = ({ cardTitle, cardDesc }) => {
     </IonCard>
   );
 };
-
-export default Card;

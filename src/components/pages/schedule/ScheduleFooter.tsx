@@ -11,7 +11,7 @@ import { arrowBackOutline, arrowForwardOutline } from 'ionicons/icons';
 import { useWeekContext } from '../../../hooks/WeekContext';
 import ViewDay from './ViewDay';
 
-const ScheduleFooter: React.FC = () => {
+export const ScheduleFooter: React.FC = () => {
   const week = useWeekContext();
 
   const prev = () => {
@@ -53,5 +53,3 @@ const ScheduleFooter: React.FC = () => {
     </IonGrid>
   );
 };
-
-export default ScheduleFooter;

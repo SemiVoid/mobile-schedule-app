@@ -6,7 +6,10 @@ interface EmployeeItemProps {
   department: string;
 }
 
-const EmployeeItem: React.FC<EmployeeItemProps> = ({ name, department }) => {
+export const EmployeeItem: React.FC<EmployeeItemProps> = ({
+  name,
+  department,
+}) => {
   return (
     <IonItem>
       <IonLabel>{name}</IonLabel>
@@ -14,5 +17,3 @@ const EmployeeItem: React.FC<EmployeeItemProps> = ({ name, department }) => {
     </IonItem>
   );
 };
-
-export default EmployeeItem;

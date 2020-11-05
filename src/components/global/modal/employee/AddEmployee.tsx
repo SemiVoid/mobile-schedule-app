@@ -7,9 +7,11 @@ import {
   IonList,
   IonModal,
 } from '@ionic/react';
-import PageContainer from '../../shared/Page/PageContainer';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, modalClose, emplAdd } from '../../../redux';
+import { RootState, modalClose, emplAdd } from '../../../../redux';
+
+// Import Components
+import { PageContainer } from '../../../shared';
 
 export const AddEmployee: React.FC = () => {
   const [name, setName] = useState('');

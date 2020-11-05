@@ -1,9 +1,9 @@
 import React from 'react';
 import './ViewDisplay.css';
 import { useScheduleContext } from '../../../hooks/ScheduleContext';
-import EmptyPage from '../../shared/EmptyPage';
+import { EmptyPage } from '../../shared';
 
-const ViewDisplay: React.FC = () => {
+export const ViewDisplay: React.FC = () => {
   const schedule = useScheduleContext();
 
   const list = schedule.filteredList.map((data) => {
@@ -28,5 +28,3 @@ const ViewDisplay: React.FC = () => {
     </>
   );
 };
-
-export default ViewDisplay;

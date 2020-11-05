@@ -1,14 +1,14 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import store from '../../redux/store';
+import store from '../../../redux/store';
 
 // Import Wrappers
-import AuthWrapper from './AuthWrapper';
-import ModalWrapper from './ModalWrapper';
-import NotifWrapper from './NotifWrapper';
+import AuthWrapper from './type/AuthWrapper';
+import ModalWrapper from './type/ModalWrapper';
+import NotifWrapper from './type/NotifWrapper';
 
 // Global Wrapper
-const GlobalWrapper: React.FC = ({ children }) => {
+export const GlobalWrapper: React.FC = ({ children }) => {
   return (
     <Provider store={store}>
       <AuthWrapper>
@@ -19,5 +19,3 @@ const GlobalWrapper: React.FC = ({ children }) => {
     </Provider>
   );
 };
-
-export default GlobalWrapper;

@@ -1,13 +1,18 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux';
 
 // Import Components
-import PageContainer from '../components/shared/Page/PageContainer';
-import AccountSection from '../components/pages/option/AccountSection';
+import { AccountButtons, AccountSection } from '../components/pages';
+import { PageContainer } from '../components/shared';
 
 const OptionPage: React.FC = () => {
+  const account = useSelector((state: RootState) => state.auth.account);
+
   return (
     <PageContainer pageTitle="Settings" fullscreen>
-      <AccountSection />
+      {account && <AccountSection />}
+      {account && <AccountButtons />}
     </PageContainer>
   );
 };

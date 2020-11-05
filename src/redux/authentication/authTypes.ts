@@ -7,6 +7,7 @@ export const USER_REGISTER_FAIL = 'USER_REGISTER_FAIL';
 
 export interface AuthState {
   account?: firebase.User;
+  displayName?: string;
   email: string;
   password: string;
   verifyPassword: string;

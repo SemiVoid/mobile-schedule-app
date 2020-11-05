@@ -6,7 +6,7 @@ interface EmptyPageProps {
   page: string;
 }
 
-const EmptyPage: React.FC<EmptyPageProps> = ({ page }) => {
+export const EmptyPage: React.FC<EmptyPageProps> = ({ page }) => {
   return (
     <IonRow className="empty-container ion-align-items-center">
       {page === 'Employee' && (
@@ -24,5 +24,3 @@ const EmptyPage: React.FC<EmptyPageProps> = ({ page }) => {
     </IonRow>
   );
 };
-
-export default EmptyPage;
