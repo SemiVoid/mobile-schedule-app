@@ -1,6 +1,3 @@
-import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
-import { IonReactRouter } from '@ionic/react-router';
 import {
   IonApp,
   IonIcon,
@@ -10,41 +7,21 @@ import {
   IonTabButton,
   IonTabs,
 } from '@ionic/react';
-import { home, calendar, menu, people, journal } from 'ionicons/icons';
-
-/* Core CSS required for Ionic components to work properly */
-import '@ionic/react/css/core.css';
-
-/* Basic CSS for apps built with Ionic */
-import '@ionic/react/css/normalize.css';
-import '@ionic/react/css/structure.css';
-import '@ionic/react/css/typography.css';
-
-/* Optional CSS utils that can be commented out */
-import '@ionic/react/css/padding.css';
-import '@ionic/react/css/float-elements.css';
-import '@ionic/react/css/text-alignment.css';
-import '@ionic/react/css/text-transformation.css';
-import '@ionic/react/css/flex-utils.css';
-import '@ionic/react/css/display.css';
-
-/* Theme variables */
-import './theme/variables.css';
-import './theme/custom.css';
-
-// Import Global Wrapper
-import { GlobalWrapper } from './components/global';
-
-// Import Pages
-import DashboardPage from './pages/DashboardPage';
-import EmployeePage from './pages/EmployeePage';
-import SchedulePage from './pages/SchedulePage';
-import TaskPage from './pages/TaskPage';
-import OptionPage from './pages/OptionPage';
+import { IonReactRouter } from '@ionic/react-router';
+import { calendar, home, journal, menu, people } from 'ionicons/icons';
+import React from 'react';
+import { Redirect, Route } from 'react-router-dom';
+import Wrapper from './components/global/Wrapper';
+import DashboardPage from './pages/Dashboard';
+import EmployeePage from './pages/Employee';
+import OptionPage from './pages/Option';
+import SchedulePage from './pages/Schedule';
+import TaskPage from './pages/Task';
+import './theme';
 
 const App: React.FC = () => (
   <IonApp>
-    <GlobalWrapper>
+    <Wrapper>
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
@@ -80,7 +57,7 @@ const App: React.FC = () => (
           </IonTabBar>
         </IonTabs>
       </IonReactRouter>
-    </GlobalWrapper>
+    </Wrapper>
   </IonApp>
 );
 

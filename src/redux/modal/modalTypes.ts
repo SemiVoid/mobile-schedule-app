@@ -2,12 +2,12 @@ export const MODAL_OPEN = 'MODAL_OPEN';
 export const MODAL_CLOSE = 'MODAL_CLOSE';
 
 export interface ModalState {
-  login: boolean;
-  register: boolean;
-  addEmployee: boolean;
+  userAuth: boolean;
+  accountUpdate: boolean;
+  employeeAdd: boolean;
 }
 
-export type Modals = 'login' | 'register' | 'addEmployee';
+export type Modals = 'userAuth' | 'accountUpdate' | 'employeeAdd';
 
 export interface ModalPayload {
   modalName: Modals;

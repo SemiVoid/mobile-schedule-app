@@ -8,7 +8,6 @@ import {
   userRegisterSuccess,
 } from '../authActions';
 import { emplSet } from '../../employee/employeeAction';
-import { modalClose } from '../../modal/modalActions';
 import { notifDismiss, notifSend } from '../../notification/notifActions';
 
 export const userLogin = (): AppThunk => {
@@ -53,7 +52,6 @@ export const userRegister = (): AppThunk => {
             workers: [],
           });
           dispatch(userRegisterSuccess());
-          dispatch(modalClose({ modalName: 'register' }));
         })
         .catch((error) => {
           dispatch(userRegisterFail());
