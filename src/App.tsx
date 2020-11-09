@@ -21,15 +21,18 @@ import './theme';
 
 const App: React.FC = () => (
   <IonApp>
-    <Wrapper>
-      <IonReactRouter>
+    <IonReactRouter>
+      <Wrapper>
         <IonTabs>
           <IonRouterOutlet>
             <Route exact path="/dashboard" component={DashboardPage} />
             <Route exact path="/employee" component={EmployeePage} />
             <Route exact path="/schedule" component={SchedulePage} />
             <Route exact path="/task" component={TaskPage} />
-            <Route exact path="/option" component={OptionPage} />
+            <Route
+              path="/option"
+              render={(props) => <OptionPage {...props} />}
+            />
             <Redirect exact from="/" to="/dashboard" />
           </IonRouterOutlet>
 
@@ -56,8 +59,8 @@ const App: React.FC = () => (
             </IonTabButton>
           </IonTabBar>
         </IonTabs>
-      </IonReactRouter>
-    </Wrapper>
+      </Wrapper>
+    </IonReactRouter>
   </IonApp>
 );
 
