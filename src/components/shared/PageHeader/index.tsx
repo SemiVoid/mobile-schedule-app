@@ -1,4 +1,5 @@
 import {
+  IonBackButton,
   IonButton,
   IonButtons,
   IonHeader,
@@ -15,6 +16,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
   headerColor,
   condense,
   modal,
+  backButton,
 }) => {
   const dispatch = useDispatch();
 
@@ -30,6 +32,11 @@ const PageHeader: React.FC<PageHeaderProps> = ({
       translucent={!condense}
     >
       <IonToolbar>
+        {backButton && !condense && (
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/" />
+          </IonButtons>
+        )}
         <IonTitle color={headerColor} size={condense ? 'large' : undefined}>
           {headerTitle}
         </IonTitle>

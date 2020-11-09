@@ -9,6 +9,7 @@ const PageContent: React.FC<PageContentProps> = ({
   headerColor,
   fullscreen,
   modal,
+  backButton,
   footer,
   children,
 }) => (
@@ -17,6 +18,7 @@ const PageContent: React.FC<PageContentProps> = ({
       <PageHeader
         headerTitle={headerTitle}
         headerColor={headerColor}
+        backButton={backButton}
         modal={modal}
       />
     )}
@@ -25,6 +27,7 @@ const PageContent: React.FC<PageContentProps> = ({
         <PageHeader
           headerTitle={headerTitle}
           headerColor={headerColor}
+          backButton={backButton}
           condense
         />
       )}

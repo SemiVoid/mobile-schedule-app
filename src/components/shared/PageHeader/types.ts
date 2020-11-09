@@ -5,4 +5,5 @@ export interface PageHeaderProps {
   headerColor?: string;
   condense?: boolean;
   modal?: Modals;
+  backButton?: boolean;
 }

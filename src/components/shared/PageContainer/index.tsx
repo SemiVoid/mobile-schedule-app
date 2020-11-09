@@ -6,6 +6,7 @@ import { PageContainerProps } from './types';
 const PageContainer: React.FC<PageContainerProps> = ({
   headerTitle,
   headerColor,
+  backButton,
   fullscreen,
   footer,
   children,
@@ -15,6 +16,7 @@ const PageContainer: React.FC<PageContainerProps> = ({
       <PageContent
         headerTitle={headerTitle}
         headerColor={headerColor}
+        backButton={backButton}
         fullscreen={fullscreen}
         footer={footer}
       >
