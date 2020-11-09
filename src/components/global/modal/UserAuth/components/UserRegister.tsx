@@ -1,10 +1,11 @@
 import React from 'react';
-import { IonButton, IonInput, IonItem, IonLabel, IonList } from '@ionic/react';
+import { IonButton, IonList } from '@ionic/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, userRegister, userInput } from '../../../../../redux';
+import { RootState, userRegister } from '../../../../../redux';
+import FormInput from '../../../../shared/FormInput';
 
 const UserRegister: React.FC = () => {
-  const { email, password, verifyPassword } = useSelector(
+  const { displayName, email, password, verifyPassword } = useSelector(
     (state: RootState) => state.auth
   );
   const dispatch = useDispatch();
@@ -17,54 +18,33 @@ const UserRegister: React.FC = () => {
   return (
     <form onSubmit={(e) => handleSignup(e)}>
       <IonList className="ion-margin-vertical">
-        <IonItem>
-          <IonLabel>Email</IonLabel>
-          <IonInput
-            type="email"
-            required
-            value={email}
-            onIonChange={(e) =>
-              dispatch(
-                userInput({
-                  field: 'email',
-                  value: e.detail.value as string,
-                })
-              )
-            }
-          ></IonInput>
-        </IonItem>
-        <IonItem>
-          <IonLabel>Password</IonLabel>
-          <IonInput
-            type="password"
-            required
-            value={password}
-            onIonChange={(e) =>
-              dispatch(
-                userInput({
-                  field: 'password',
-                  value: e.detail.value as string,
-                })
-              )
-            }
-          ></IonInput>
-        </IonItem>
-        <IonItem>
-          <IonLabel>Verify Password</IonLabel>
-          <IonInput
-            type="password"
-            required
-            value={verifyPassword}
-            onIonChange={(e) =>
-              dispatch(
-                userInput({
-                  field: 'verifyPassword',
-                  value: e.detail.value as string,
-                })
-              )
-            }
-          ></IonInput>
-        </IonItem>
+        <FormInput
+          required
+          text="Display Name"
+          field="displayName"
+          value={displayName}
+        />
+        <FormInput
+          required
+          type="email"
+          text="Email"
+          field="email"
+          value={email}
+        />
+        <FormInput
+          required
+          type="password"
+          text="Password"
+          field="password"
+          value={password}
+        />
+        <FormInput
+          required
+          type="password"
+          text="Verify Password"
+          field="verifyPassword"
+          value={verifyPassword}
+        />
       </IonList>
       <IonButton expand="block" type="submit">
         Signup

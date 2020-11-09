@@ -1,7 +1,8 @@
-import { IonButton, IonInput, IonItem, IonLabel, IonList } from '@ionic/react';
+import { IonButton, IonList } from '@ionic/react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, userInput, userLogin } from '../../../../../redux';
+import { RootState, userLogin } from '../../../../../redux';
+import FormInput from '../../../../shared/FormInput';
 
 const UserLogin: React.FC = () => {
   const { email, password } = useSelector((state: RootState) => state.auth);
@@ -15,38 +16,20 @@ const UserLogin: React.FC = () => {
   return (
     <form onSubmit={(e) => handleLogin(e)}>
       <IonList className="ion-margin-vertical">
-        <IonItem>
-          <IonLabel>Email</IonLabel>
-          <IonInput
-            type="email"
-            required
-            value={email}
-            onIonChange={(e) =>
-              dispatch(
-                userInput({
-                  field: 'email',
-                  value: e.detail.value as string,
-                })
-              )
-            }
-          ></IonInput>
-        </IonItem>
-        <IonItem>
-          <IonLabel>Password</IonLabel>
-          <IonInput
-            type="password"
-            required
-            value={password}
-            onIonChange={(e) =>
-              dispatch(
-                userInput({
-                  field: 'password',
-                  value: e.detail.value as string,
-                })
-              )
-            }
-          ></IonInput>
-        </IonItem>
+        <FormInput
+          required
+          type="email"
+          text="Email"
+          field="email"
+          value={email}
+        />
+        <FormInput
+          required
+          type="password"
+          text="Password"
+          field="password"
+          value={password}
+        />
       </IonList>
       <IonButton expand="block" type="submit">
         Log In
