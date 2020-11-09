@@ -6,19 +6,21 @@ export const USER_REGISTER_SUCCESS = 'USER_REGISTER_SUCCESS';
 export const USER_REGISTER_FAIL = 'USER_REGISTER_FAIL';
 
 export interface AuthState {
-  account?: firebase.User;
-  displayName?: string;
+  displayName: string;
   email: string;
   password: string;
   verifyPassword: string;
+  account?: firebase.User;
 }
 
 export interface AccountPayload {
   account?: firebase.User;
 }
 
+export type fieldType = 'displayName' | 'email' | 'password' | 'verifyPassword';
+
 export interface InputPayload {
-  field: string;
+  field: fieldType;
   value: string;
 }
 

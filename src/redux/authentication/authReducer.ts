@@ -10,6 +10,7 @@ import {
 } from './authTypes';
 
 const authInitState: AuthState = {
+  displayName: '',
   email: '',
   password: '',
   verifyPassword: '',
@@ -48,6 +49,7 @@ const authReducer = (
     case USER_REGISTER_SUCCESS: {
       return {
         ...state,
+        displayName: '',
         email: '',
         password: '',
         verifyPassword: '',

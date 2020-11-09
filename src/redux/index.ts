@@ -11,9 +11,12 @@ export {
 } from './authentication/thunks/userThunks';
 
 export {
-  accountUpdate,
+  updateName,
+  updateEmail,
   accountDelete,
 } from './authentication/thunks/accountThunks';
+
+export type { fieldType } from './authentication/authTypes';
 
 // Employee Reexports
 export { emplSet, emplFetch, emplAdd } from './employee/employeeAction';
