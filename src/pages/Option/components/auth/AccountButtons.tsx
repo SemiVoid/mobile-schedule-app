@@ -24,7 +24,7 @@ export const AccountButtons: React.FC = () => {
         <IonLabel>Account</IonLabel>
       </IonItemDivider>
       <IonItem onClick={handleUpdate} button>
-        <IonLabel color="warning">Update Name</IonLabel>
+        <IonLabel color="warning">Update Account</IonLabel>
       </IonItem>
       <IonItem onClick={handleLogout} button>
         <IonLabel color="secondary">Logout</IonLabel>
