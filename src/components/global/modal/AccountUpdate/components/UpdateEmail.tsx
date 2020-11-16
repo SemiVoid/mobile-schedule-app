@@ -2,17 +2,17 @@ import { IonButton, IonInput, IonItem, IonLabel, IonList } from '@ionic/react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useIonInput from '../../../../../hooks/useIonInput';
-import { RootState, updateName } from '../../../../../redux';
+import { RootState, updateEmail } from '../../../../../redux';
 
-const UpdateName: React.FC = () => {
-  const [bindName, sendName] = useIonInput('displayName');
+const UpdateEmail: React.FC = () => {
+  const [bindEmail, sendEmail] = useIonInput('email');
   const { account } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
 
   const handleUpdate = (e: React.FormEvent) => {
     e.preventDefault();
-    sendName();
-    dispatch(updateName());
+    sendEmail();
+    dispatch(updateEmail());
   };
 
   return (
@@ -23,19 +23,20 @@ const UpdateName: React.FC = () => {
     >
       <IonList className="ion-margin-vertical">
         <IonItem>
-          <IonLabel>Name</IonLabel>
+          <IonLabel>Email</IonLabel>
           <IonInput
-            {...bindName}
-            placeholder={account?.displayName as string}
+            {...bindEmail}
+            type="email"
+            placeholder={account?.email as string}
             required
           />
         </IonItem>
       </IonList>
       <IonButton type="submit" expand="block">
-        Update Name
+        Update Email
       </IonButton>
     </form>
   );
 };
 
-export default UpdateName;
+export default UpdateEmail;
