@@ -1,53 +1,49 @@
+import { IonButton, IonInput, IonItem, IonLabel, IonList } from '@ionic/react';
 import React from 'react';
-import { IonButton, IonList } from '@ionic/react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, userRegister } from '../../../../../redux';
-import FormInput from '../../../../shared/FormInput';
+import { useDispatch } from 'react-redux';
+import useIonInput from '../../../../../hooks/useIonInput';
+import { userRegister } from '../../../../../redux';
 
 const UserRegister: React.FC = () => {
-  const { displayName, email, password, verifyPassword } = useSelector(
-    (state: RootState) => state.auth
+  const [bindName, sendName] = useIonInput('displayName');
+  const [bindEmail, sendEmail] = useIonInput('email');
+  const [bindPassword, sendPassword] = useIonInput('password');
+  const [bindVerifyPassword, sendVerifyPassword] = useIonInput(
+    'verifyPassword'
   );
   const dispatch = useDispatch();
 
   const handleSignup = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    sendName();
+    sendEmail();
+    sendPassword();
+    sendVerifyPassword();
     dispatch(userRegister());
   };
 
   return (
     <form onSubmit={(e) => handleSignup(e)}>
       <IonList className="ion-margin-vertical">
-        <FormInput
-          required
-          text="Display Name"
-          field="displayName"
-          value={displayName}
-        />
-        <FormInput
-          required
-          type="email"
-          text="Email"
-          field="email"
-          value={email}
-        />
-        <FormInput
-          required
-          type="password"
-          text="Password"
-          field="password"
-          value={password}
-        />
-        <FormInput
-          required
-          type="password"
-          text="Verify Password"
-          field="verifyPassword"
-          value={verifyPassword}
-        />
+        <IonItem>
+          <IonLabel>Display Name</IonLabel>
+          <IonInput {...bindName} type="text" required />
+        </IonItem>
+        <IonItem>
+          <IonLabel>Email</IonLabel>
+          <IonInput {...bindEmail} type="email" required />
+        </IonItem>
+        <IonItem>
+          <IonLabel>Password</IonLabel>
+          <IonInput {...bindPassword} type="password" required />
+        </IonItem>
+        <IonItem>
+          <IonLabel>Verify Password</IonLabel>
+          <IonInput {...bindVerifyPassword} type="password" required />
+        </IonItem>
       </IonList>
       <IonButton expand="block" type="submit">
-        Signup
+        Register
       </IonButton>
     </form>
   );
