@@ -20,4 +20,6 @@ firebaseApp.firestore().enablePersistence();
 
 export const db = firebaseApp.firestore();
 
+export const authProvider = firebase.auth.EmailAuthProvider;
+
 export default firebaseApp;
