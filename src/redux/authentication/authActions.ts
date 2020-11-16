@@ -8,6 +8,8 @@ import {
   USER_LOGIN_FAIL,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
+  ACCOUNT_UPDATE_SUCCESS,
+  ACCOUNT_UPDATE_FAIL,
 } from './authTypes';
 
 export const userAccount = (account: AccountPayload): AuthActionTypes => {
@@ -45,5 +47,17 @@ export const userRegisterSuccess = (): AuthActionTypes => {
 export const userRegisterFail = (): AuthActionTypes => {
   return {
     type: USER_REGISTER_FAIL,
+  };
+};
+
+export const accountUpdateSuccess = (): AuthActionTypes => {
+  return {
+    type: ACCOUNT_UPDATE_SUCCESS,
+  };
+};
+
+export const accountUpdateFail = (): AuthActionTypes => {
+  return {
+    type: ACCOUNT_UPDATE_FAIL,
   };
 };

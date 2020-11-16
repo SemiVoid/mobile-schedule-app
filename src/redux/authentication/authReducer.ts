@@ -7,6 +7,8 @@ import {
   USER_LOGIN_FAIL,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
+  ACCOUNT_UPDATE_SUCCESS,
+  ACCOUNT_UPDATE_FAIL,
 } from './authTypes';
 
 const authInitState: AuthState = {
@@ -58,6 +60,15 @@ const authReducer = (
     case USER_REGISTER_FAIL: {
       return {
         ...state,
+        password: '',
+        verifyPassword: '',
+      };
+    }
+    case ACCOUNT_UPDATE_SUCCESS || ACCOUNT_UPDATE_FAIL: {
+      return {
+        ...state,
+        displayName: '',
+        email: '',
         password: '',
         verifyPassword: '',
       };

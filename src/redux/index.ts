@@ -13,6 +13,7 @@ export {
 export {
   updateName,
   updateEmail,
+  updatePassword,
   accountDelete,
 } from './authentication/thunks/accountThunks';
 
