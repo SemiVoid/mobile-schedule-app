@@ -4,20 +4,25 @@ export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
 export const USER_LOGIN_FAIL = 'USER_LOGIN_FAIL';
 export const USER_REGISTER_SUCCESS = 'USER_REGISTER_SUCCESS';
 export const USER_REGISTER_FAIL = 'USER_REGISTER_FAIL';
+export const ACCOUNT_UPDATE_SUCCESS = 'ACCOUNT_UPDATE_SUCCESS';
+export const ACCOUNT_UPDATE_FAIL = 'ACCOUNT_UPDATE_FAIL';
 
 export interface AuthState {
-  account?: firebase.User;
+  displayName: string;
   email: string;
   password: string;
   verifyPassword: string;
+  account?: firebase.User;
 }
 
 export interface AccountPayload {
   account?: firebase.User;
 }
 
+export type fieldType = 'displayName' | 'email' | 'password' | 'verifyPassword';
+
 export interface InputPayload {
-  field: string;
+  field: fieldType;
   value: string;
 }
 
@@ -47,10 +52,20 @@ interface UserRegisterFailAction {
   type: typeof USER_REGISTER_FAIL;
 }
 
+interface AccountUpdateSuccessAction {
+  type: typeof ACCOUNT_UPDATE_SUCCESS;
+}
+
+interface AccountUpdateFailAction {
+  type: typeof ACCOUNT_UPDATE_FAIL;
+}
+
 export type AuthActionTypes =
   | UserAccountAction
   | UserInputAction
   | UserLoginSuccessAction
   | UserLoginFailAction
   | UserRegisterSuccessAction
-  | UserRegisterFailAction;
+  | UserRegisterFailAction
+  | AccountUpdateSuccessAction
+  | AccountUpdateFailAction;

@@ -1,5 +1,3 @@
-import { auth, db } from '../../config/firebase';
-import { AppThunk } from '../rootReducer';
 import {
   AuthActionTypes,
   InputPayload,
@@ -10,8 +8,9 @@ import {
   USER_LOGIN_FAIL,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
+  ACCOUNT_UPDATE_SUCCESS,
+  ACCOUNT_UPDATE_FAIL,
 } from './authTypes';
-import { modalClose, notifSend, notifDismiss, emplSet } from '../../redux';
 
 export const userAccount = (account: AccountPayload): AuthActionTypes => {
   return {
@@ -51,80 +50,14 @@ export const userRegisterFail = (): AuthActionTypes => {
   };
 };
 
-export const userLogin = (): AppThunk => {
-  return (dispatch, getState) => {
-    dispatch(notifSend({ notifType: 'notifLoading' }));
-    auth
-      .signInWithEmailAndPassword(
-        getState().auth.email,
-        getState().auth.password
-      )
-      .then(() => {
-        dispatch(userLoginSuccess());
-        dispatch(modalClose({ modalName: 'login' }));
-      })
-      .catch((error) => {
-        dispatch(userLoginFail());
-        dispatch(
-          notifSend({
-            notifType: 'notifToast',
-            header: 'Login Error',
-            message: error.message,
-          })
-        );
-      })
-      .finally(() => {
-        dispatch(notifDismiss({ notifType: 'notifLoading' }));
-      });
+export const accountUpdateSuccess = (): AuthActionTypes => {
+  return {
+    type: ACCOUNT_UPDATE_SUCCESS,
   };
 };
 
-export const userRegister = (): AppThunk => {
-  return (dispatch, getState) => {
-    if (getState().auth.password === getState().auth.verifyPassword) {
-      dispatch(notifSend({ notifType: 'notifLoading' }));
-      auth
-        .createUserWithEmailAndPassword(
-          getState().auth.email,
-          getState().auth.password
-        )
-        .then((data) => {
-          db.doc(`/users/${data.user?.uid}`).set({createdAt: new Date()});
-          db.doc(`/users/${data.user?.uid}/employees/test`).set({workers: []});
-          dispatch(userRegisterSuccess());
-          dispatch(modalClose({ modalName: 'register' }));
-        })
-        .catch((error) => {
-          dispatch(userRegisterFail());
-          dispatch(
-            notifSend({
-              notifType: 'notifToast',
-              header: 'Registration Error',
-              message: error.message,
-            })
-          );
-        })
-        .finally(() => {
-          dispatch(notifDismiss({ notifType: 'notifLoading' }));
-        });
-    } else {
-      dispatch(
-        notifSend({
-          notifType: 'notifToast',
-          header: 'Registration Error',
-          message: 'Passwords do not match',
-        })
-      );
-      dispatch(userRegisterFail());
-    }
-  };
-};
-
-export const userLogout = (): AppThunk => {
-  return (dispatch) => {
-    auth.signOut().then(() => {
-      dispatch(userAccount({ account: undefined }));
-      dispatch(emplSet({list: []}));
-    });
+export const accountUpdateFail = (): AuthActionTypes => {
+  return {
+    type: ACCOUNT_UPDATE_FAIL,
   };
 };

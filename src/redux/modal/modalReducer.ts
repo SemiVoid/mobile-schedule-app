@@ -6,9 +6,9 @@ import {
 } from './modalTypes';
 
 const modalInitState: ModalState = {
-  login: false,
-  register: false,
-  addEmployee: false,
+  userAuth: false,
+  accountUpdate: false,
+  employeeAdd: false,
 };
 
 const modalReducer = (
