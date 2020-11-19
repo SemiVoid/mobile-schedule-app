@@ -24,7 +24,7 @@ export const EmployeeFooter: React.FC = () => {
           <IonButton
             color="employee"
             onClick={() => {
-              dispatch(emplFetch());
+              dispatch(emplFetch('origEmplList'));
             }}
             expand="block"
           >
