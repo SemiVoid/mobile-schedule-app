@@ -11,6 +11,7 @@ const useIonInput = (
     value: string | undefined;
     onIonChange: (e: any) => void;
   },
+  () => void,
   () => void
 ] => {
   const [inputValue, setInputValue] = useState(initialValue);
@@ -21,6 +22,10 @@ const useIonInput = (
     onIonChange: (e: any) => {
       setInputValue(e.detail.value as string);
     },
+  };
+
+  const inputReset = () => {
+    setInputValue(initialValue);
   };
 
   const inputSendData = () => {
@@ -34,7 +39,7 @@ const useIonInput = (
     }
   };
 
-  return [inputValue, inputBind, inputSendData];
+  return [inputValue, inputBind, inputSendData, inputReset];
 };
 
 export default useIonInput;
