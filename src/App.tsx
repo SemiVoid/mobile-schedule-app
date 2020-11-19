@@ -10,7 +10,7 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import { calendar, home, journal, menu, people } from 'ionicons/icons';
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router';
 import Wrapper from './components/global/Wrapper';
 import DashboardPage from './pages/Dashboard';
 import EmployeePage from './pages/Employee';
@@ -29,14 +29,11 @@ const App: React.FC = () => (
             <Route exact path="/employee" component={EmployeePage} />
             <Route exact path="/schedule" component={SchedulePage} />
             <Route exact path="/task" component={TaskPage} />
-            <Route
-              path="/option"
-              render={(props) => <OptionPage {...props} />}
-            />
+            <Route path="/option" component={OptionPage} />
             <Redirect exact from="/" to="/dashboard" />
           </IonRouterOutlet>
 
-          <IonTabBar slot="bottom">
+          <IonTabBar slot="bottom" translucent>
             <IonTabButton tab="dashboard" href="/dashboard">
               <IonIcon icon={home} />
               <IonLabel>Dashboard</IonLabel>
