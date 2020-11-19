@@ -1,18 +1,23 @@
 import { IonButton, IonInput, IonItem, IonLabel, IonList } from '@ionic/react';
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import useIonInput from '../../../../hooks/useIonInput';
 import { emplAdd, RootState } from '../../../../redux';
 import ModalContainer from '../../../shared/ModalContainer';
 
 const EmployeeAdd: React.FC = () => {
+  const [name, bindName, , resetName] = useIonInput(undefined);
+  const [department, bindDepartment, , resetDepartment] = useIonInput(
+    undefined
+  );
   const { employeeAdd } = useSelector((state: RootState) => state.modal);
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [department, setDepartment] = useState('');
 
   const handleAddEmployee = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(emplAdd(name, department));
+    resetName();
+    resetDepartment();
   };
 
   return (
@@ -29,25 +34,11 @@ const EmployeeAdd: React.FC = () => {
         <IonList className="ion-margin-vertical">
           <IonItem>
             <IonLabel>Name</IonLabel>
-            <IonInput
-              type="text"
-              required
-              value={name}
-              onIonChange={(e) => {
-                setName(e.detail.value as string);
-              }}
-            ></IonInput>
+            <IonInput {...bindName} type="text" required />
           </IonItem>
           <IonItem>
             <IonLabel>Department</IonLabel>
-            <IonInput
-              type="text"
-              required
-              value={department}
-              onIonChange={(e) => {
-                setDepartment(e.detail.value as string);
-              }}
-            ></IonInput>
+            <IonInput {...bindDepartment} type="text" required />
           </IonItem>
         </IonList>
         <IonButton type="submit" expand="block">

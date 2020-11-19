@@ -5,10 +5,10 @@ import useIonInput from '../../../../../hooks/useIonInput';
 import { userRegister } from '../../../../../redux';
 
 const UserRegister: React.FC = () => {
-  const [bindName, sendName] = useIonInput('displayName');
-  const [bindEmail, sendEmail] = useIonInput('email');
-  const [bindPassword, sendPassword] = useIonInput('password');
-  const [bindVerifyPassword, sendVerifyPassword] = useIonInput(
+  const [, bindName, sendName] = useIonInput('displayName');
+  const [, bindEmail, sendEmail] = useIonInput('email');
+  const [, bindPassword, sendPassword] = useIonInput('password');
+  const [, bindVerifyPassword, sendVerifyPassword] = useIonInput(
     'verifyPassword'
   );
   const dispatch = useDispatch();

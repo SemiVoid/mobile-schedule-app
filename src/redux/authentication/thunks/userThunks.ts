@@ -84,7 +84,7 @@ export const userLogout = (): AppThunk => {
   return (dispatch) => {
     auth.signOut().then(() => {
       dispatch(userAccount({ account: undefined }));
-      dispatch(emplSet({ list: [] }));
+      dispatch(emplSet({ list: [], listType: 'origEmplList' }));
     });
   };
 };

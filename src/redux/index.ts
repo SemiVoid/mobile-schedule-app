@@ -20,7 +20,8 @@ export {
 export type { fieldType } from './authentication/authTypes';
 
 // Employee Reexports
-export { emplSet, emplFetch, emplAdd } from './employee/employeeAction';
+export * from './employee/employeeAction';
+export * from './employee/thunks/emplThunks'
 
 // Modal Reexports
 export { modalOpen, modalClose } from './modal/modalActions';

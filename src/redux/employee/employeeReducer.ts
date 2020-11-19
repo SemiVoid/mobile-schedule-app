@@ -1,7 +1,15 @@
-import { EmplState, EmplActionTypes, EMPL_SET } from './employeeType';
+import {
+  EmplActionTypes,
+  EmplState,
+  EMPL_CHANGE,
+  EMPL_SET,
+} from './employeeType';
 
 const emplInitState: EmplState = {
+  origEmplList: [],
   employeeList: [],
+  changesMade: false,
+  numberOfEmpl: 0,
 };
 
 const emplReducer = (
@@ -12,7 +20,13 @@ const emplReducer = (
     case EMPL_SET: {
       return {
         ...state,
-        employeeList: action.payload.list,
+        [action.payload.listType]: action.payload.list,
+      };
+    }
+    case EMPL_CHANGE: {
+      return {
+        ...state,
+        [action.payload.variable]: action.payload.value,
       };
     }
     default: {
