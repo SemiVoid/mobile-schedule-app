@@ -6,14 +6,18 @@ import { emplAdd, RootState } from '../../../../redux';
 import ModalContainer from '../../../shared/ModalContainer';
 
 const EmployeeAdd: React.FC = () => {
-  const [name, bindName] = useIonInput(undefined);
-  const [department, bindDepartment] = useIonInput(undefined);
+  const [name, bindName, , resetName] = useIonInput(undefined);
+  const [department, bindDepartment, , resetDepartment] = useIonInput(
+    undefined
+  );
   const { employeeAdd } = useSelector((state: RootState) => state.modal);
   const dispatch = useDispatch();
 
   const handleAddEmployee = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(emplAdd(name, department));
+    resetName();
+    resetDepartment();
   };
 
   return (
