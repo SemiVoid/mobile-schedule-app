@@ -2,12 +2,10 @@ import {
   IonCard,
   IonCardContent,
   IonCardTitle,
-  IonIcon,
   IonItem,
   IonLabel,
   IonText,
 } from '@ionic/react';
-import { arrowForward } from 'ionicons/icons';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux';
@@ -25,10 +23,9 @@ const DashboardCard: React.FC<CardProps> = ({ cardTitle, cardDesc }) => {
       <IonItem
         color={cardTitle.toLowerCase()}
         routerLink={`/${cardTitle.toLowerCase()}`}
-        detail={false}
+        detail={true}
       >
         <IonCardTitle>{cardTitle}</IonCardTitle>
-        <IonIcon icon={arrowForward} slot="end" />
       </IonItem>
       <IonCardContent>
         {cardTitle === 'Employee' && (

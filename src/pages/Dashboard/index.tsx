@@ -4,7 +4,7 @@ import DashboardContent from './components/DashboardContent';
 
 const DashboardPage: React.FC = () => {
   return (
-    <PageContainer headerTitle="Dashboard">
+    <PageContainer headerTitle="Dashboard" fullscreen>
       <DashboardContent />
     </PageContainer>
   );
