@@ -5,8 +5,8 @@ import useIonInput from '../../../../../hooks/useIonInput';
 import { userLogin } from '../../../../../redux';
 
 const UserLogin: React.FC = () => {
-  const [bindEmail, sendEmail] = useIonInput('email');
-  const [bindPassword, sendPassword] = useIonInput('password');
+  const [, bindEmail, sendEmail] = useIonInput('email');
+  const [, bindPassword, sendPassword] = useIonInput('password');
   const dispatch = useDispatch();
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {

@@ -3,9 +3,16 @@ import { useDispatch } from 'react-redux';
 import { fieldType, userInput } from '../redux';
 
 const useIonInput = (
-  inputField: fieldType,
-  initialValue = ''
-): [{ value: string; onIonChange: (e: any) => void }, () => void, string] => {
+  inputField: fieldType | undefined,
+  initialValue: string = ''
+): [
+  string,
+  {
+    value: string | undefined;
+    onIonChange: (e: any) => void;
+  },
+  () => void
+] => {
   const [inputValue, setInputValue] = useState(initialValue);
   const dispatch = useDispatch();
 
@@ -17,14 +24,17 @@ const useIonInput = (
   };
 
   const inputSendData = () => {
-    dispatch(
-      userInput({
-        field: inputField,
-        value: inputValue,
-      })
-    );
+    if (inputField && inputValue) {
+      dispatch(
+        userInput({
+          field: inputField,
+          value: inputValue,
+        })
+      );
+    }
   };
-  return [inputBind, inputSendData, inputValue];
+
+  return [inputValue, inputBind, inputSendData];
 };
 
 export default useIonInput;

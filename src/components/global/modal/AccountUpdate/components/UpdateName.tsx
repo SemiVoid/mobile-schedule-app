@@ -5,7 +5,7 @@ import useIonInput from '../../../../../hooks/useIonInput';
 import { RootState, updateName } from '../../../../../redux';
 
 const UpdateName: React.FC = () => {
-  const [bindName, sendName] = useIonInput('displayName');
+  const [, bindName, sendName] = useIonInput('displayName');
   const { account } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
 

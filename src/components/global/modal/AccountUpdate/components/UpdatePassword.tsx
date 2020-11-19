@@ -5,8 +5,8 @@ import useIonInput from '../../../../../hooks/useIonInput';
 import { updatePassword } from '../../../../../redux';
 
 const UpdatePassword: React.FC = () => {
-  const [bindPassword, sendPassword] = useIonInput('password');
-  const [bindVerifyPassword, sendVerfiyPassword] = useIonInput(
+  const [, bindPassword, sendPassword] = useIonInput('password');
+  const [, bindVerifyPassword, sendVerfiyPassword] = useIonInput(
     'verifyPassword'
   );
   const dispatch = useDispatch();
