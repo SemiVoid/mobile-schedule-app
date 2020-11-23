@@ -5,9 +5,10 @@ export interface ModalState {
   userAuth: boolean;
   accountUpdate: boolean;
   employeeAdd: boolean;
+  scheduleAdd: boolean;
 }
 
-export type Modals = 'userAuth' | 'accountUpdate' | 'employeeAdd';
+export type Modals = 'userAuth' | 'accountUpdate' | 'employeeAdd' | 'scheduleAdd';
 
 export interface ModalPayload {
   modalName: Modals;

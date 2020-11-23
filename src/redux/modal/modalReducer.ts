@@ -2,13 +2,14 @@ import {
   ModalState,
   ModalActionTypes,
   MODAL_OPEN,
-  MODAL_CLOSE
+  MODAL_CLOSE,
 } from './modalTypes';
 
 const modalInitState: ModalState = {
   userAuth: false,
   accountUpdate: false,
   employeeAdd: false,
+  scheduleAdd: false,
 };
 
 const modalReducer = (
