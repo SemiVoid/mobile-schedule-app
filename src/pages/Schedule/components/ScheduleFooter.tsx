@@ -7,23 +7,37 @@ import {
   IonRow,
 } from '@ionic/react';
 import { arrowBackOutline, arrowForwardOutline } from 'ionicons/icons';
-import React from 'react';
-import { useWeekContext } from '../../../hooks/WeekContext';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  RootState,
+  weekCalculate,
+  weekNext,
+  weekPrev,
+  weekReset,
+} from '../../../redux';
 import ViewDay from './ViewDay';
 
 export const ScheduleFooter: React.FC = () => {
-  const week = useWeekContext();
+  const { weekIndex } = useSelector((state: RootState) => state.sched);
+  const dispatch = useDispatch();
+
+  const handleIndexChange = () => {
+    dispatch(weekCalculate());
+  };
+
+  useEffect(handleIndexChange, [weekIndex]);
 
   const prev = () => {
-    week.setWeekIndex(week.weekIndex - 1);
+    dispatch(weekPrev());
   };
 
   const curr = () => {
-    week.setWeekIndex(0);
+    dispatch(weekReset());
   };
 
   const next = () => {
-    week.setWeekIndex(week.weekIndex + 1);
+    dispatch(weekNext());
   };
 
   return (

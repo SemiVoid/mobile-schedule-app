@@ -1,15 +1,16 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import EmptyPage from '../../../components/shared/PageEmpty';
-import { useScheduleContext } from '../../../hooks/ScheduleContext';
+import { RootState } from '../../../redux';
 import './ViewDisplay.css';
 
 export const ViewDisplay: React.FC = () => {
-  const schedule = useScheduleContext();
+  const { listFiltered } = useSelector((state: RootState) => state.sched);
 
-  const list = schedule.filteredList.map((data) => {
+  const list = listFiltered.map((data) => {
     return (
       <div className="display-person" key={data.id}>
-        <span className="display-name">{data.worker}</span>
+        <span className="display-name">{data.name}</span>
         <span className="display-time">
           {data.startTime} - {data.endTime}
         </span>

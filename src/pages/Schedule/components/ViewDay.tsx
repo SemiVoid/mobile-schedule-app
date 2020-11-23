@@ -1,35 +1,42 @@
-import { IonCol, IonGrid, IonRow } from '@ionic/react';
-import React, { useState } from 'react';
-import { useScheduleContext } from '../../../hooks/ScheduleContext';
-import { useWeekContext } from '../../../hooks/WeekContext';
+import { IonCol, IonGrid, IonRow, IonText } from '@ionic/react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, schedFetch, schedFilter } from '../../../redux';
 import './ViewDay.css';
 
 const ViewDay: React.FC = () => {
-  const [currentDay, setCurrentDay] = useState<Date>(new Date());
-  const week = useWeekContext();
-  const schedule = useScheduleContext();
+  const { weekList } = useSelector(
+    (state: RootState) => state.sched.weekLayout
+  );
+  const { list, currentDay } = useSelector((state: RootState) => state.sched);
+  const dispatch = useDispatch();
 
-  function toggleCurrDay(date: Date) {
-    schedule.getScheduleForDate(date);
-    setCurrentDay(date);
+  function handleToggleDay(date: Date) {
+    dispatch(schedFilter(date));
   }
+
+  const handleListChange = () => {
+    dispatch(schedFetch('listTemp'));
+  };
+
+  useEffect(handleListChange, [list]);
 
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat'];
 
   const dayList = days.map((day) => <IonCol key={day}>{day}</IonCol>);
 
-  const dayListNum = week.weekList.map((data) =>
-    data.days.map((day) => (
-      <IonCol
-        onClick={() => {
-          toggleCurrDay(day);
-        }}
-        key={day.getDate()}
-      >
-        {day.getDate()}
-      </IonCol>
-    ))
-  );
+  const dayListNum = weekList.map((data) => (
+    <IonCol
+      onClick={() => {
+        handleToggleDay(data);
+      }}
+      key={data.getDate()}
+    >
+      <IonText color={currentDay === data ? 'primary' : undefined}>
+        {data.getDate()}
+      </IonText>
+    </IonCol>
+  ));
 
   return (
     <IonGrid className="day-calendar">
