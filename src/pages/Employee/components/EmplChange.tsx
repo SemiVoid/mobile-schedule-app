@@ -16,7 +16,7 @@ const EmplChange: React.FC = () => {
 
   return (
     <IonItem>
-      <IonLabel>Changes Were made. Do you want to sync them?</IonLabel>
+      <IonLabel>Changes Were made.</IonLabel>
       <IonButton color="warning" onClick={handleRevert}>Revert</IonButton>
       <IonButton onClick={handleSubmit}>Submit</IonButton>
     </IonItem>
