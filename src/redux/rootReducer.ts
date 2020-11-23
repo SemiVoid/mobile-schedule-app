@@ -6,12 +6,14 @@ import authReducer from './authentication/authReducer';
 import emplReducer from './employee/employeeReducer';
 import modalReducer from './modal/modalReducer';
 import notifReducer from './notification/notifReducer';
+import schedReducer from './schedule/schedReducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
   modal: modalReducer,
   notif: notifReducer,
   empl: emplReducer,
+  sched: schedReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
