@@ -20,6 +20,7 @@
     "@types/uuid": "^8.3.0",
     "firebase": "^7.24.0",
     "ionicons": "^5.2.3",
+    "moment": "^2.29.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-firebase-hooks": "^2.2.0",
