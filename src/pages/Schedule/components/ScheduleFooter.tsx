@@ -4,17 +4,19 @@ import {
   IonGrid,
   IonIcon,
   IonLabel,
-  IonRow,
+  IonRow
 } from '@ionic/react';
 import { arrowBackOutline, arrowForwardOutline } from 'ionicons/icons';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  modalOpen,
   RootState,
+  schedFetch,
   weekCalculate,
   weekNext,
   weekPrev,
-  weekReset,
+  weekReset
 } from '../../../redux';
 import ViewDay from './ViewDay';
 
@@ -42,6 +44,30 @@ export const ScheduleFooter: React.FC = () => {
 
   return (
     <IonGrid className="schedule-buttons" fixed>
+      <IonRow>
+        <IonCol>
+          <IonButton
+            color="schedule"
+            onClick={(e) => {
+              dispatch(modalOpen({ modalName: 'scheduleAdd' }));
+            }}
+            expand="block"
+          >
+            <IonLabel>Add Schedule</IonLabel>
+          </IonButton>
+        </IonCol>
+        <IonCol>
+          <IonButton
+            color="schedule"
+            onClick={(e) => {
+              dispatch(schedFetch('list'));
+            }}
+            expand="block"
+          >
+            <IonLabel>Refresh</IonLabel>
+          </IonButton>
+        </IonCol>
+      </IonRow>
       <IonRow>
         <ViewDay />
       </IonRow>
