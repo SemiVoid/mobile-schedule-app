@@ -9,6 +9,7 @@ import {
 } from '../authActions';
 import { emplSet } from '../../employee/employeeAction';
 import { notifDismiss, notifSend } from '../../notification/notifActions';
+import { schedSet } from '../../schedule/schedActions';
 
 export const userLogin = (): AppThunk => {
   return (dispatch, getState) => {
@@ -90,6 +91,7 @@ export const userLogout = (): AppThunk => {
     auth.signOut().then(() => {
       dispatch(userAccount({ account: undefined }));
       dispatch(emplSet({ list: [], listType: 'origEmplList' }));
+      dispatch(schedSet({ list: [], listType: 'list' }));
     });
   };
 };
