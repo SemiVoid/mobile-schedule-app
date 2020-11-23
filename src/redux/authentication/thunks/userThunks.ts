@@ -51,7 +51,12 @@ export const userRegister = (): AppThunk => {
           db.doc(`/users/${data.user?.uid}/employees/test`).set({
             workers: [],
           });
-          data.user?.updateProfile({displayName: getState().auth.displayName})
+          db.doc(`/users/${data.user?.uid}/schedules/test`).set({
+            schedules: [],
+          });
+          data.user?.updateProfile({
+            displayName: getState().auth.displayName,
+          });
           dispatch(userRegisterSuccess());
         })
         .catch((error) => {
