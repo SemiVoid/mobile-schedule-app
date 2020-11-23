@@ -54,13 +54,6 @@ export const emplAdd = (name: string, department: string): AppThunk => {
           listType: 'employeeList',
         })
       );
-      dispatch(
-        notifSend({
-          notifType: 'notifToast',
-          header: 'Employee Added',
-          message: `${name} temporarily Added. To save the changes hit submit`,
-        })
-      );
     }
   };
 };
