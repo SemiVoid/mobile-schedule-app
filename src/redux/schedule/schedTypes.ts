@@ -7,7 +7,7 @@ export const WEEK_INDEX = 'WEEK_INDEX';
 export interface ScheduleType {
   id: string;
   name: string;
-  date: Date;
+  date: string;
   startTime: string;
   endTime: string;
 }
