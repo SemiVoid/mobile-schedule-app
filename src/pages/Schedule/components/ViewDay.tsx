@@ -1,7 +1,8 @@
 import { IonCol, IonGrid, IonRow, IonText } from '@ionic/react';
+import moment from 'moment';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, schedFetch, schedFilter } from '../../../redux';
+import { dateChange, RootState, schedFetch, schedFilter } from '../../../redux';
 import './ViewDay.css';
 
 const ViewDay: React.FC = () => {
@@ -19,7 +20,23 @@ const ViewDay: React.FC = () => {
     dispatch(schedFetch('listTemp'));
   };
 
+  const handleStart = () => {
+    dispatch(
+      dateChange({
+        date: moment()
+          .day(0)
+          .hour(0)
+          .minute(0)
+          .second(0)
+          .millisecond(0)
+          .toDate(),
+      })
+    );
+  };
+
   useEffect(handleListChange, [list]);
+
+  useEffect(handleStart, []);
 
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat'];
 
