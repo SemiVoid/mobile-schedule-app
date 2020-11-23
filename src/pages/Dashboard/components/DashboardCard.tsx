@@ -16,6 +16,7 @@ export interface CardProps {
 }
 
 const DashboardCard: React.FC<CardProps> = ({ cardTitle, cardDesc }) => {
+  const { worksToday } = useSelector((state: RootState) => state.sched);
   const { numberOfEmpl } = useSelector((state: RootState) => state.empl);
 
   return (
@@ -28,11 +29,27 @@ const DashboardCard: React.FC<CardProps> = ({ cardTitle, cardDesc }) => {
         <IonCardTitle>{cardTitle}</IonCardTitle>
       </IonItem>
       <IonCardContent>
+        {cardTitle === 'Schedule' && (
+          <IonItem>
+            <IonLabel>Employees Working Today</IonLabel>
+            <IonText slot="end" color="schedule">
+              {worksToday}
+            </IonText>
+          </IonItem>
+        )}
         {cardTitle === 'Employee' && (
           <IonItem>
             <IonLabel>Number of Employees</IonLabel>
             <IonText slot="end" color="employee">
               {numberOfEmpl}
+            </IonText>
+          </IonItem>
+        )}
+        {cardTitle === 'Task' && (
+          <IonItem>
+            <IonLabel>Total Tasks</IonLabel>
+            <IonText slot="end" color="task">
+              {worksToday}
             </IonText>
           </IonItem>
         )}
